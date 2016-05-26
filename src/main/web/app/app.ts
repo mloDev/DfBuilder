@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Routes , ROUTER_DIRECTIVES} from '@angular/router';
+import {HTTP_PROVIDERS} from '@angular/http';
+import { Routes , ROUTER_DIRECTIVES, Router} from '@angular/router';
 import { Navbar } from './navbar/navbar';
 import { ROUTES } from './routes';
 import { Footer } from './footer/footer';
@@ -13,4 +14,5 @@ import { Footer } from './footer/footer';
 @Routes(ROUTES)
 export class AppComponent {
   public title = 'Angular2 Bootstrap4 Navbar';
+  constructor(private router:Router) {}
 }

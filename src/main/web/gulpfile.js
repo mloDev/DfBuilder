@@ -25,6 +25,8 @@ gulp.task('libcopy', function() {
         .pipe(gulp.dest(staticDir + 'js/lib/symbol-observable'));
     gulp.src(['./node_modules/rxjs/**/*'])
         .pipe(gulp.dest(staticDir + 'js/lib/rxjs'));
+    gulp.src(['./node_modules/angular2-jwt/*'])
+    	.pipe(gulp.dest(staticDir + 'js/lib/angular2-jwt'));
 
     // copy @angular dependencies
     gulp.src(['./node_modules/zone.js/dist/zone.js',

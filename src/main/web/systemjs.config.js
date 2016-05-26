@@ -7,7 +7,8 @@
     'rxjs':                       'js/lib/rxjs',
     'angular2-in-memory-web-api': 'js/lib/angular2-in-memory-web-api',
     '@angular':                   'js/lib/@angular',
-    'moment':                     'js/lib/moment.min.js'
+    'moment':                     'js/lib/moment.min.js',
+    'angular2-jwt':				  'js/lib/angular2-jwt'
   };
 
   // packages tells the System loader how to load when no filename and/or no extension
@@ -15,7 +16,8 @@
     'app':                        { main: 'main.js',  defaultExtension: 'js' },
     'symbol-observable':          { main: 'index.js', defaultExtension: 'js'},
     'rxjs':                       { defaultExtension: 'js' },
-    'angular2-in-memory-web-api': { defaultExtension: 'js' }
+    'angular2-in-memory-web-api': { defaultExtension: 'js' },
+    'angular2-jwt':				  { main: 'angular2-jwt.js', defaultExtension: 'js' }
   };
 
   var packageNames = [
@@ -27,7 +29,8 @@
     '@angular/platform-browser-dynamic',
     '@angular/router',
     '@angular/testing',
-    '@angular/upgrade'
+    '@angular/upgrade',
+    '@angular/router-deprecated'
   ];
 
   // add package entries for angular packages in the form '@angular/common': { main: 'index.js', defaultExtension: 'js' }
