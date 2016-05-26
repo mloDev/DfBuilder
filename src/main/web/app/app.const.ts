@@ -3,5 +3,6 @@ export let CONFIGURATION = {
         server: 'http://localhost:3000/',
         apiUrl: '',
         gameSizes: 'gameSizes',
+        ships: 'ships',
     },
 }

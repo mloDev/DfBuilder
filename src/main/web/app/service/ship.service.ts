@@ -5,10 +5,10 @@ import {Http, Response} from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { CONFIGURATION} from '../app.const';
-import { GameSize } from './gameSize';
+import { Ship } from '../model/ship';
 
 @Injectable()
-export class HelloService {
+export class ShipService {
 
     private actionUrl: string;
     
@@ -16,12 +16,12 @@ export class HelloService {
         
         this.actionUrl = CONFIGURATION.baseUrls.server +
             CONFIGURATION.baseUrls.apiUrl +
-            CONFIGURATION.baseUrls.gameSizes;
+            CONFIGURATION.baseUrls.ships;
     }
 
-    getGameSizes(): Promise<GameSize[]> {
+    getShips(): Promise<Ship[]> {
         return this.http.get(this.actionUrl).toPromise()
-               .then(response => response.json()._embedded.gameSizes);
+               .then(response => response.json()._embedded.ships);
         
     }
 }
