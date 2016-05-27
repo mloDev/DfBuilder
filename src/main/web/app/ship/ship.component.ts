@@ -1,41 +1,39 @@
 'use strict';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { RouteParams } from '@angular/router-deprecated';
 
-import {Component} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
 import {ROUTER_DIRECTIVES} from '@angular/router';
-import {ShipService} from './hello.service';
+import {ShipService} from '../service/ship.service';
+import { Ship } from '../model/ship';
+import { ShipTypePipe } from '../pipes/ship-type-pipe';
+import { ShipFactionPipe } from '../pipes/ship-faction-pipe';
+import { FactionSelector } from '../selector/faction-selector';
 
 @Component({
     selector: 'test',
+    pipes: [ShipTypePipe, ShipFactionPipe ],
     templateUrl: 'app/ship/ship.component.html',
     providers: [ShipService],
-    directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES]
+    directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, FactionSelector]
 })
-export class ShipComponent {
+export class ShipComponent implements OnInit {
 
-    // vars
-    private jsonResponse: string;
-    private message: string;
-    private subscription;
+    @Input() faction;
+    
+    ships: Ship [];
 
-    // constructor
-    constructor(private helloService: HelloService) {}
+  constructor(
+    private shipService: ShipService) { }
 
-    // on-init
-    ngOnInit() {
-        // save subscription
-        this.subscription = this.helloService.getTest()
-            .subscribe(
-                (data) => {this.jsonResponse = JSON.stringify(data);
-                         this.message = data.test.message;},
-                (err) => console.log(err),
-                () => console.log('hello service test complete')
-        );
-    }
-
-    // on-destroy
-    ngOnDestroy() {
-        // unsubscribe
-        this.subscription.unsubscribe();
-    }
+    
+  getShips() {
+    this.shipService
+        .getShips()
+        .then(ships => this.ships = ships);
+  }
+    
+  ngOnInit() {
+    this.getShips();
+  }
 }

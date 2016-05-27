@@ -9,19 +9,18 @@ import { Ship } from '../model/ship';
 
 @Injectable()
 export class ShipService {
-
+    
     private actionUrl: string;
+
     
     constructor(@Inject(Http) private http: Http) {
-        
-        this.actionUrl = CONFIGURATION.baseUrls.server +
+            this.actionUrl = CONFIGURATION.baseUrls.server +
             CONFIGURATION.baseUrls.apiUrl +
             CONFIGURATION.baseUrls.ships;
     }
 
     getShips(): Promise<Ship[]> {
         return this.http.get(this.actionUrl).toPromise()
-               .then(response => response.json()._embedded.ships);
-        
+               .then(response => response.json());
     }
 }
