@@ -24,4 +24,8 @@ export class GameSizeService {
                .then(response => response.json());
         
     }
+    
+    getGameSize(id: number): GameSize {
+        return this.getGameSizes().then(gameSizes => gameSizes.filter(gameSize => gameSize.id === id)[0]);
+    }
 }
