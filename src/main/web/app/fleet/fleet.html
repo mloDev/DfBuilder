@@ -8,8 +8,24 @@
 		</div>
 		<div class="col-md-9">
 			<div class="col-md-12">
-				<span>Kampfgruppen der Flotte</span>
-				<span>{{gameSize.battlegroupMax}}</span>
+				<div class="col-md-4">
+					<game-selector (select)="gameSize = $event"></game-selector>
+				</div>
+				<div class="col-md-4">
+					<faction-selector (select)="faction = $event"></faction-selector>
+				</div>
+				<div class="col-md-4">
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="col-md-4" *ngIf="gameSize">
+					{{gameSize.name}}
+				</div>
+				<div class="col-md-4">
+					{{faction}}
+				</div>
+				<div class="col-md-4">
+				</div>
 			</div>
 			<div class="col-md-12">
 				<span>Linegruppen der Flotte</span>
@@ -23,6 +39,8 @@
 			<div class="col-md-12">
 				<span>Flaggruppen der Flotte</span>
 			</div>
+			
+			
 			
 		</div>
 	</div>

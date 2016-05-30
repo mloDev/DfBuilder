@@ -14,7 +14,6 @@ export class ShipFactionPipe implements PipeTransform {
         if (faction == "all") {
             return value;
         }
-        console.log(faction.toUpperCase());
         return value.filter((ship)=>new RegExp(faction.toUpperCase()).test(ship.faction))
     }
           

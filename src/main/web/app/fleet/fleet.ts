@@ -1,29 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import {CORE_DIRECTIVES} from '@angular/common';
 import {ROUTER_DIRECTIVES} from '@angular/router';
-import {GameSizeService} from '../service/gameSize.service';
 import { GameSize } from '../model/gameSize';
+import { GameSizeSelector } from "../selector/gameSize-selector";
+import { FactionSelector } from "../selector/faction-selector";
 
 @Component({
     selector: 'fleet',
-    templateUrl: 'app/fleet/fleet.html',
-    providers: [GameSizeService], 
-    directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES]
+    templateUrl: 'app/fleet/fleet.html', 
+    directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, GameSizeSelector, FactionSelector]
 })
 
 export class FleetComponent {
+    @Output() select = new EventEmitter();
         
-      constructor(
-    private gameSizeService: GameSizeService) { }
+    constructor() { }
         
-    gameSize: GameSize;
+    @Input() gameSize: GameSize;
+    @Input() faction;
     
-    getGameSize(id: number) {
-        this.gameSizeService.getGameSize(id).then(gameSize => this.gameSize = gameSize);
-    }
-       
     ngOnInit(){
-        this.getGameSize(1); 
     }
 }

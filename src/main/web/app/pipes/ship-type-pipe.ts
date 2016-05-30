@@ -13,8 +13,7 @@ export class ShipTypePipe implements PipeTransform {
         }
         if (shipType == "") {
             return value;
-        } 
-        console.log(shipType);
+        }
         return value.filter((ship)=>new RegExp(shipType).test(ship.shipType))
     }
           
