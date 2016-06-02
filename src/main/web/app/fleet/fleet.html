@@ -1,47 +1,78 @@
 <h2>Fleet</h2>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-3">
-			<div class="col-md-12">
-				<span>Verfügbare Schiffe</span>
+		<div class="col-md-12">
+			<div class="col-md-4">
+				<game-selector [(selected)]="gameSize" (select)="onItemSelected($event)"></game-selector>
+			</div>
+			<div class="col-md-4">
+				<faction-selector (select)="faction = $event"></faction-selector>
+			</div>
+			<div class="col-md-4">
+			
 			</div>
 		</div>
-		<div class="col-md-9">
-			<div class="col-md-12">
-				<div class="col-md-4">
-					<game-selector [(selected)]="gameSize" (select)="onItemSelected($event)"></game-selector>
-				</div>
-				<div class="col-md-4">
-					<faction-selector (select)="faction = $event"></faction-selector>
-				</div>
-				<div class="col-md-4">
+		<div class="col-md-12">
+			<div class="col-md-3">
+				<div class="col-md-12">
+					<span>Verfügbare Schiffe</span>
+					<ship-list [faction]="faction"></ship-list>
 				</div>
 			</div>
-			<div class="col-md-12">
-				<div class="col-md-4" *ngIf="gameSize">
-					{{gameSize.name}}
+			<div class="col-md-9"  *ngIf="gameSize">
+				<div class="col-md-12" *ngIf="gameSize.lineSize > 0">
+					<div class="col-md-12">
+						<div class="col-md-9">
+							<span>Linegruppen der Flotte</span>
+						</div>
+						<div class="col-md-3">
+							<span>{{gameSize.lineMax}}/{{gameSize.lineSize}}</span>					
+						</div>					
+					</div>
+					<div class="col-md-12" [dragula]='"first-bag"'>
+					
+					</div>
 				</div>
-				<div class="col-md-4">
-					{{faction}}
+				<div class="col-md-12" *ngIf="gameSize.pathfinderSize > 0">
+					<div class="col-md-12">
+						<div class="col-md-9">
+							<span>Pathfindergruppen der Flotte</span>
+						</div>
+						<div class="col-md-3">
+							<span>{{gameSize.pathfinderMax}}/{{gameSize.pathfinderSize}}</span>				
+						</div>					
+					</div>
+					<div class="col-md-12">
+					
+					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-12" *ngIf="gameSize.vanguardSize > 0">
+					<div class="col-md-12">
+						<div class="col-md-9">
+							<span>Vanguardgruppen der Flotte</span>
+						</div>
+						<div class="col-md-3">
+							<span>{{gameSize.vanguardMax}}/{{gameSize.vanguardSize}}</span>				
+						</div>					
+					</div>
+					<div class="col-md-12">
+					
+					</div>
+				</div>
+				<div class="col-md-12" *ngIf="gameSize.flagSize > 0">
+					<div class="col-md-12">
+						<div class="col-md-9">
+							<span>Flaggruppen der Flotte</span>
+						</div>
+						<div class="col-md-3">
+							<span>{{gameSize.flagMax}}/{{gameSize.flagSize}}</span>				
+						</div>					
+					</div>
+					<div class="col-md-12">
+					
+					</div>
 				</div>
 			</div>
-			<div class="col-md-12">
-				<span>Linegruppen der Flotte</span>
-			</div>
-			<div class="col-md-12">
-				<span>Pathfindergruppen der Flotte</span>
-			</div>
-			<div class="col-md-12">
-				<span>Vanguardgruppen der Flotte</span>
-			</div>
-			<div class="col-md-12">
-				<span>Flaggruppen der Flotte</span>
-			</div>
-			
-			
-			
 		</div>
 	</div>
 </div>

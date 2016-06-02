@@ -5,11 +5,14 @@ import {ROUTER_DIRECTIVES} from '@angular/router';
 import { GameSize } from '../model/gameSize';
 import { GameSizeSelector } from "../selector/gameSize-selector";
 import { FactionSelector } from "../selector/faction-selector";
+import { ShipList } from "../ship/ship.list";
+import { Dragula, DragulaService} from "ng2-dragula";
 
 @Component({
     selector: 'fleet',
     templateUrl: 'app/fleet/fleet.html',
-    directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, GameSizeSelector, FactionSelector]
+    directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, ShipList, GameSizeSelector, FactionSelector, Dragula],
+    viewProviders: [DragulaService]
 })
 
 export class FleetComponent {
@@ -17,7 +20,7 @@ export class FleetComponent {
     constructor() { }
         
     @Input() gameSize: GameSize;
-    @Input() faction;
+    @Input() @Output() faction;
     
     ngOnInit(){
     }

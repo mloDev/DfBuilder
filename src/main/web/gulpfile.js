@@ -27,6 +27,10 @@ gulp.task('libcopy', function() {
         .pipe(gulp.dest(staticDir + 'js/lib/rxjs'));
     gulp.src(['./node_modules/angular2-jwt/*'])
     	.pipe(gulp.dest(staticDir + 'js/lib/angular2-jwt'));
+    gulp.src(['./node_modules/ng2-dragula/**/*'])
+		.pipe(gulp.dest(staticDir + 'js/lib/ng2-dragula'));
+    gulp.src(['./node_modules/dragula/*'])
+		.pipe(gulp.dest(staticDir + 'js/lib/dragula'));
 
     // copy @angular dependencies
     gulp.src(['./node_modules/zone.js/dist/zone.js',

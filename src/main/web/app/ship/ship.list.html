@@ -1,0 +1,35 @@
+<div class="entity-list" ng-init="ships = []">
+	<div class="container-fluid">
+			<span>Light ships</span>
+			<div class="row shipRow" [dragula]='"first-bag"'>
+				<div class="col-md-12" *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'LIGHT'" ([ngModel])="ship">
+					<ship-detail-small [ship]="ship"></ship-detail-small>				 
+				</div>
+			</div>
+	</div>
+	<div class="container-fluid">
+			<span>Medium ships</span>
+			<div class="row shipRow">
+				<div class="col-md-12" *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'MEDIUM'">
+					<ship-detail-small [ship]="ship"></ship-detail-small>
+				</div>
+			</div>
+	</div>
+	<div class="container-fluid">
+			<span>Heavy ships</span>
+			<div class="row shipRow">
+				<div class="col-md-12" *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'HEAVY'">
+					<ship-detail-small [ship]="ship"></ship-detail-small>		 
+				</div>
+			</div>
+	</div>
+	<div class="container-fluid">
+		<span>Super heavy ships</span>
+		<div class="row shipRow">
+			<div class="col-md-12" *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'SUPER'">
+				<ship-detail-small [ship]="ship"></ship-detail-small>		
+			</div>
+		</div>
+	</div>
+</div>
+

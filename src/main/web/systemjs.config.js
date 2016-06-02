@@ -8,7 +8,9 @@
     'angular2-in-memory-web-api': 'js/lib/angular2-in-memory-web-api',
     '@angular':                   'js/lib/@angular',
     'moment':                     'js/lib/moment.min.js',
-    'angular2-jwt':				  'js/lib/angular2-jwt'
+    'angular2-jwt':				  'js/lib/angular2-jwt',
+    'dragula':					  'js/lib/dragula/dragula.js',
+    'ng2-dragula':				  'js/lib/ng2-dragula/ng2-dragula.js'
   };
 
   // packages tells the System loader how to load when no filename and/or no extension
