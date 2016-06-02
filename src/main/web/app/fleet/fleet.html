@@ -9,7 +9,7 @@
 		<div class="col-md-9">
 			<div class="col-md-12">
 				<div class="col-md-4">
-					<game-selector (select)="gameSize = $event"></game-selector>
+					<game-selector [(selected)]="gameSize" (select)="onItemSelected($event)"></game-selector>
 				</div>
 				<div class="col-md-4">
 					<faction-selector (select)="faction = $event"></faction-selector>

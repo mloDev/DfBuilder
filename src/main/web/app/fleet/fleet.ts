@@ -8,12 +8,11 @@ import { FactionSelector } from "../selector/faction-selector";
 
 @Component({
     selector: 'fleet',
-    templateUrl: 'app/fleet/fleet.html', 
+    templateUrl: 'app/fleet/fleet.html',
     directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, GameSizeSelector, FactionSelector]
 })
 
 export class FleetComponent {
-    @Output() select = new EventEmitter();
         
     constructor() { }
         
@@ -21,5 +20,10 @@ export class FleetComponent {
     @Input() faction;
     
     ngOnInit(){
+    }
+    
+    onItemSelected(selectedItem: GameSize) {
+            console.log(selectedItem);
+        this.gameSize = selectedItem;
     }
 }
