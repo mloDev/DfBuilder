@@ -32,11 +32,9 @@
 							<span>{{gameSize.lineMin}}/{{gameSize.lineSize}}</span>					
 						</div>					
 					</div>
-					<div class="col-md-12 battleContainer" *ngFor="let line of arrLine; let i = index">
-						<div ([ngModel])="battleLine" class="col-md-4 shipEmptyContainer" *ngFor="let battle of battleGroupes | battleTypePipe: 'LINE'">
-							{{battleLine[i]}}
+						<div ([ngModel])="battleLines" class="col-md-12" *ngFor="let battleGroupe of battleLines">
+							<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
 						</div>
-					</div>
 			</div>
 				<div class="col-md-12" *ngIf="gameSize.pathfinderSize > 0">
 					<div class="col-md-12">
@@ -50,9 +48,8 @@
 							<span>{{gameSize.pathfinderMin}}/{{gameSize.pathfinderSize}}</span>				
 						</div>					
 					</div>
-					<div class="col-md-12 battleContainer" *ngFor="let i of arrPathfinder">
-						<div class="col-md-4 shipEmptyContainer" *ngFor="let battle of battleGroupes | battleTypePipe: 'PATHFINDER'">
-						</div>					
+					<div ([ngModel])="battlePathfinders" class="col-md-12" *ngFor="let battleGroupe of battlePathfinders">
+						<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
 					</div>
 				</div>
 				<div class="col-md-12" *ngIf="gameSize.vanguardSize > 0">
@@ -67,9 +64,8 @@
 							<span>{{gameSize.vanguardMin}}/{{gameSize.vanguardSize}}</span>				
 						</div>					
 					</div>
-					<div class="col-md-12 battleContainer" *ngFor="let i of arrVanguard">
-						<div class="col-md-4 shipEmptyContainer" *ngFor="let battle of battleGroupes | battleTypePipe: 'VANGUARD'">
-						</div>					
+					<div ([ngModel])="battleVanguards" class="col-md-12" *ngFor="let battleGroupe of battleVanguards">
+						<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
 					</div>
 				</div>
 				<div class="col-md-12" *ngIf="gameSize.flagSize > 0">
@@ -84,9 +80,8 @@
 							<span>{{gameSize.flagMin}}/{{gameSize.flagSize}}</span>				
 						</div>					
 					</div>
-					<div class="col-md-12 battleContainer" *ngFor="let battle of battleGroupes | battleTypePipe: 'FLAG'">
-						<div class="col-md-4 shipEmptyContainer">
-						</div>					
+					<div ([ngModel])="battleFlags" class="col-md-12" *ngFor="let battleGroupe of battleFlags">
+						<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
 					</div>
 				</div>
 			</div>

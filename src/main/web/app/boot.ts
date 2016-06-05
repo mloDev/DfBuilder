@@ -7,6 +7,7 @@ import {LocationStrategy, HashLocationStrategy, APP_BASE_HREF} from '@angular/co
 import { AuthConfig, AuthHttp } from 'angular2-jwt';
 import { FORM_PROVIDERS } from '@angular/common';
 import { FactionSelector } from './selector/faction-selector';
+import { NgForNumber } from "./pipes/ngForNumber-pipe";
 
 bootstrap( AppComponent, [
     provide(APP_BASE_HREF, {useValue: '/'}),
@@ -21,4 +22,4 @@ bootstrap( AppComponent, [
     }),
     FORM_PROVIDERS,
     ROUTER_PROVIDERS,
-    HTTP_PROVIDERS, FactionSelector ] );
+    HTTP_PROVIDERS, FactionSelector, NgForNumber ] );

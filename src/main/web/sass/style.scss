@@ -106,26 +106,57 @@ header .display-2 {
 /* ----------------------- SHIPS ---------------------------------------*/
 .shipContainer {
 	border-corner-shape: bevel;
-	padding: 10px;
     border-radius: 5px;
     border-style: solid;
     border-width: 1px;
-    margin: 10px;
-    height: 200px;
+    height: 100px;
 }
 
-.shipEmptyContainer {
+.shipEmptyLightContainer {
 	border-corner-shape: bevel;
 	padding: 0px;
     border-radius: 5px;
     border-style: solid;
     border-width: 1px;
     margin: 0px;
-    height: 200px;
+    height: 100px;
+    background-color: #ffcccc;
+}
+
+.shipEmptyMediumContainer {
+	border-corner-shape: bevel;
+	padding: 0px;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    margin: 0px;
+    height: 100px;
+    background-color: #99ccff;
+}
+
+.shipEmptyHeavyContainer {
+	border-corner-shape: bevel;
+	padding: 0px;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    margin: 0px;
+    height: 100px;
+    background-color: #ccffcc;
+}
+
+.shipEmptySuperHeavyContainer {
+	border-corner-shape: bevel;
+	padding: 0px;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    margin: 0px;
+    height: 100px;
+    background-color: #ffff99;
 }
 
 .battleContainer {
-    height: 200px;
 }
 
 .shipRow {
