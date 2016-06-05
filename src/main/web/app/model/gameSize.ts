@@ -2,13 +2,13 @@ export class GameSize {
     id: number;
     name: string;
     pathfinderSize: number;
-    pathfinderMax: number;
+    pathfinderMin: number;
     lineSize: number;
-    lineMax: number;
+    lineMin: number;
     vanguardSize: number;
-    vanguardMax: number;
+    vanguardMin: number;
     flagSize: number;
-    flagMax: number;
+    flagMin: number;
     battlegroupMax: number;
     maxPoints: number; 
 }

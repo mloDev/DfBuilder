@@ -1,7 +1,7 @@
 <div class="entity-list" ng-init="ships = []">
 	<div class="container-fluid">
 			<span>Light ships</span>
-			<div class="row shipRow" [dragula]='"first-bag"'>
+			<div class="row shipRow" [dragula]='"light-bag"'>
 				<div class="col-md-12" *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'LIGHT'" ([ngModel])="ship">
 					<ship-detail-small [ship]="ship"></ship-detail-small>				 
 				</div>

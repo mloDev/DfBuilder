@@ -109,8 +109,23 @@ header .display-2 {
 	padding: 10px;
     border-radius: 5px;
     border-style: solid;
-    border-width: 2px;
+    border-width: 1px;
     margin: 10px;
+    height: 200px;
+}
+
+.shipEmptyContainer {
+	border-corner-shape: bevel;
+	padding: 0px;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    margin: 0px;
+    height: 200px;
+}
+
+.battleContainer {
+    height: 200px;
 }
 
 .shipRow {
@@ -139,4 +154,18 @@ header .display-2 {
 }
 .heroes li:hover {
   padding-left: 30px;
+}
+.wrapper {
+  display: table;
+}
+.container {
+  display: table-cell;
+  background-color: rgba(255, 255, 255, 0.2);
+	width: 50%;
+	}
+  
+  .parent {
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 50px 0;
+  padding: 20px;
 }

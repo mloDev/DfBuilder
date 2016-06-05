@@ -10,13 +10,14 @@ import { ShipTypePipe } from '../pipes/ship-type-pipe';
 import { ShipFactionPipe } from '../pipes/ship-faction-pipe';
 import { FactionSelector } from '../selector/faction-selector';
 import { ShipDetailSmall } from "../ship/ship.detail.small";
+import { Dragula, DragulaService} from 'ng2-dragula/ng2-dragula';
 
 @Component({
     selector: 'ship-list',
     pipes: [ShipTypePipe, ShipFactionPipe ],
     templateUrl: 'app/ship/ship.list.html',
     providers: [ShipService],
-    directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, FactionSelector, ShipDetailSmall]
+    directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, FactionSelector, ShipDetailSmall, Dragula]
 })
 export class ShipList implements OnInit {
 
