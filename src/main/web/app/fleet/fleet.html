@@ -15,8 +15,20 @@
 		<div class="col-md-12">
 			<div class="col-md-3">
 				<div class="col-md-12">
-					<span>Verfügbare Schiffe</span>
-					<ship-list [faction]="faction"></ship-list>
+					<tabs>
+	        			<tab [tabTitle]="'L'">
+	        				<ship-list [faction]="faction" [shipType]="'LIGHT'"></ship-list>
+	        			</tab>
+	        			<tab tabTitle="M">
+	        				<ship-list [faction]="faction" [shipType]="'MEDIUM'"></ship-list>
+	        			</tab>
+	        			<tab tabTitle="H">
+	        				<ship-list [faction]="faction" [shipType]="'HEAVY'"></ship-list>
+	        			</tab>
+	        			<tab tabTitle="SH">
+	        				<ship-list [faction]="faction" [shipType]="'SUPER'"></ship-list>
+	        			</tab>
+	      			</tabs>
 				</div>
 			</div>
 			<div class="col-md-9"  *ngIf="gameSize">
@@ -88,3 +100,8 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $('#tabs').tab();
+    });
+</script> 

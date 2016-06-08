@@ -12,13 +12,16 @@ import { NgForNumber } from "../pipes/ngForNumber-pipe";
 
 import { BattleGroupe } from "../model/battleGroupe";
 import { BattleGroupeService } from '../service/battleGroupe.service';
+import {Tabs} from '../navbar/tabs';
+import {Tab} from '../model/tab';
+import {Ship} from '../model/ship';
 
 import { BattleGroupeComponent } from "../fleet/battleGroupe.component";
 @Component({
     selector: 'fleet',
     pipes: [ BattleTypePipe, NgForNumber],
     templateUrl: 'app/fleet/fleet.html',
-    directives: [ CORE_DIRECTIVES, ROUTER_DIRECTIVES, ShipList, GameSizeSelector, FactionSelector, Dragula, BattleGroupeComponent ],
+    directives: [ CORE_DIRECTIVES, ROUTER_DIRECTIVES, ShipList, GameSizeSelector, FactionSelector, Dragula, BattleGroupeComponent, Tabs, Tab ],
     providers: [ BattleGroupeService ],
     viewProviders: [ DragulaService ]
 
@@ -42,29 +45,53 @@ export class FleetComponent {
     
     @Input() gameSize: GameSize;
     @Input() @Output() faction;
-        
+    
     constructor(private dragulaService: DragulaService, private battleService: BattleGroupeService) {
         dragulaService.setOptions('light-bag', {
-            copy: true,
-            revertOnSpill: true    
+            copy: true   
         })
         dragulaService.setOptions('medium-bag', {
-            copy: true,
-            revertOnSpill: true    
+            accepts:    function (el, target, source, sibling) {
+                    if (target.className.indexOf("isEmpty") > 1 && target.className.indexOf("isFilled") == -1) {
+                        return true;
+                    } else {
+                        return false;    
+                    }
+            },
+            copy: true  
         })
         dragulaService.setOptions('heavy-bag', {
-            copy: true,
-            revertOnSpill: true    
+            accepts:    function (el, target, source, sibling) {
+                    if (target.className.indexOf("isEmpty") > 1 && target.className.indexOf("isFilled") == -1) {
+                        return true;
+                    } else {
+                        return false;    
+                    }
+            },
+            copy: true   
         })
         dragulaService.setOptions('superHeavy-bag', {
-            copy: true,
-            revertOnSpill: true    
+            accepts:    function (el, target, source, sibling) {
+                    if (target.className.indexOf("isEmpty") > 1 && target.className.indexOf("isFilled") == -1) {
+                        return true;
+                    } else {
+                        return false;    
+                    }
+            },
+            copy: true 
         });
         dragulaService.drop.subscribe((value) => {
             this.onDrop(value.slice(1));
         });
+          dragulaService.dropModel.subscribe((value) => {
+            //this.onDropModel(value.slice(1));
+          });
+          dragulaService.removeModel.subscribe((value) => {
+            //this.onRemoveModel(value.slice(1));
+          });
     }
-        
+   
+    
     onClick(input, $event) {
         if (input === "addLine") {
             if (this.gameSize.lineMin < this.gameSize.lineSize) {
@@ -151,21 +178,29 @@ export class FleetComponent {
     private onDrop(args) {
         let [e, el] = args;
         this.removeClass(e, 'shipContainer');
+        e = e.parentNode;
+        if ( e != null ) {
+            console.log(e);
+            this.removeClass(e, 'isEmpty');
+            this.addClass(e, 'isFilled');
+            }
     }
     
     private removeClass(el: any, name: string) {
         if (this.hasClass(el, name)) {
-          el.className = el.className.replace(new RegExp('(?:^|\s+)' + name + '(?:\s+|$)', 'g'), '');
+          el.className = el.className.replace(name, '');
         }
     }
     
       private hasClass(el: any, name: string) {
-        return new RegExp('(?:^|\s+)' + name + '(?:\s+|$)').test(el.className);
+        return (el.className.indexOf(name) > 1);
       }
 
-  private addClass(el: any, name: string) {
-    if (!this.hasClass(el, name)) {
-      el.className = el.className ? [el.className, name].join(' ') : name;
-    }
-  }
+      private addClass(el: any, name: string) {
+        if (!this.hasClass(el, name)) {
+          el.className = el.className ? [el.className, name].join('') : name;
+        }
+      }
+    
+        
 }

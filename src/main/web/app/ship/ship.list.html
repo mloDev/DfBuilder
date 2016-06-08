@@ -1,34 +1,24 @@
 <div class="entity-list" ng-init="ships = []">
-	<div class="container-fluid">
-			<span>Light ships</span>
-			<div class="row shipRow" >
-				<div class="col-md-12 shipContainer" [dragula]='"light-bag"' *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'LIGHT'" ([ngModel])="ship">
-					<ship-detail-small [ship]="ship"></ship-detail-small>				 
-				</div>
-			</div>
+	<div class="row shipRow" *ngIf="shipType === 'LIGHT'">
+		<div class="col-md-12" [dragula]='"light-bag"' [dragulaModel]="ships">
+			<div class="shipContainer" *ngFor="let ship of ships">
+				<ship-detail-small [ship]="ship"></ship-detail-small>				
+			</div> 
+		</div>
 	</div>
-	<div class="container-fluid">
-			<span>Medium ships</span>
-			<div class="row shipRow" >
-				<div class="col-md-12 shipContainer" [dragula]='"medium-bag"' *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'MEDIUM'">
-					<ship-detail-small [ship]="ship"></ship-detail-small>
-				</div>
-			</div>
+	<div class="row shipRow" *ngIf="shipType === 'MEDIUM'">
+		<div class="col-md-12 shipContainer" [dragula]='"medium-bag"' *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: shipType">
+			<ship-detail-small [ship]="ship"></ship-detail-small>
+		</div>
 	</div>
-	<div class="container-fluid">
-			<span>Heavy ships</span>
-			<div class="row shipRow" >
-				<div class="col-md-12 shipContainer" [dragula]='"heavy-bag"' *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'HEAVY'">
-					<ship-detail-small [ship]="ship"></ship-detail-small>		 
-				</div>
-			</div>
+	<div class="row shipRow" *ngIf="shipType === 'HEAVY'">
+		<div class="col-md-12 shipContainer" [dragula]='"heavy-bag"' *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: shipType">
+			<ship-detail-small [ship]="ship"></ship-detail-small>		 
+		</div>
 	</div>
-	<div class="container-fluid">
-		<span>Super heavy ships</span>
-		<div class="row shipRow" >
-			<div class="col-md-12 shipContainer"  [dragula]='"superHeavy-bag"' *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'SUPER'">
-				<ship-detail-small [ship]="ship"></ship-detail-small>		
-			</div>
+	<div class="row shipRow" *ngIf="shipType === 'SUPER'">
+		<div class="col-md-12 shipContainer"  [dragula]='"superHeavy-bag"' *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: shipType">
+			<ship-detail-small [ship]="ship"></ship-detail-small>		
 		</div>
 	</div>
 </div>

@@ -23,7 +23,14 @@ export class ShipList implements OnInit {
 
     @Input() @Output() faction;
     
-    ships: Ship [];
+    @Input() shipType;
+    
+    @Input() @Output() public ships: Ship [];
+    
+    @Output() public lightShips: Ship [];
+    @Output() mediumShips: Ship [];
+    @Output() heavyShips: Ship [];
+    @Output() superHeavyShips: Ship [];
     
     @Output() ship: Ship;
 
@@ -38,6 +45,7 @@ export class ShipList implements OnInit {
   }
     
   ngOnInit() {
+      console.log(this.shipType);
     this.getShips();
   }
 }

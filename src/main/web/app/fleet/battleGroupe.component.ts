@@ -9,6 +9,7 @@ import { ShipList } from "../ship/ship.list";
 import { Dragula, DragulaService} from 'ng2-dragula/ng2-dragula';
 import { BattleTypePipe } from '../pipes/battleType-pipe';
 import { NgForNumber } from "../pipes/ngForNumber-pipe";
+import { Ship } from "../model/ship";
 
 import { BattleGroupe } from "../model/battleGroupe";
 import { BattleGroupeService } from '../service/battleGroupe.service';
@@ -24,6 +25,6 @@ import { BattleGroupeService } from '../service/battleGroupe.service';
 export class BattleGroupeComponent {
         
     @Input() battleGroupe: BattleGroupe;
-
         
+    @Input() lightShips: Ship[] = [];
 }
