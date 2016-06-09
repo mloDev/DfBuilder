@@ -37,6 +37,8 @@ gulp.task('libcopy', function() {
 		.pipe(gulp.dest(staticDir + 'js/lib/contra'));    
     gulp.src(['./node_modules/ticky/**/*'])
 		.pipe(gulp.dest(staticDir + 'js/lib/ticky'));
+	gulp.src(['./node_modules/ng2-bs3-modal/**/*'])
+		.pipe(gulp.dest(staticDir + 'js/lib/ng2-bs3-modal'));
 	gulp.src(['./node_modules/atoa/**/*'])
 		.pipe(gulp.dest(staticDir + 'js/lib/atoa'));
 

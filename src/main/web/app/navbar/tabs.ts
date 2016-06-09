@@ -4,7 +4,7 @@ import { Tab } from '../model/tab';
 @Component({
   selector: 'tabs',
   template:`
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs nav-display">
       <li *ngFor=" let tab of tabs" (click)="selectTab(tab)" [class.active]="tab.active">
         <a>{{tab.tabTitle}}</a>
       </li>

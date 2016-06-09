@@ -1,8 +1,24 @@
 <div [dragula]='"light-bag"' [dragulaModel]="lightShips" class="col-md-2 shipEmptyLightContainer isEmpty" *ngFor="let ship of battleGroupe.battleGroupeType.lightShipMin | ngForNumber">
+	<span>Light Ship</span>
 </div>
-<div [dragula]='"medium-bag"' class="col-md-2 shipEmptyMediumContainer isEmpty" *ngFor="let ship of battleGroupe.battleGroupeType.mediumShipMin | ngForNumber">
+<div [dragula]='"light-bag"' class="col-md-2 shipAddEmptyContainer isAddEmpty" *ngIf="battleGroupe.battleGroupeType.lightShipMin < battleGroupe.battleGroupeType.lightShipSize">
+	<span>Add Light Ship</span>
+</div>
+<div id="medium-bag" [dragula]='"medium-bag"' class="col-md-2 shipEmptyMediumContainer isEmpty" *ngFor="let ship of battleGroupe.battleGroupeType.mediumShipMin | ngForNumber">
+	<span>Medium Ship</span>
+</div>
+<div [dragula]='"medium-bag"' class="col-md-2 shipAddEmptyContainer isAddEmpty" *ngIf="battleGroupe.battleGroupeType.mediumShipMin < battleGroupe.battleGroupeType.mediumShipSize">
+	<span>Add Medium Ship</span>
 </div>
 <div [dragula]='"heavy-bag"' class="col-md-2 shipEmptyHeavyContainer isEmpty" *ngFor="let ship of battleGroupe.battleGroupeType.heavyShipMin | ngForNumber">
+	<span>Heavy Ship</span>
+</div>
+<div [dragula]='"heavy-bag"' class="col-md-2 shipAddEmptyContainer isAddEmpty" *ngIf="battleGroupe.battleGroupeType.heavyShipMin < battleGroupe.battleGroupeType.heavyShipSize">
+	<span>Add Heavy Ship</span>
 </div>
 <div [dragula]='"superHeavy-bag"' class="col-md-2 shipEmptySuperHeavyContainer isEmpty" *ngFor="let ship of battleGroupe.battleGroupeType.superHeavyShipMin | ngForNumber">
+	<div>Super Heavy Ship</div>
+</div>
+<div [dragula]='"superHeavy-bag"' class="col-md-2 shipAddEmptyContainer isAddEmpty" *ngIf="battleGroupe.battleGroupeType.superHeavyShipMin < battleGroupe.battleGroupeType.superHeavyShipSize">
+	<span>Add Super Heavy Ship</span>
 </div>
