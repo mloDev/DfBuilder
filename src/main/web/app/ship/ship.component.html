@@ -1,2 +1,70 @@
-<div><h3>JSON</h3><div>{{jsonResponse}}</div></div>
-<div><h3>message</h3><div>{{message}}</div></div>
+<div class="entity-list" ng-init="ships = []">
+<h2>Ships</h2>
+
+<faction-selector (select)="faction = $event"></faction-selector>
+
+<div class="container-fluid">
+		<h3>Light ships</h3>
+		<div class="row shipRow">
+			<div class="col-md-3" *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'LIGHT'">
+			  <div class="col-md-12 shipContainer">
+			  	<div class="col-md-12">
+				  <div>{{ship.name}}</div>
+				</div>
+				<div class="col-md-6">
+					<div class="col-md-12">{{ship.faction}}</div>
+				  	<div class="col-md-12">{{ship.shipType}}</div>
+				</div>
+			  </div>
+			</div>
+		</div>
+</div>
+<div class="container-fluid">
+		<h3>Medium ships</h3>
+		<div class="row shipRow">
+			<div class="col-md-3" *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'MEDIUM'">
+			  <div class="col-md-12 shipContainer">
+			  	<div class="col-md-12">
+				  <div>{{ship.name}}</div>
+				</div>
+				<div class="col-md-6">
+					<div class="col-md-12">{{ship.faction}}</div>
+				  	<div class="col-md-12">{{ship.shipType}}</div>
+				</div>
+			  </div>
+			</div>
+		</div>
+</div>
+<div class="container-fluid">
+		<h3>Heavy ships</h3>
+		<div class="row shipRow">
+			<div class="col-md-3" *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'HEAVY'">
+			  <div class="col-md-12 shipContainer">
+			  	<div class="col-md-12">
+				  <div>{{ship.name}}</div>
+				</div>
+				<div class="col-md-6">
+					<div class="col-md-12">{{ship.faction}}</div>
+				  	<div class="col-md-12">{{ship.shipType}}</div>
+				</div>
+			  </div>
+			</div>
+		</div>
+</div>
+<div class="container-fluid">
+		<h3>Super heavy ships</h3>
+		<div class="row shipRow">
+			<div class="col-md-4" *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'SUPER'">
+			  <div class="col-md-12 shipContainer">
+			  	<div class="col-md-12">
+				  <div>{{ship.name}}</div>
+				</div>
+				<div class="col-md-6">
+					<div class="col-md-12">{{ship.faction}}</div>
+				  	<div class="col-md-12">{{ship.shipType}}</div>
+				</div>
+			  </div>
+			</div>
+		</div>
+</div>
+

@@ -6,9 +6,10 @@ import {provide} from '@angular/core';
 import {LocationStrategy, HashLocationStrategy, APP_BASE_HREF} from '@angular/common';
 import { AuthConfig, AuthHttp } from 'angular2-jwt';
 import { FORM_PROVIDERS } from '@angular/common';
+import { FactionSelector } from './selector/faction-selector';
 
 bootstrap( AppComponent, [
-    provide(APP_BASE_HREF, {useValue: '/#'}),
+    provide(APP_BASE_HREF, {useValue: '/'}),
     provide(LocationStrategy, {useClass: HashLocationStrategy}),
     provide(AuthHttp, {
       useFactory: (http) => {
@@ -20,4 +21,4 @@ bootstrap( AppComponent, [
     }),
     FORM_PROVIDERS,
     ROUTER_PROVIDERS,
-    HTTP_PROVIDERS ] );
+    HTTP_PROVIDERS, FactionSelector ] );

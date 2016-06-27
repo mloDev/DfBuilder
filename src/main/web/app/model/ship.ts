@@ -11,4 +11,5 @@ export class Ship {
   t: string;
   faction: string;
   pts: number;
+  shipType: string;
 }

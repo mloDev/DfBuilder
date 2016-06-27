@@ -1,8 +1,9 @@
 export let CONFIGURATION = {
     baseUrls: {
         server: 'http://localhost:3000/',
-        apiUrl: '',
+        apiUrl: 'api/',
         gameSizes: 'gameSizes',
-        ships: 'ships',
+        ships: 'ship',
+        shipsByFaction: 'shipByFaction'
     },
 }

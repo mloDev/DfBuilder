@@ -5,6 +5,8 @@ import { Navbar } from './navbar/navbar';
 import { ROUTES } from './routes';
 import { Footer } from './footer/footer';
 
+
+
 @Component({
   selector: 'my-app',
   templateUrl: 'app/app.html',

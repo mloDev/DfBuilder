@@ -3,7 +3,8 @@ import { HeroComponent } from './hero/hero';
 import { HomeComponent } from './home/home';
 import { AboutUsComponent } from './home/about/about';
 import { ContactComponent } from './home/contact/contact';
-import { HelloComponent } from './hello/hello.component';
+import { ShipComponent } from './ship/ship.component';
+import { FleetComponent } from './fleet/fleet';
 
 export enum MenuType {
   BRAND,
@@ -36,8 +37,8 @@ export declare class RouteInfo implements RouteInfoMetadata {
 
 export const ROUTES: RouteInfo[] = [
   { path: '/', component: HomeComponent, title: "DropFleet Builder", menuType: MenuType.BRAND },
-  { path: '/heroes', component: HeroComponent, title: "Heroes", menuType: MenuType.LEFT },
-  { path: '/hello', component: HelloComponent, title: "Hello", menuType: MenuType.LEFT },
+  { path: '/fleet', component: FleetComponent, title: "Fleet", menuType: MenuType.LEFT },
+  { path: '/ships', component: ShipComponent, title: "Ships", menuType: MenuType.RIGHT },
   { path: '/about', component: AboutUsComponent, title: "About Us", menuType: MenuType.RIGHT },
   { path: '/contact', component: ContactComponent, title: "Contact", menuType: MenuType.RIGHT }
 ]
