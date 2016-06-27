@@ -105,11 +105,58 @@ header .display-2 {
 
 /* ----------------------- SHIPS ---------------------------------------*/
 .shipContainer {
-	padding: 10px;
+	border-corner-shape: bevel;
     border-radius: 5px;
     border-style: solid;
-    border-width: 2px;
-    margin: 10px;
+    border-width: 1px;
+    height: 100px;
+}
+
+.shipEmptyLightContainer {
+	border-corner-shape: bevel;
+	padding: 0px;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    margin: 0px;
+    height: 100px;
+    background-color: #ffcccc;
+}
+
+.shipEmptyMediumContainer {
+	border-corner-shape: bevel;
+	padding: 0px;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    margin: 0px;
+    height: 100px;
+    background-color: #99ccff;
+}
+
+.shipEmptyHeavyContainer {
+	border-corner-shape: bevel;
+	padding: 0px;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    margin: 0px;
+    height: 100px;
+    background-color: #ccffcc;
+}
+
+.shipEmptySuperHeavyContainer {
+	border-corner-shape: bevel;
+	padding: 0px;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    margin: 0px;
+    height: 100px;
+    background-color: #ffff99;
+}
+
+.battleContainer {
 }
 
 .shipRow {
@@ -128,14 +175,26 @@ header .display-2 {
     background-image: linear-gradient(180deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
 }
 
-/* ----------------------- HEROS ---------------------------------------*/
-.heroes {
-  width: 300px;
+/* ----------------------- DRAGULA ---------------------------------------*/
+.gu-mirror {
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
 }
-.heroes li {
-  cursor: pointer;
-  transition: all 0.2s ease;
+.gu-hide {
+  display: none !important;
 }
-.heroes li:hover {
-  padding-left: 30px;
+.gu-unselectable {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+.gu-transit {
+  opacity: 0.2;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  filter: alpha(opacity=20);
 }

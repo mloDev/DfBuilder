@@ -9,19 +9,30 @@ import { Ship } from '../model/ship';
 import { ShipTypePipe } from '../pipes/ship-type-pipe';
 import { ShipFactionPipe } from '../pipes/ship-faction-pipe';
 import { FactionSelector } from '../selector/faction-selector';
+import { ShipDetailSmall } from "../ship/ship.detail.small";
+import { Dragula, DragulaService} from 'ng2-dragula/ng2-dragula';
 
 @Component({
-    selector: 'ship-component',
+    selector: 'ship-list',
     pipes: [ShipTypePipe, ShipFactionPipe ],
-    templateUrl: 'app/ship/ship.component.html',
+    templateUrl: 'app/ship/ship.list.html',
     providers: [ShipService],
-    directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, FactionSelector]
+    directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, FactionSelector, ShipDetailSmall, Dragula]
 })
-export class ShipComponent implements OnInit {
+export class ShipList implements OnInit {
 
-    @Input() faction;
+    @Input() @Output() faction;
     
-    ships: Ship [];
+    @Input() shipType;
+    
+    @Input() @Output() public ships: Ship [];
+    
+    @Output() public lightShips: Ship [];
+    @Output() mediumShips: Ship [];
+    @Output() heavyShips: Ship [];
+    @Output() superHeavyShips: Ship [];
+    
+    @Output() ship: Ship;
 
   constructor(
     private shipService: ShipService) { }
@@ -34,6 +45,7 @@ export class ShipComponent implements OnInit {
   }
     
   ngOnInit() {
+      console.log(this.shipType);
     this.getShips();
   }
 }

@@ -4,6 +4,7 @@ export let CONFIGURATION = {
         apiUrl: 'api/',
         gameSizes: 'gameSizes',
         ships: 'ship',
-        shipsByFaction: 'shipByFaction'
+        shipsByFaction: 'shipByFaction',
+        battlegroupe: 'battlegroupe'
     },
 }

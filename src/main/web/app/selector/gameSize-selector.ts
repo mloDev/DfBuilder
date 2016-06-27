@@ -10,8 +10,9 @@ import 'rxjs/add/operator/toPromise';
 })
 
 export class GameSizeSelector implements OnInit {
-    @Output() select = new EventEmitter();
-    games: GameSize[] = [];
+    @Output() select: EventEmitter<GameSize> = new EventEmitter();
+    @Input() games: GameSize[] = [];
+    @Output() gameSize: GameSize;
     
     constructor(
         private gameService: GameSizeService) {};
@@ -24,9 +25,10 @@ export class GameSizeSelector implements OnInit {
     
     ngOnInit(){
         this.getGames();
-        if (this.games ==  null) {
+        this.gameSize = this.games[0];
+        if (this.games == null) {
         } else {
-            this.select.emit(this.games[0]);    
+            this.select.emit(this.gameSize);    
         }
     }
 

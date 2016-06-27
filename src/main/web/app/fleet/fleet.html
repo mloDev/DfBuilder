@@ -1,47 +1,107 @@
 <h2>Fleet</h2>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-3">
-			<div class="col-md-12">
-				<span>Verfügbare Schiffe</span>
+		<div class="col-md-12">
+			<div class="col-md-4">
+				<game-selector [(selected)]="gameSize" (select)="onItemSelected($event)"></game-selector>
+			</div>
+			<div class="col-md-4">
+				<faction-selector (select)="faction = $event"></faction-selector>
+			</div>
+			<div class="col-md-4">
+			
 			</div>
 		</div>
-		<div class="col-md-9">
-			<div class="col-md-12">
-				<div class="col-md-4">
-					<game-selector (select)="gameSize = $event"></game-selector>
-				</div>
-				<div class="col-md-4">
-					<faction-selector (select)="faction = $event"></faction-selector>
-				</div>
-				<div class="col-md-4">
-				</div>
-			</div>
-			<div class="col-md-12">
-				<div class="col-md-4" *ngIf="gameSize">
-					{{gameSize.name}}
-				</div>
-				<div class="col-md-4">
-					{{faction}}
-				</div>
-				<div class="col-md-4">
+		<div class="col-md-12">
+			<div class="col-md-3">
+				<div class="col-md-12">
+					<tabs>
+	        			<tab [tabTitle]="'L'">
+	        				<ship-list [faction]="faction" [shipType]="'LIGHT'"></ship-list>
+	        			</tab>
+	        			<tab tabTitle="M">
+	        				<ship-list [faction]="faction" [shipType]="'MEDIUM'"></ship-list>
+	        			</tab>
+	        			<tab tabTitle="H">
+	        				<ship-list [faction]="faction" [shipType]="'HEAVY'"></ship-list>
+	        			</tab>
+	        			<tab tabTitle="SH">
+	        				<ship-list [faction]="faction" [shipType]="'SUPER'"></ship-list>
+	        			</tab>
+	      			</tabs>
 				</div>
 			</div>
-			<div class="col-md-12">
-				<span>Linegruppen der Flotte</span>
+			<div class="col-md-9"  *ngIf="gameSize">
+				<div class="col-md-12" *ngIf="gameSize.lineSize > 0">
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<span>Linegruppen der Flotte</span>
+						</div>
+						<div class="col-md-3">
+							<button (click)="onClick('addLine', $event)">Add Line</button>
+						</div>
+						<div class="col-md-3">
+							<span>{{gameSize.lineMin}}/{{gameSize.lineSize}}</span>					
+						</div>					
+					</div>
+						<div ([ngModel])="battleLines" class="col-md-12" *ngFor="let battleGroupe of battleLines">
+							<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
+						</div>
 			</div>
-			<div class="col-md-12">
-				<span>Pathfindergruppen der Flotte</span>
+				<div class="col-md-12" *ngIf="gameSize.pathfinderSize > 0">
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<span>Pathfindergruppen der Flotte</span>
+						</div>
+						<div class="col-md-3">
+							<button (click)="onClick('addPathfinder', $event)">Add Line</button>
+						</div>
+						<div class="col-md-3">
+							<span>{{gameSize.pathfinderMin}}/{{gameSize.pathfinderSize}}</span>				
+						</div>					
+					</div>
+					<div ([ngModel])="battlePathfinders" class="col-md-12" *ngFor="let battleGroupe of battlePathfinders">
+						<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
+					</div>
+				</div>
+				<div class="col-md-12" *ngIf="gameSize.vanguardSize > 0">
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<span>Vanguardgruppen der Flotte</span>
+						</div>
+						<div class="col-md-3">
+							<button (click)="onClick('addVanguard', $event)">Add Line</button>
+						</div>
+						<div class="col-md-3">
+							<span>{{gameSize.vanguardMin}}/{{gameSize.vanguardSize}}</span>				
+						</div>					
+					</div>
+					<div ([ngModel])="battleVanguards" class="col-md-12" *ngFor="let battleGroupe of battleVanguards">
+						<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
+					</div>
+				</div>
+				<div class="col-md-12" *ngIf="gameSize.flagSize > 0">
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<span>Flaggruppen der Flotte</span>
+						</div>
+						<div class="col-md-3">
+							<button (click)="onClick('addFlag', $event)">Add Line</button>
+						</div>
+						<div class="col-md-3">
+							<span>{{gameSize.flagMin}}/{{gameSize.flagSize}}</span>				
+						</div>					
+					</div>
+					<div ([ngModel])="battleFlags" class="col-md-12" *ngFor="let battleGroupe of battleFlags">
+						<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
+					</div>
+				</div>
 			</div>
-			<div class="col-md-12">
-				<span>Vanguardgruppen der Flotte</span>
-			</div>
-			<div class="col-md-12">
-				<span>Flaggruppen der Flotte</span>
-			</div>
-			
-			
-			
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $('#tabs').tab();
+    });
+</script> 
