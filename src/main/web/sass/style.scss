@@ -71,7 +71,7 @@ header .display-2 {
 
 /* ----------------------- FOOTER ---------------------------------------*/
 .footer {
-    background:#363636;
+    background:#2e3c45;
     position:relative;
     padding: 0;
     margin-top: -100px; /* negative value of footer height */
@@ -96,6 +96,8 @@ header .display-2 {
 
 #wrap {
   min-height: 100%;
+  background: #2e3c45;
+  color: #61727D;
 }
 
 #main {
@@ -105,65 +107,190 @@ header .display-2 {
 
 /* ----------------------- SHIPS ---------------------------------------*/
 .shipContainer {
-	border-corner-shape: bevel;
-    border-radius: 5px;
+    -webkit-border-top-right-radius: 15px;
+	-webkit-border-bottom-left-radius: 15px;
+	-moz-border-radius-topright: 15px;
+	-moz-border-radius-bottomleft: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
     border-style: solid;
     border-width: 1px;
     height: 100px;
+    margin-bottom: 6px;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 5px 5px 5px #61727D;
 }
 
 .shipEmptyLightContainer {
-	border-corner-shape: bevel;
 	padding: 0px;
-    border-radius: 5px;
+	-webkit-border-top-right-radius: 15px;
+	-webkit-border-bottom-left-radius: 15px;
+	-moz-border-radius-topright: 15px;
+	-moz-border-radius-bottomleft: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
     border-style: solid;
     border-width: 1px;
     margin: 0px;
     height: 100px;
-    background-color: #ffcccc;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.btn-addShip {
+	background-color: transparent;
+	border-color: transparent;
+	width: 100%;
+	height: 100%;
+}
+
+.btn-primary {
+	background-color: #61727D;
+	color: #2e3c45;
+	border-color: transparent;
+}
+
+.entity-list {
+	font-size: 10px;
+}
+
+.btn-primary:focus .btn-primary:active .btn-primary:hover {
+	background-color: #61727D;
+}
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for vh unit */
+
+  /* Make it a flex container */
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; 
+  
+  /* Align the bootstrap's container vertically */
+    -webkit-box-align : center;
+  -webkit-align-items : center;
+       -moz-box-align : center;
+       -ms-flex-align : center;
+          align-items : center;
+  
+  /* In legacy web browsers such as Firefox 9
+     we need to specify the width of the flex container */
+  width: 100%;
+  
+  /* Also 'margin: 0 auto' doesn't have any effect on flex items in such web browsers
+     hence the bootstrap's container won't be aligned to the center anymore.
+  
+     Therefore, we should use the following declarations to get it centered again */
+         -webkit-box-pack : center;
+            -moz-box-pack : center;
+            -ms-flex-pack : center;
+  -webkit-justify-content : center;
+          justify-content : center;
+}
+
+.nav li {
+	margin: 0 5 0 5;
+}
+
+.noPadding {
+	padding: 0;
 }
 
 .shipEmptyMediumContainer {
 	border-corner-shape: bevel;
-	padding: 0px;
-    border-radius: 5px;
+	padding: 0px;	
+	-webkit-border-top-right-radius: 15px;
+	-webkit-border-bottom-left-radius: 15px;
+	-moz-border-radius-topright: 15px;
+	-moz-border-radius-bottomleft: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
     border-style: solid;
     border-width: 1px;
     margin: 0px;
     height: 100px;
-    background-color: #99ccff;
+    margin-left: 3px;
+    margin-right: 3px;
 }
 
 .shipEmptyHeavyContainer {
 	border-corner-shape: bevel;
-	padding: 0px;
-    border-radius: 5px;
+	padding: 0px;	
+	-webkit-border-top-right-radius: 15px;
+	-webkit-border-bottom-left-radius: 15px;
+	-moz-border-radius-topright: 15px;
+	-moz-border-radius-bottomleft: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
     border-style: solid;
     border-width: 1px;
     margin: 0px;
     height: 100px;
-    background-color: #ccffcc;
+    margin-left: 3px;
+    margin-right: 3px;
 }
 
 .shipEmptySuperHeavyContainer {
 	border-corner-shape: bevel;
-	padding: 0px;
-    border-radius: 5px;
+	padding: 0px;	
+	-webkit-border-top-right-radius: 15px;
+	-webkit-border-bottom-left-radius: 15px;
+	-moz-border-radius-topright: 15px;
+	-moz-border-radius-bottomleft: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
     border-style: solid;
     border-width: 1px;
     margin: 0px;
     height: 100px;
-    background-color: #ffff99;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.shipAddEmptyContainer {
+	border-corner-shape: bevel;
+	padding: 0px;	
+	-webkit-border-top-right-radius: 15px;
+	-webkit-border-bottom-left-radius: 15px;
+	-moz-border-radius-topright: 15px;
+	-moz-border-radius-bottomleft: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+    border-style: solid;
+    border-width: 1px;
+    margin-left: 3px;
+    margin-right: 3px;
+    height: 100px;
+}
+
+.shipContainer col-md-12 col-md- {
+	padding: 0px;
+}
+
+.row-no-padding {
+  [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
 }
 
 .battleContainer {
 }
 
 .shipRow {
-	padding: 15px;
+	margin-top: 3px;
+	margin-bottom: 3px;
 }
 
 /* ----------------------- NAVBAR---------------------------------------*/
+
+.bg-inverse {
+	background-color:#2e3c45;
+	color:#dae2e6;
+}
+
 
 .navbar.transparent.navbar-inverse .navbar-inner {
     border-width: 0px;

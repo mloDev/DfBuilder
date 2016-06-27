@@ -45,7 +45,6 @@ export class ShipList implements OnInit {
   }
     
   ngOnInit() {
-      console.log(this.shipType);
     this.getShips();
   }
 }

@@ -12,6 +12,7 @@ import { BattleTypePipe } from '../pipes/battleType-pipe';
 import { NgForNumber } from "../pipes/ngForNumber-pipe";
 
 import { BattleGroupe } from "../model/battleGroupe";
+import { BattleGroupeType } from "../model/battleGroupeType";
 import { BattleGroupeService } from '../service/battleGroupe.service';
 import {Tabs} from '../navbar/tabs';
 import {Tab} from '../model/tab';
@@ -35,10 +36,10 @@ export class FleetComponent {
     @Input() battlePathfinders: BattleGroupe[] = [];
     @Input() battleVanguards: BattleGroupe[] = [];
     
-    @Input() battleFlag: BattleGroupe;
-    @Input() battleLine: BattleGroupe;
-    @Input() battlePathfinder: BattleGroupe;
-    @Input() battleVanguard: BattleGroupe;
+    @Input() battleFlag: BattleGroupeType;
+    @Input() battleLine: BattleGroupeType;
+    @Input() battlePathfinder: BattleGroupeType;
+    @Input() battleVanguard: BattleGroupeType;
     
     battleGroupes: BattleGroupe[] = [];
     
@@ -61,7 +62,8 @@ export class FleetComponent {
             },
               copy: function (el, source) {
                 return source === document.getElementById('light-bag-list')
-              }   
+              },
+              removeOnSpill: true   
         })
         dragulaService.setOptions('medium-bag', {
             accepts:    function (el, target, source, sibling) {
@@ -84,9 +86,10 @@ export class FleetComponent {
                         return false;    
                     }
             },
-                copy: function (el, source) {
+              copy: function (el, source) {
                 return source === document.getElementById('heavy-bag-list')
-              }   
+              },
+              removeOnSpill: true   
         })
         dragulaService.setOptions('superHeavy-bag', {
             accepts:    function (el, target, source, sibling) {
@@ -96,9 +99,10 @@ export class FleetComponent {
                         return false;    
                     }
             },
-                copy: function (el, source) {
+              copy: function (el, source) {
                 return source === document.getElementById('superHeavy-bag-list')
-              } 
+              }, 
+              removeOnSpill: true
         });
         dragulaService.drop.subscribe((value) => {
             this.onDrop(value.slice(1));
@@ -118,22 +122,31 @@ export class FleetComponent {
     onClick(input, $event) {
         if (input === "addLine") {
             if (this.gameSize.lineMin < this.gameSize.lineSize) {
-                this.battleLines.push(this.battleLine);
+                var battleGroupeLine = new BattleGroupe();
+                battleGroupeLine.battleGroupeType = this.battleLine;
+                this.battleLines.push(battleGroupeLine);
                 this.gameSize.lineMin++;
+                console.log(battleGroupeLine.id);
             }
         } else if (input === "addVanguard") {
             if (this.gameSize.vanguardMin < this.gameSize.vanguardSize) {
-                this.battleVanguards.push(this.battleVanguard);
+                var battleGroupeVanguard = new BattleGroupe();
+                battleGroupeVanguard.battleGroupeType = this.battleVanguard;
+                this.battleVanguards.push(battleGroupeVanguard);
                 this.gameSize.vanguardMin++;
             }
         } else if (input === "addFlag") {
-            if (this.gameSize.flagMin < this.gameSize.flagSize) {
-                this.battleFlags.push(this.battleFlag);
+            if (this.gameSize.flagMin < this.gameSize.flagSize) { 
+                var battleGroupeFlag = new BattleGroupe();
+                battleGroupeFlag.battleGroupeType = this.battleFlag;
+                this.battleFlags.push(battleGroupeFlag);
                 this.gameSize.flagMin++;
             }
         } else if (input === "addPathfinder") {
             if (this.gameSize.pathfinderMin < this.gameSize.pathfinderSize) {
-                this.battlePathfinders.push(this.battlePathfinder);;
+                var battleGroupePathfinder = new BattleGroupe();
+                battleGroupePathfinder.battleGroupeType = this.battlePathfinder;
+                this.battlePathfinders.push(battleGroupePathfinder);
                 this.gameSize.pathfinderMin++;
             }
         }
@@ -156,22 +169,30 @@ export class FleetComponent {
         this.battleFlags = [];
         if (this.gameSize.lineMin != 0) {
             for (var i = 0; i < this.gameSize.lineMin; i++) {
-                this.battleLines.push(this.battleLine);
+                var battleGroupeLine = new BattleGroupe();
+                battleGroupeLine.battleGroupeType = this.battleLine;
+                this.battleLines.push(battleGroupeLine);
             }    
         } 
         if (this.gameSize.pathfinderMin != 0) {
             for (var i = 0; i < this.gameSize.pathfinderMin; i++) {
-                this.battlePathfinders.push(this.battlePathfinder);
+                var battleGroupePathfinder = new BattleGroupe();
+                battleGroupePathfinder.battleGroupeType = this.battlePathfinder;
+                this.battlePathfinders.push(battleGroupePathfinder);
             }    
         } 
         if (this.gameSize.vanguardMin != 0) {
             for (var i = 0; i < this.gameSize.vanguardMin; i++) {
-                this.battleVanguards.push(this.battleVanguard);    
+                var battleGroupeVanguard = new BattleGroupe();
+                battleGroupeVanguard.battleGroupeType = this.battleVanguard;
+                this.battleVanguards.push(battleGroupeVanguard);    
             }    
         } 
         if (this.gameSize.flagMin != 0) {
             for (var i = 0; i < this.gameSize.flagMin; i++) {
-                this.battleFlags.push(this.battleFlag);    
+                var battleGroupeFlag = new BattleGroupe();
+                battleGroupeFlag.battleGroupeType = this.battleFlag;
+                this.battleFlags.push(battleGroupeFlag);    
             }    
         }   
     }
@@ -179,13 +200,13 @@ export class FleetComponent {
     loadBattleGroupeTypes() {
         for (let i of this.battleGroupes) {
             if (i.battleGroupeType.battleType == "LINE") {
-                this.battleLine =  i;     
+                this.battleLine =  i.battleGroupeType;     
             } else if (i.battleGroupeType.battleType == "FLAG") {
-                this.battleFlag =  i; 
+                this.battleFlag =  i.battleGroupeType; 
             } else if (i.battleGroupeType.battleType == "VANGUARD") {
-                this.battleVanguard =  i;
+                this.battleVanguard =  i.battleGroupeType;
             } else if (i.battleGroupeType.battleType == "PATHFINDER") {
-                this.battlePathfinder =  i; 
+                this.battlePathfinder =  i.battleGroupeType; 
             } 
         }  
     }

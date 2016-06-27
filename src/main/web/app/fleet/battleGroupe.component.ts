@@ -27,4 +27,23 @@ export class BattleGroupeComponent {
     @Input() battleGroupe: BattleGroupe;
         
     @Input() lightShips: Ship[] = [];
+    
+    clickedAdd(shipType) {
+        if (shipType === "light") {
+            this.battleGroupe.lightShipSize++;
+        } else if (shipType === "medium") {
+            this.battleGroupe.mediumShipSize++;
+        } else if (shipType === "heavy") {
+            this.battleGroupe.heavyShipSize++;
+        } else if (shipType === "superHeavy") {
+            this.battleGroupe.superHeavyShipSize++;
+        }
+    }
+    
+    ngOnInit() {
+        this.battleGroupe.lightShipSize =  this.battleGroupe.battleGroupeType.lightShipMin; 
+        this.battleGroupe.mediumShipSize =  this.battleGroupe.battleGroupeType.mediumShipMin;    
+        this.battleGroupe.heavyShipSize =  this.battleGroupe.battleGroupeType.heavyShipMin;       
+        this.battleGroupe.superHeavyShipSize =  this.battleGroupe.battleGroupeType.superHeavyShipMin;     
+    }
 }
