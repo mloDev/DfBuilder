@@ -2,15 +2,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="col-md-4">
-				<game-selector [(selected)]="gameSize" (select)="onItemSelected($event)"></game-selector>
-			</div>
-			<div class="col-md-4">
-				<faction-selector (select)="faction = $event"></faction-selector>
-			</div>
-			<div class="col-md-4">
-			
-			</div>
+			<button type="button" class="btn btn-default" (click)="modal.open()">Open me!</button>
 		</div>
 		<div class="col-md-12">
 			<div class="col-md-3">
@@ -105,3 +97,24 @@
         $('#tabs').tab();
     });
 </script> 
+
+
+    <modal #modal>
+        <modal-header [show-close]="true">
+            <h4 class="modal-title">Select Fleet details</h4>
+        </modal-header>
+        <modal-body>
+	        <div class="col-md-12">
+				<div class="col-md-4">
+					<game-selector [(selected)]="gameSize" (select)="onItemSelected($event)"></game-selector>
+				</div>
+				<div class="col-md-4">
+					<faction-selector (select)="faction = $event"></faction-selector>
+				</div>
+				<div class="col-md-4">
+				
+				</div>
+			</div>
+        </modal-body>
+        <modal-footer [show-default-buttons]="true"></modal-footer>
+    </modal>

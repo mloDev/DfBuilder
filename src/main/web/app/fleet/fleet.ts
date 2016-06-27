@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 
 import {CORE_DIRECTIVES} from '@angular/common';
 import {ROUTER_DIRECTIVES} from '@angular/router';
@@ -7,6 +7,7 @@ import { GameSizeSelector } from "../selector/gameSize-selector";
 import { FactionSelector } from "../selector/faction-selector";
 import { ShipList } from "../ship/ship.list";
 import { Dragula, DragulaService} from 'ng2-dragula/ng2-dragula';
+import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { BattleTypePipe } from '../pipes/battleType-pipe';
 import { NgForNumber } from "../pipes/ngForNumber-pipe";
 
@@ -21,7 +22,7 @@ import { BattleGroupeComponent } from "../fleet/battleGroupe.component";
     selector: 'fleet',
     pipes: [ BattleTypePipe, NgForNumber],
     templateUrl: 'app/fleet/fleet.html',
-    directives: [ CORE_DIRECTIVES, ROUTER_DIRECTIVES, ShipList, GameSizeSelector, FactionSelector, Dragula, BattleGroupeComponent, Tabs, Tab ],
+    directives: [ MODAL_DIRECTIVES, CORE_DIRECTIVES, ROUTER_DIRECTIVES, ShipList, GameSizeSelector, FactionSelector, Dragula, BattleGroupeComponent, Tabs, Tab ],
     providers: [ BattleGroupeService ],
     viewProviders: [ DragulaService ]
 
@@ -41,6 +42,9 @@ export class FleetComponent {
     
     battleGroupes: BattleGroupe[] = [];
     
+    @ViewChild('modal')
+    modal: ModalComponent;
+    
     @Output() battle: BattleGroupe;
     
     @Input() gameSize: GameSize;
@@ -48,7 +52,16 @@ export class FleetComponent {
     
     constructor(private dragulaService: DragulaService, private battleService: BattleGroupeService) {
         dragulaService.setOptions('light-bag', {
-            copy: true   
+           accepts:    function (el, target, source, sibling) {
+                    if (target.className.indexOf("isEmpty") > 1 && target.className.indexOf("isFilled") == -1) {
+                        return true;
+                    } else {
+                        return false;    
+                    }
+            },
+              copy: function (el, source) {
+                return source === document.getElementById('light-bag-list')
+              }   
         })
         dragulaService.setOptions('medium-bag', {
             accepts:    function (el, target, source, sibling) {
@@ -58,7 +71,10 @@ export class FleetComponent {
                         return false;    
                     }
             },
-            copy: true  
+            copy: function (el, source) {
+                return source === document.getElementById('medium-bag-list')
+              },
+            removeOnSpill: true
         })
         dragulaService.setOptions('heavy-bag', {
             accepts:    function (el, target, source, sibling) {
@@ -68,7 +84,9 @@ export class FleetComponent {
                         return false;    
                     }
             },
-            copy: true   
+                copy: function (el, source) {
+                return source === document.getElementById('heavy-bag-list')
+              }   
         })
         dragulaService.setOptions('superHeavy-bag', {
             accepts:    function (el, target, source, sibling) {
@@ -78,10 +96,15 @@ export class FleetComponent {
                         return false;    
                     }
             },
-            copy: true 
+                copy: function (el, source) {
+                return source === document.getElementById('superHeavy-bag-list')
+              } 
         });
         dragulaService.drop.subscribe((value) => {
             this.onDrop(value.slice(1));
+        });
+        dragulaService.drag.subscribe((value) => {
+            this.onDrag(value.slice(1));
         });
           dragulaService.dropModel.subscribe((value) => {
             //this.onDropModel(value.slice(1));
@@ -180,12 +203,24 @@ export class FleetComponent {
         this.removeClass(e, 'shipContainer');
         e = e.parentNode;
         if ( e != null ) {
-            console.log(e);
-            this.removeClass(e, 'isEmpty');
-            this.addClass(e, 'isFilled');
+            if (this.hasClass(e, 'isEmpty')) {
+                this.removeClass(e, 'isEmpty');
+                this.addClass(e, 'isFilled');
             }
+        }
     }
     
+    private onDrag(args) {
+        let [e, el] = args;
+        e = e.parentNode;
+        if ( e != null ) {
+            if (this.hasClass(e, 'isFilled')) {
+                this.removeClass(e, 'isFilled');
+                this.addClass(e, 'isEmpty');
+            }
+        }
+    }
+
     private removeClass(el: any, name: string) {
         if (this.hasClass(el, name)) {
           el.className = el.className.replace(name, '');
@@ -193,7 +228,7 @@ export class FleetComponent {
     }
     
       private hasClass(el: any, name: string) {
-        return (el.className.indexOf(name) > 1);
+        return (el.className.indexOf(name) > 1); 
       }
 
       private addClass(el: any, name: string) {
@@ -202,5 +237,8 @@ export class FleetComponent {
         }
       }
     
+    open() {
+        this.modal.open();
+    }
         
 }
