@@ -15,6 +15,6 @@ import { Footer } from './footer/footer';
 })
 @Routes(ROUTES)
 export class AppComponent {
-  public title = 'Angular2 Bootstrap4 Navbar';
+  public title = 'Df Builder';
   constructor(private router:Router) {}
 }

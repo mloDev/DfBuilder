@@ -12,8 +12,7 @@ export class GameSizeService {
 
     private actionUrl: string;
     
-    constructor(@Inject(Http) private http: Http) {
-        
+    constructor(@Inject(Http) private http: Http) {   
         this.actionUrl = CONFIGURATION.baseUrls.server +
             CONFIGURATION.baseUrls.apiUrl +
             CONFIGURATION.baseUrls.gameSizes;
@@ -22,6 +21,9 @@ export class GameSizeService {
     getGameSizes(): Promise<GameSize[]> {
         return this.http.get(this.actionUrl).toPromise()
                .then(response => response.json());
-        
+    }
+    
+    getGameSize(id: number) {
+        return this.getGameSizes().then(gameSizes => gameSizes.filter(gameSize => gameSize.id === id)[0]);
     }
 }

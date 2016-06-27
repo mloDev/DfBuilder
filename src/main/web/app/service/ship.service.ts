@@ -12,7 +12,6 @@ export class ShipService {
     
     private actionUrl: string;
 
-    
     constructor(@Inject(Http) private http: Http) {
             this.actionUrl = CONFIGURATION.baseUrls.server +
             CONFIGURATION.baseUrls.apiUrl +
