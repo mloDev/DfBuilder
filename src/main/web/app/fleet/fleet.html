@@ -1,11 +1,29 @@
-<h2>Fleet</h2>
 <div class="container-fluid">
-	<div class="row">
+	<div class="row ">
 		<div class="col-md-12">
-			<button type="button" class="btn btn-default" (click)="modal.open()">Open me!</button>
+			<div class="col-md-6">
+				<button type="button" class="btn btn-primary" (click)="modal.open()">New</button>
+				
+				<button type="button" class="btn btn-primary" (click)="modal.open()">Save</button>
+				
+				<button type="button" class="btn btn-primary" (click)="modal.open()">Open</button>
+				
+				<button type="button" class="btn btn-primary" (click)="modal.open()">Export</button>
+				
+				<button type="button" class="btn btn-primary" (click)="modal.open()">Copy as BBCode</button>
+				
+			</div>
+			<div class="col-md-4">
+				<span>Fleet title</span>
+			</div>
+			<div class="col-md-2">
+				<span>Points: 0/1500</span>
+			</div>
+			
 		</div>
+		
 		<div class="col-md-12">
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div class="col-md-12">
 					<tabs>
 	        			<tab [tabTitle]="'L'">
@@ -23,20 +41,20 @@
 	      			</tabs>
 				</div>
 			</div>
-			<div class="col-md-9"  *ngIf="gameSize">
+			<div class="col-md-10"  *ngIf="gameSize">
 				<div class="col-md-12" *ngIf="gameSize.lineSize > 0">
 					<div class="col-md-12">
 						<div class="col-md-6">
 							<span>Linegruppen der Flotte</span>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-4">
 							<button (click)="onClick('addLine', $event)">Add Line</button>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<span>{{gameSize.lineMin}}/{{gameSize.lineSize}}</span>					
 						</div>					
 					</div>
-						<div ([ngModel])="battleLines" class="col-md-12" *ngFor="let battleGroupe of battleLines">
+						<div ([ngModel])="battleLines" class="col-md-12 shipRow" *ngFor="let battleGroupe of battleLines">
 							<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
 						</div>
 			</div>
@@ -45,14 +63,14 @@
 						<div class="col-md-6">
 							<span>Pathfindergruppen der Flotte</span>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-4">
 							<button (click)="onClick('addPathfinder', $event)">Add Line</button>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<span>{{gameSize.pathfinderMin}}/{{gameSize.pathfinderSize}}</span>				
 						</div>					
 					</div>
-					<div ([ngModel])="battlePathfinders" class="col-md-12" *ngFor="let battleGroupe of battlePathfinders">
+					<div ([ngModel])="battlePathfinders" class="col-md-12 shipRow" *ngFor="let battleGroupe of battlePathfinders">
 						<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
 					</div>
 				</div>
@@ -61,14 +79,14 @@
 						<div class="col-md-6">
 							<span>Vanguardgruppen der Flotte</span>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-4">
 							<button (click)="onClick('addVanguard', $event)">Add Line</button>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<span>{{gameSize.vanguardMin}}/{{gameSize.vanguardSize}}</span>				
 						</div>					
 					</div>
-					<div ([ngModel])="battleVanguards" class="col-md-12" *ngFor="let battleGroupe of battleVanguards">
+					<div ([ngModel])="battleVanguards" class="col-md-12 shipRow" *ngFor="let battleGroupe of battleVanguards">
 						<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
 					</div>
 				</div>
@@ -77,14 +95,14 @@
 						<div class="col-md-6">
 							<span>Flaggruppen der Flotte</span>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-4">
 							<button (click)="onClick('addFlag', $event)">Add Line</button>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<span>{{gameSize.flagMin}}/{{gameSize.flagSize}}</span>				
 						</div>					
 					</div>
-					<div ([ngModel])="battleFlags" class="col-md-12" *ngFor="let battleGroupe of battleFlags">
+					<div ([ngModel])="battleFlags" class="col-md-12 shipRow" *ngFor="let battleGroupe of battleFlags">
 						<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
 					</div>
 				</div>

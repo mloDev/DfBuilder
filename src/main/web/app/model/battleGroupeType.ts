@@ -3,11 +3,11 @@ export class BattleGroupeType {
     battleType: string;
     mediumShipMin: number;
     lightShipMin: number;
-    vanguardShipMin: number;
-    flagShipMin: number;
+    heavyShipMin: number;
+    superHeavyShipMin: number;
     mediumShipSize: number;
     lightShipSize: number;
-    vanguardShipSize: number;
-    flagShipSize: number;
+    heavyShipSize: number;
+    superHeavyShipSize: number;
     maxShips: number; 
 }
