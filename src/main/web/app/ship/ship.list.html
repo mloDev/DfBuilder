@@ -1,23 +1,15 @@
 <div class="entity-list col-md-12" ng-init="ships = []">
-	<div class="row shipRow" *ngIf="shipType === 'LIGHT'">
-		<div id="light-bag-list" class="col-md-12 shipContainer" [dragula]='"light-bag"' *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: shipType">
-			<ship-detail-small [ship]="ship"></ship-detail-small>		
-		</div>
+	<div id="light-bag-list" class="col-md-2 shipContainer" [dragula]='"light-bag"' *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'LIGHT'">
+		<ship-detail-small [ship]="ship"></ship-detail-small>		
 	</div>
-	<div class="row shipRow" *ngIf="shipType === 'MEDIUM'">
-		<div id="medium-bag-list" class="col-md-12 shipContainer" [dragula]='"medium-bag"' *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: shipType">
-			<ship-detail-small [ship]="ship"></ship-detail-small>
-		</div>
+	<div id="medium-bag-list" class="col-md-2 shipContainer" [dragula]='"medium-bag"' *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'MEDIUM'">
+		<ship-detail-small [ship]="ship"></ship-detail-small>
 	</div>
-	<div class="row shipRow" *ngIf="shipType === 'HEAVY'">
-		<div id="heavy-bag-list" class="col-md-12 shipContainer" [dragula]='"heavy-bag"' *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: shipType">
-			<ship-detail-small [ship]="ship"></ship-detail-small>		 
-		</div>
+	<div id="heavy-bag-list" class="col-md-2 shipContainer" [dragula]='"heavy-bag"' *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'HEAVY'">
+		<ship-detail-small [ship]="ship"></ship-detail-small>		 
 	</div>
-	<div class="row shipRow" *ngIf="shipType === 'SUPER'">
-		<div id="superHeavy-bag-list" class="col-md-12 shipContainer" [dragula]='"superHeavy-bag"' *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: shipType">
-			<ship-detail-small [ship]="ship"></ship-detail-small>		
-		</div>
+	<div id="superHeavy-bag-list" class="col-md-2 shipContainer" [dragula]='"superHeavy-bag"' *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'SUPER'">
+		<ship-detail-small [ship]="ship"></ship-detail-small>		
 	</div>
 </div>
 
