@@ -1,54 +1,67 @@
+		<div class="col-md-12 optionLine">
+			<div class="col-md-6">
+				<button type="button" (click)="modal.open()" class="btn btn-primary pull-left">Reset</button>
+				<button type="button" class="btn btn-primary pull-left">tonnage</button>
+				<button type="button" class="btn btn-primary pull-left">special</button>
+				<button type="button" class="btn btn-primary pull-left">type</button>
+				<button type="button" class="btn btn-primary pull-left">Export</button>
+			</div>
+			<div class="col-md-6">
+
+			</div>
+		</div>
+		
+
+
 <div class="container-fluid">
 	<div class="row ">
 		<div class="col-md-12">
-			<div class="col-md-6">
-				<button type="button" class="btn btn-primary" (click)="modal.open()">New</button>
-				
-				<button type="button" class="btn btn-primary" (click)="modal.open()">Save</button>
-				
-				<button type="button" class="btn btn-primary" (click)="modal.open()">Open</button>
-				
-				<button type="button" class="btn btn-primary" (click)="modal.open()">Export</button>
-				
-				<button type="button" class="btn btn-primary" (click)="modal.open()">Copy as BBCode</button>
-				
+			<div class="col-md-offset-1 col-md-2 shipList">
+	        	<ship-list (shipChange)="myShipChange($event)" [faction]="faction" [shipType]="'LIGHT'"></ship-list>
 			</div>
-			<div class="col-md-4">
-				<span>Fleet title</span>
-			</div>
-			<div class="col-md-2">
-				<span>Points: 0/1500</span>
-			</div>
-			
-		</div>
-		
-		<div class="col-md-12">
-			<div class="col-md-2">
+			<div class="col-md-8 armyList" *ngIf="gameSize">
 				<div class="col-md-12">
-					<tabs>
-	        			<tab [tabTitle]="'L'">
-	        				<ship-list [faction]="faction" [shipType]="'LIGHT'"></ship-list>
-	        			</tab>
-	        			<tab tabTitle="M">
-	        				<ship-list [faction]="faction" [shipType]="'MEDIUM'"></ship-list>
-	        			</tab>
-	        			<tab tabTitle="H">
-	        				<ship-list [faction]="faction" [shipType]="'HEAVY'"></ship-list>
-	        			</tab>
-	        			<tab tabTitle="SH">
-	        				<ship-list [faction]="faction" [shipType]="'SUPER'"></ship-list>
-	        			</tab>
-	      			</tabs>
+					<div class="col-md-1">
+						<span>FACTION</span>
+					</div>
+					<div class="col-md-5">
+						<div class="col-md-12">
+							<span>TITLE</span>
+						</div>
+						<div class="col-md-12">
+							<span>POINTS</span>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="pull-right">
+							<button type="button" class="btn btn-primary" (click)="modal.open()">
+								<span class="glyphicon glyphicon-cog"></span>
+							</button>
+							<button type="button" class="btn btn-primary" (click)="modal.open()">
+								<span class="glyphicon glyphicon-floppy-save"></span>
+							</button>
+							<button type="button" class="btn btn-primary" (click)="modal.open()">
+								<span class="glyphicon glyphicon-floppy-open"></span>
+							</button>
+							<button type="button" class="btn btn-primary" (click)="modal.open()">
+								<span class="glyphicon glyphicon-export"></span>
+							</button>
+							<button type="button" class="btn btn-primary" (click)="modal.open()">
+								<span class="glyphicon glyphicon-copy"></span>
+							</button>
+						</div>
+					</div>
 				</div>
-			</div>
-			<div class="col-md-10"  *ngIf="gameSize">
+				<div class="col-md-6">
 				<div class="col-md-12" *ngIf="gameSize.lineSize > 0">
 					<div class="col-md-12">
 						<div class="col-md-6">
 							<span>Linegruppen der Flotte</span>
 						</div>
 						<div class="col-md-4">
-							<button (click)="onClick('addLine', $event)">Add Line</button>
+							<button type="button" class="btn btn-primary-add " (click)="onClick('addLine', $event)">
+								<span class="glyphicon glyphicon-plus-sign"></span>
+							</button>
 						</div>
 						<div class="col-md-2">
 							<span>{{gameSize.lineMin}}/{{gameSize.lineSize}}</span>					
@@ -57,14 +70,16 @@
 						<div ([ngModel])="battleLines" class="col-md-12 shipRow" *ngFor="let battleGroupe of battleLines">
 							<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
 						</div>
-			</div>
+				</div>
 				<div class="col-md-12" *ngIf="gameSize.pathfinderSize > 0">
 					<div class="col-md-12">
 						<div class="col-md-6">
 							<span>Pathfindergruppen der Flotte</span>
 						</div>
 						<div class="col-md-4">
-							<button (click)="onClick('addPathfinder', $event)">Add Line</button>
+							<button type="button" class="btn btn-primary-add" (click)="onClick('addPathfinder', $event)">
+								<span class="glyphicon glyphicon-plus-sign"></span>
+							</button>
 						</div>
 						<div class="col-md-2">
 							<span>{{gameSize.pathfinderMin}}/{{gameSize.pathfinderSize}}</span>				
@@ -74,13 +89,17 @@
 						<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
 					</div>
 				</div>
+				</div>
+				<div class="col-md-6">
 				<div class="col-md-12" *ngIf="gameSize.vanguardSize > 0">
 					<div class="col-md-12">
 						<div class="col-md-6">
 							<span>Vanguardgruppen der Flotte</span>
 						</div>
 						<div class="col-md-4">
-							<button (click)="onClick('addVanguard', $event)">Add Line</button>
+							<button type="button" class="btn btn-primary-add" (click)="onClick('addVanguard', $event)">
+								<span class="glyphicon glyphicon-plus-sign"></span>
+							</button>
 						</div>
 						<div class="col-md-2">
 							<span>{{gameSize.vanguardMin}}/{{gameSize.vanguardSize}}</span>				
@@ -96,7 +115,9 @@
 							<span>Flaggruppen der Flotte</span>
 						</div>
 						<div class="col-md-4">
-							<button (click)="onClick('addFlag', $event)">Add Line</button>
+							<button type="button" class="btn btn-primary-add" (click)="onClick('addFlag', $event)">
+								<span class="glyphicon glyphicon-plus-sign"></span>
+							</button>
 						</div>
 						<div class="col-md-2">
 							<span>{{gameSize.flagMin}}/{{gameSize.flagSize}}</span>				
@@ -106,8 +127,12 @@
 						<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
 					</div>
 				</div>
-			</div>
+				</div>
 		</div>
+		</div>
+
+		
+
 	</div>
 </div>
 <script type="text/javascript">

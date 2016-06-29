@@ -1,39 +1,72 @@
-<div [dragula]='"light-bag"' class="col-md-2 shipEmptyLightContainer isEmpty text-center" *ngFor="let ship of battleGroupe.lightShipSize | ngForNumber">
-	<div class="vertical-center">
-		<span>LIGHT_ICON</span>
+<div class="col-md-2 text-center shipEmptyLightContainer" *ngFor="let ship of battleGroupe.lightShipSize | ngForNumber">
+	<div class="col-md-12 fleetShip">
+		<div class="col-md-offset-10 col-md-2">
+			<div class="pull-right">
+				<button type="button" class="btn btn-primary" (click)="clickedRemove('light')" *ngIf="battleGroupe.lightShipSize > battleGroupe.battleGroupeType.lightShipMin">
+					<span class="glyphicon glyphicon-cog"></span>
+				</button>			
+			</div>
+		</div>
+	</div>
+	<div [dragula]='"light-bag"' class="isEmpty">
 	</div>
 </div>
-<div [dragula]='"light-bag"' class="col-md-2 shipAddEmptyContainer isAddEmpty" *ngIf="battleGroupe.lightShipSize < battleGroupe.battleGroupeType.lightShipSize">
+<div [dragula]='"light-bag"' class="col-md-2 shipAddEmptyContainer isAddEmpty" *ngIf="battleGroupe.lightShipSize < battleGroupe.battleGroupeType.lightShipSize && maxShips < 4">
 		<div class="center-block">
 		<button (click)="clickedAdd('light')" class="btn-addShip center-block">ADD LIGHT</button>
 	</div>
 </div>
-<div [dragula]='"medium-bag"' class="col-md-2 shipEmptyMediumContainer isEmpty" *ngFor="let ship of battleGroupe.mediumShipSize | ngForNumber">
-	<div class="vertical-center">
-		<span>MEDIUM_ICON</span>
+<div class="col-md-2 shipEmptyMediumContainer" *ngFor="let ship of battleGroupe.mediumShipSize | ngForNumber">
+			<div class="col-md-12 fleetShip">
+		<div class="col-md-offset-10 col-md-2">
+			<div class="pull-right">
+				<button type="button" class="btn btn-primary" (click)="clickedRemove('medium')" *ngIf="battleGroupe.mediumShipSize > battleGroupe.battleGroupeType.mediumShipMin">
+					<span class="glyphicon glyphicon-cog"></span>
+				</button>			
+			</div>
+		</div>
+	</div>
+	<div [dragula]='"medium-bag"' class="isEmpty">
 	</div>
 </div>
-<div [dragula]='"medium-bag"' class="col-md-2 shipAddEmptyContainer isAddEmpty" *ngIf="battleGroupe.mediumShipSize < battleGroupe.battleGroupeType.mediumShipSize">
+<div [dragula]='"medium-bag"' class="col-md-2 shipAddEmptyContainer isAddEmpty" *ngIf="battleGroupe.mediumShipSize < battleGroupe.battleGroupeType.mediumShipSize && maxShips < 4">
 	<div class="center-block">
 		<button (click)="clickedAdd('medium')" class="btn-addShip center-block">ADD MEDIUM</button>
 	</div>
 </div>
-<div [dragula]='"heavy-bag"' class="col-md-2 shipEmptyHeavyContainer isEmpty" *ngFor="let ship of battleGroupe.heavyShipSize | ngForNumber">
-	<div class="vertical-center">
-		<span>HEAVY_ICON</span>
+<div class="col-md-2 shipEmptyHeavyContainer" *ngFor="let ship of battleGroupe.heavyShipSize | ngForNumber">
+	<div class="col-md-12 fleetShip">
+		<div class="col-md-offset-10 col-md-2">
+			<div class="pull-right">
+				<button type="button" class="btn btn-primary" (click)="clickedRemove('heavy')" *ngIf="battleGroupe.heavyShipSize > battleGroupe.battleGroupeType.heavyShipMin">
+					<span class="glyphicon glyphicon-cog"></span>
+				</button>			
+			</div>
+		</div>
+	</div>
+	<div [dragula]='"heavy-bag"' class="isEmpty vertical-center">
+		<span>HEAVY ICON</span>
 	</div>
 </div>
-<div [dragula]='"heavy-bag"' class="col-md-2 shipAddEmptyContainer isAddEmpty" *ngIf="battleGroupe.heavyShipSize < battleGroupe.battleGroupeType.heavyShipSize">
+<div [dragula]='"heavy-bag"' class="col-md-2 shipAddEmptyContainer isAddEmpty" *ngIf="battleGroupe.heavyShipSize < battleGroupe.battleGroupeType.heavyShipSize && maxShips < 4">
 		<div class="center-block">
 		<button (click)="clickedAdd('heavy')" class="btn-addShip center-block">ADD HEAVY</button>
 	</div>
 </div>
-<div [dragula]='"superHeavy-bag"' class="col-md-2 shipEmptySuperHeavyContainer isEmpty" *ngFor="let ship of battleGroupe.superHeavyShipSize | ngForNumber">
-	<div class="vertical-center">
-		<span>SUPERHEAVY_ICON</span>
+<div class="col-md-2 shipEmptySuperHeavyContainer" *ngFor="let ship of battleGroupe.superHeavyShipSize | ngForNumber">
+	<div class="col-md-12 fleetShip">
+		<div class="col-md-offset-10 col-md-2">
+			<div class="pull-right">
+				<button type="button" class="btn btn-primary" (click)="clickedRemove('superHeavy')" *ngIf="battleGroupe.superHeavyShipSize > battleGroupe.battleGroupeType.superHeavyShipMin">
+					<span class="glyphicon glyphicon-cog"></span>
+				</button>			
+			</div>
+		</div>
+	</div>
+	<div [dragula]='"superHeavy-bag"' class="isEmpty">
 	</div>
 </div>
-<div [dragula]='"superHeavy-bag"' class="col-md-2 shipAddEmptyContainer isAddEmpty" *ngIf="battleGroupe.superHeavyShipSize < battleGroupe.battleGroupeType.superHeavyShipSize">
+<div [dragula]='"superHeavy-bag"' class="col-md-2 shipAddEmptyContainer isAddEmpty" *ngIf="battleGroupe.superHeavyShipSize < battleGroupe.battleGroupeType.superHeavyShipSize && maxShips < 4">
 		<div class="center-block">
 		<button (click)="clickedAdd('superHeavy')" class="btn-addShip center-block">ADD SH</button>
 	</div>

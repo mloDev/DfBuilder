@@ -28,6 +28,8 @@ export class BattleGroupeComponent {
         
     @Input() lightShips: Ship[] = [];
     
+    maxShips: number;
+    
     clickedAdd(shipType) {
         if (shipType === "light") {
             this.battleGroupe.lightShipSize++;
@@ -38,12 +40,32 @@ export class BattleGroupeComponent {
         } else if (shipType === "superHeavy") {
             this.battleGroupe.superHeavyShipSize++;
         }
+        this.calcMaxShips();
+    }
+    
+    clickedRemove(shipType) {
+        if (shipType === "light") {
+            this.battleGroupe.lightShipSize--;
+        } else if (shipType === "medium") {
+            this.battleGroupe.mediumShipSize--;
+        } else if (shipType === "heavy") {
+            this.battleGroupe.heavyShipSize--;
+        } else if (shipType === "superHeavy") {
+            this.battleGroupe.superHeavyShipSize--;
+        }  
+        this.calcMaxShips();
+    }
+    
+    calcMaxShips() {
+        this.maxShips = this.battleGroupe.lightShipSize + this.battleGroupe.mediumShipSize + this.battleGroupe.heavyShipSize + this.battleGroupe.superHeavyShipSize
     }
     
     ngOnInit() {
         this.battleGroupe.lightShipSize =  this.battleGroupe.battleGroupeType.lightShipMin; 
         this.battleGroupe.mediumShipSize =  this.battleGroupe.battleGroupeType.mediumShipMin;    
         this.battleGroupe.heavyShipSize =  this.battleGroupe.battleGroupeType.heavyShipMin;       
-        this.battleGroupe.superHeavyShipSize =  this.battleGroupe.battleGroupeType.superHeavyShipMin;     
+        this.battleGroupe.superHeavyShipSize =  this.battleGroupe.battleGroupeType.superHeavyShipMin; 
+        this.calcMaxShips();
+        console.log(this.maxShips);
     }
 }

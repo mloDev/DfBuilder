@@ -105,6 +105,16 @@ gulp.task('imagecopy', function() {
         .pipe(gulp.dest(staticDir + 'app/images'));
 });
 
+//image js
+gulp.task('imagecopy', function() {
+    // clean dest
+    del([staticDir + 'app/js/*'], {force:true});
+
+    // copy iamgefolder
+    gulp.src('./js/**/*')
+        .pipe(gulp.dest(staticDir + 'js/lib/'));
+});
+
 // html watch
 gulp.task('htmlw', function() {
     // watch index && systemjs config

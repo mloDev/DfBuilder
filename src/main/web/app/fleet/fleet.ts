@@ -50,11 +50,17 @@ export class FleetComponent {
     
     @Input() gameSize: GameSize;
     @Input() @Output() faction;
+    ship: Ship;
+    
+   myShipChange(event) {
+    console.log(event);
+       this.ship =  event;
+  }
     
     constructor(private dragulaService: DragulaService, private battleService: BattleGroupeService) {
         dragulaService.setOptions('light-bag', {
            accepts:    function (el, target, source, sibling) {
-                    if (target.className.indexOf("isEmpty") > 1 && target.className.indexOf("isFilled") == -1) {
+                    if (target.className === "isEmpty") {
                         return true;
                     } else {
                         return false;    
@@ -67,7 +73,7 @@ export class FleetComponent {
         })
         dragulaService.setOptions('medium-bag', {
             accepts:    function (el, target, source, sibling) {
-                    if (target.className.indexOf("isEmpty") > 1 && target.className.indexOf("isFilled") == -1) {
+                    if (target.className === "isEmpty") {
                         return true;
                     } else {
                         return false;    
@@ -80,7 +86,7 @@ export class FleetComponent {
         })
         dragulaService.setOptions('heavy-bag', {
             accepts:    function (el, target, source, sibling) {
-                    if (target.className.indexOf("isEmpty") > 1 && target.className.indexOf("isFilled") == -1) {
+                    if (target.className === "isEmpty") {
                         return true;
                     } else {
                         return false;    
@@ -93,7 +99,7 @@ export class FleetComponent {
         })
         dragulaService.setOptions('superHeavy-bag', {
             accepts:    function (el, target, source, sibling) {
-                    if (target.className.indexOf("isEmpty") > 1 && target.className.indexOf("isFilled") == -1) {
+                    if (target.className === "isEmpty") {
                         return true;
                     } else {
                         return false;    
@@ -110,12 +116,15 @@ export class FleetComponent {
         dragulaService.drag.subscribe((value) => {
             this.onDrag(value.slice(1));
         });
-          dragulaService.dropModel.subscribe((value) => {
+        dragulaService.over.subscribe((value) => {
+            this.onOver(value.slice(1));
+        });
+        dragulaService.dropModel.subscribe((value) => {
             //this.onDropModel(value.slice(1));
-          });
-          dragulaService.removeModel.subscribe((value) => {
+        });
+        dragulaService.removeModel.subscribe((value) => {
             //this.onRemoveModel(value.slice(1));
-          });
+        });
     }
    
     
@@ -219,6 +228,11 @@ export class FleetComponent {
         } 
     }
     
+    private onOver(args) {
+        let [e, el, container] = args;
+        // do something
+    }
+    
     private onDrop(args) {
         let [e, el] = args;
         this.removeClass(e, 'shipContainer');
@@ -256,10 +270,5 @@ export class FleetComponent {
         if (!this.hasClass(el, name)) {
           el.className = el.className ? [el.className, name].join('') : name;
         }
-      }
-    
-    open() {
-        this.modal.open();
-    }
-        
+      }      
 }
