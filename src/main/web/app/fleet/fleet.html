@@ -1,47 +1,30 @@
-<div class="container-fluid">
-	<div class="row ">
 		<div class="col-md-12 optionLine">
 			<div class="col-md-6">
-				<button type="button" class="btn btn-primary pull-left">Reset</button>
+				<button type="button" (click)="modal.open()" class="btn btn-primary pull-left">Reset</button>
 				<button type="button" class="btn btn-primary pull-left">tonnage</button>
 				<button type="button" class="btn btn-primary pull-left">special</button>
 				<button type="button" class="btn btn-primary pull-left">type</button>
 				<button type="button" class="btn btn-primary pull-left">Export</button>
 			</div>
 			<div class="col-md-6">
-				<div class="pull-right">
-					<button type="button" class="btn btn-primary" (click)="modal.open()">
-						<span class="glyphicon glyphicon-cog"></span>
-					</button>
-					<button type="button" class="btn btn-primary" (click)="modal.open()">
-						<span class="glyphicon glyphicon-floppy-save"></span>
-					</button>
-					<button type="button" class="btn btn-primary" (click)="modal.open()">
-						<span class="glyphicon glyphicon-floppy-open"></span>
-					</button>
-					<button type="button" class="btn btn-primary" (click)="modal.open()">
-						<span class="glyphicon glyphicon-export"></span>
-					</button>
-					<button type="button" class="btn btn-primary" (click)="modal.open()">
-						<span class="glyphicon glyphicon-copy"></span>
-					</button>
-				</div>
+
 			</div>
 		</div>
 		
-		<div class="col-md-12 row-fluid shipList">
-        	<ship-list [faction]="faction" [shipType]="'LIGHT'"></ship-list>
-		</div>
+
+
+<div class="container-fluid">
+	<div class="row ">
 		<div class="col-md-12">
-			<div class="col-md-3 shipDetailView">
-				<span>SHIPDETAILVIEW</span>
+			<div class="col-md-offset-1 col-md-2 shipList">
+	        	<ship-list (shipChange)="myShipChange($event)" [faction]="faction" [shipType]="'LIGHT'"></ship-list>
 			</div>
-			<div class="col-md-offset-1 col-md-8 armyList h-scroll" *ngIf="gameSize">
+			<div class="col-md-8 armyList" *ngIf="gameSize">
 				<div class="col-md-12">
-					<div class="col-md-2">
+					<div class="col-md-1">
 						<span>FACTION</span>
 					</div>
-					<div class="col-md-10">
+					<div class="col-md-5">
 						<div class="col-md-12">
 							<span>TITLE</span>
 						</div>
@@ -49,7 +32,27 @@
 							<span>POINTS</span>
 						</div>
 					</div>
+					<div class="col-md-6">
+						<div class="pull-right">
+							<button type="button" class="btn btn-primary" (click)="modal.open()">
+								<span class="glyphicon glyphicon-cog"></span>
+							</button>
+							<button type="button" class="btn btn-primary" (click)="modal.open()">
+								<span class="glyphicon glyphicon-floppy-save"></span>
+							</button>
+							<button type="button" class="btn btn-primary" (click)="modal.open()">
+								<span class="glyphicon glyphicon-floppy-open"></span>
+							</button>
+							<button type="button" class="btn btn-primary" (click)="modal.open()">
+								<span class="glyphicon glyphicon-export"></span>
+							</button>
+							<button type="button" class="btn btn-primary" (click)="modal.open()">
+								<span class="glyphicon glyphicon-copy"></span>
+							</button>
+						</div>
+					</div>
 				</div>
+				<div class="col-md-6">
 				<div class="col-md-12" *ngIf="gameSize.lineSize > 0">
 					<div class="col-md-12">
 						<div class="col-md-6">
@@ -86,6 +89,8 @@
 						<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
 					</div>
 				</div>
+				</div>
+				<div class="col-md-6">
 				<div class="col-md-12" *ngIf="gameSize.vanguardSize > 0">
 					<div class="col-md-12">
 						<div class="col-md-6">
@@ -121,6 +126,7 @@
 					<div ([ngModel])="battleFlags" class="col-md-12 shipRow" *ngFor="let battleGroupe of battleFlags">
 						<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
 					</div>
+				</div>
 				</div>
 		</div>
 		</div>

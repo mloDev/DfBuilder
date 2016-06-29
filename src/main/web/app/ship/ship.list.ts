@@ -32,7 +32,7 @@ export class ShipList implements OnInit {
     @Output() heavyShips: Ship [];
     @Output() superHeavyShips: Ship [];
     
-    @Output() ship: Ship;
+    @Output() shipChange = new EventEmitter();
 
   constructor(
     private shipService: ShipService) { }
@@ -46,5 +46,10 @@ export class ShipList implements OnInit {
     
   ngOnInit() {
     this.getShips();
+  }
+    
+  setShip(ship) {
+    this.shipChange.emit(
+        ship)  
   }
 }

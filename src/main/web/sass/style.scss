@@ -69,6 +69,10 @@ header .display-2 {
     background-color: rgba(255,255,255,0.5);
 }
 
+.isEmpty {
+	height: 100%;
+}
+
 /* ----------------------- FOOTER ---------------------------------------*/
 .footer {
     background:#2e3c45;
@@ -151,10 +155,19 @@ have a fixed width and height (but it's not required).
 	border-bottom-left-radius: 15px;
     border-style: solid;
     border-width: 1px;
-    height: 100px;
+    height: 75px;
     margin-bottom: 6px;
     background-color: rgba(0, 0, 0, 0.1);
-    box-shadow: 2px 2px 2px #888888;
+}
+
+.fleetShip {
+	-webkit-border-top-right-radius: 15px;
+	-moz-border-radius-topright: 15px;
+	border-top-right-radius: 15px;
+    border-style: solid;
+    border-width: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    height: 14px;
 }
 
 .optionLine {
@@ -176,13 +189,13 @@ have a fixed width and height (but it's not required).
 }
 
 .armyList {
-    -webkit-border-top-right-radius: 15px;
+    -webkit-border-bottom-right-radius: 15px;
 	-webkit-border-bottom-left-radius: 15px;
-	-moz-border-radius-topright: 15px;
+	-moz-border-radius-bottomright: 15px;
 	-moz-border-radius-bottomleft: 15px;
-	border-top-right-radius: 15px;
+	border-bottom-right-radius: 15px;
 	border-bottom-left-radius: 15px;
-	border-width: 1px 1px 1px 1px;
+	border-width: 0px 1px 1px 1px;
 	border-color: #00FF00;
 	border-style: solid;
 	padding: 5px 5px 5px 5px;
@@ -199,7 +212,7 @@ have a fixed width and height (but it's not required).
     border-style: solid;
     border-width: 1px;
     margin: 0px;
-    height: 100px;
+    height: 75px;
     margin-left: 3px;
     margin-right: 3px;
 }
@@ -326,7 +339,7 @@ have a fixed width and height (but it's not required).
     border-style: solid;
     border-width: 1px;
     margin: 0px;
-    height: 100px;
+    height: 75px;
     margin-left: 3px;
     margin-right: 3px;
 }
@@ -343,7 +356,7 @@ have a fixed width and height (but it's not required).
     border-style: solid;
     border-width: 1px;
     margin: 0px;
-    height: 100px;
+    height: 75px;
     margin-left: 3px;
     margin-right: 3px;
 }
@@ -360,7 +373,7 @@ have a fixed width and height (but it's not required).
     border-style: solid;
     border-width: 1px;
     margin: 0px;
-    height: 100px;
+    height: 75px;
     margin-left: 3px;
     margin-right: 3px;
 }
@@ -378,7 +391,7 @@ have a fixed width and height (but it's not required).
     border-width: 1px;
     margin-left: 3px;
     margin-right: 3px;
-    height: 100px;
+    height: 75px;
 }
 
 .shipContainer col-md-12 col-md- {
@@ -398,6 +411,7 @@ have a fixed width and height (but it's not required).
 .shipRow {
 	margin-top: 3px;
 	margin-bottom: 3px;
+	padding: 0px 0px 0px 0px;
 }
 
 /* ----------------------- NAVBAR---------------------------------------*/
