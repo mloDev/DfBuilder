@@ -5,6 +5,7 @@ export let CONFIGURATION = {
         gameSizes: 'gameSizes',
         ships: 'ship',
         shipsByFaction: 'shipByFaction',
-        battlegroupe: 'battlegroupe'
+        battlegroupe: 'battlegroupe',
+        battlegroupeType: 'battlegroupeType'
     },
 }

@@ -41,6 +41,9 @@ gulp.task('libcopy', function() {
 		.pipe(gulp.dest(staticDir + 'js/lib/ng2-bs3-modal'));
 	gulp.src(['./node_modules/atoa/**/*'])
 		.pipe(gulp.dest(staticDir + 'js/lib/atoa'));
+	gulp.src(['./node_modules/ng2-dnd/**/*'])
+	.pipe(gulp.dest(staticDir + 'js/lib/ng2-dnd'));
+
 
     // copy @angular dependencies
     gulp.src(['./node_modules/zone.js/dist/zone.js',

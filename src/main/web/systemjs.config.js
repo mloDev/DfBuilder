@@ -15,7 +15,8 @@
     'contra':			 		  'js/lib/contra',
     'ticky': 					  'js/lib/ticky/ticky-browser.js',
     'atoa': 					  'js/lib/atoa/atoa.js',
-    'ng2-bs3-modal': 			  'js/lib/ng2-bs3-modal'
+    'ng2-bs3-modal': 			  'js/lib/ng2-bs3-modal',
+    'ng2-dnd':					  'js/lib/ng2-dnd'
   };
 
   // packages tells the System loader how to load when no filename and/or no extension
@@ -28,7 +29,8 @@
     'ng2-dragula':				  { main: 'ng2-dragula.js', defaultExtension: 'js' },
     'dragula':				  	  { main: 'dragula.js', defaultExtension: 'js' },
     'contra': 			  		  { main: 'contra.js', defaultExtension: 'js' },
-    'ng2-bs3-modal': 			  { main: 'ng2-bs3-modal.js', defaultExtension: 'js' }
+    'ng2-bs3-modal': 			  { main: 'ng2-bs3-modal.js', defaultExtension: 'js' },
+    'ng2-dnd': 			 		  { main: 'ng2-dnd.js', defaultExtension: 'js' }
   };
   
   var packageNames = [
