@@ -1,4 +1,5 @@
 import { BattleGroupeType } from "../model/battleGroupeType";
+import { Ship } from "../model/ship";
 
 export class BattleGroupe {
     id: number;
@@ -7,6 +8,10 @@ export class BattleGroupe {
     mediumShipSize: number;
     heavyShipSize: number;
     superHeavyShipSize: number;
+    lightShips: Ship[] = [];
+    mediumShips: Ship[] = [];
+    heavyShips: Ship[] = [];
+    superHeavyShips: Ship[] = [];
     
     constructor() {};
 }

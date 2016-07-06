@@ -11,13 +11,14 @@ import { ShipFactionPipe } from '../pipes/ship-faction-pipe';
 import { FactionSelector } from '../selector/faction-selector';
 import { ShipDetailSmall } from "../ship/ship.detail.small";
 import { Dragula, DragulaService} from 'ng2-dragula/ng2-dragula';
+import { DND_DIRECTIVES } from 'ng2-dnd/ng2-dnd';
 
 @Component({
     selector: 'ship-list',
     pipes: [ShipTypePipe, ShipFactionPipe ],
     templateUrl: 'app/ship/ship.list.html',
     providers: [ShipService],
-    directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, FactionSelector, ShipDetailSmall, Dragula]
+    directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, FactionSelector, ShipDetailSmall, DND_DIRECTIVES, Dragula]
 })
 export class ShipList implements OnInit {
 
@@ -27,7 +28,7 @@ export class ShipList implements OnInit {
     
     @Input() @Output() public ships: Ship [];
     
-    @Output() public lightShips: Ship [];
+    @Output() lightShips: Ship [];
     @Output() mediumShips: Ship [];
     @Output() heavyShips: Ship [];
     @Output() superHeavyShips: Ship [];

@@ -18,12 +18,14 @@ import {Tabs} from '../navbar/tabs';
 import {Tab} from '../model/tab';
 import {Ship} from '../model/ship';
 
+import {DND_PROVIDERS, DND_DIRECTIVES} from 'ng2-dnd/ng2-dnd';
+
 import { BattleGroupeComponent } from "../fleet/battleGroupe.component";
 @Component({
     selector: 'fleet',
     pipes: [ BattleTypePipe, NgForNumber],
     templateUrl: 'app/fleet/fleet.html',
-    directives: [ MODAL_DIRECTIVES, CORE_DIRECTIVES, ROUTER_DIRECTIVES, ShipList, GameSizeSelector, FactionSelector, Dragula, BattleGroupeComponent, Tabs, Tab ],
+    directives: [DND_DIRECTIVES, MODAL_DIRECTIVES, CORE_DIRECTIVES, ROUTER_DIRECTIVES, ShipList, GameSizeSelector, FactionSelector, Dragula, BattleGroupeComponent, Tabs, Tab ],
     providers: [ BattleGroupeService ],
     viewProviders: [ DragulaService ]
 
@@ -42,6 +44,7 @@ export class FleetComponent {
     @Input() battleVanguard: BattleGroupeType;
     
     battleGroupes: BattleGroupe[] = [];
+    battleGroupeTypes: BattleGroupeType[] = [];
     
     @ViewChild('modal')
     modal: ModalComponent;
@@ -57,74 +60,7 @@ export class FleetComponent {
        this.ship =  event;
   }
     
-    constructor(private dragulaService: DragulaService, private battleService: BattleGroupeService) {
-        dragulaService.setOptions('light-bag', {
-           accepts:    function (el, target, source, sibling) {
-                    if (target.className === "isEmpty") {
-                        return true;
-                    } else {
-                        return false;    
-                    }
-            },
-              copy: function (el, source) {
-                return source === document.getElementById('light-bag-list')
-              },
-              removeOnSpill: true   
-        })
-        dragulaService.setOptions('medium-bag', {
-            accepts:    function (el, target, source, sibling) {
-                    if (target.className === "isEmpty") {
-                        return true;
-                    } else {
-                        return false;    
-                    }
-            },
-            copy: function (el, source) {
-                return source === document.getElementById('medium-bag-list')
-              },
-            removeOnSpill: true
-        })
-        dragulaService.setOptions('heavy-bag', {
-            accepts:    function (el, target, source, sibling) {
-                    if (target.className === "isEmpty") {
-                        return true;
-                    } else {
-                        return false;    
-                    }
-            },
-              copy: function (el, source) {
-                return source === document.getElementById('heavy-bag-list')
-              },
-              removeOnSpill: true   
-        })
-        dragulaService.setOptions('superHeavy-bag', {
-            accepts:    function (el, target, source, sibling) {
-                    if (target.className === "isEmpty") {
-                        return true;
-                    } else {
-                        return false;    
-                    }
-            },
-              copy: function (el, source) {
-                return source === document.getElementById('superHeavy-bag-list')
-              }, 
-              removeOnSpill: true
-        });
-        dragulaService.drop.subscribe((value) => {
-            this.onDrop(value.slice(1));
-        });
-        dragulaService.drag.subscribe((value) => {
-            this.onDrag(value.slice(1));
-        });
-        dragulaService.over.subscribe((value) => {
-            this.onOver(value.slice(1));
-        });
-        dragulaService.dropModel.subscribe((value) => {
-            //this.onDropModel(value.slice(1));
-        });
-        dragulaService.removeModel.subscribe((value) => {
-            //this.onRemoveModel(value.slice(1));
-        });
+    constructor(private battleService: BattleGroupeService) {
     }
    
     
@@ -167,8 +103,15 @@ export class FleetComponent {
             .then(battleGroupes => this.battleGroupes = battleGroupes);    
     }
     
+    getBattleGroupeTypes() {
+        this.battleService
+            .getBattleGroupeTypes()
+            .then(battleGroupeTypes => this.battleGroupeTypes = battleGroupeTypes);    
+    }
+    
     ngOnInit(){
         this.getBattleGroupes();
+        this.getBattleGroupeTypes();
     }
     
     initBattleGoupes(game: GameSize) {
@@ -207,15 +150,15 @@ export class FleetComponent {
     }
     
     loadBattleGroupeTypes() {
-        for (let i of this.battleGroupes) {
-            if (i.battleGroupeType.battleType == "LINE") {
-                this.battleLine =  i.battleGroupeType;     
-            } else if (i.battleGroupeType.battleType == "FLAG") {
-                this.battleFlag =  i.battleGroupeType; 
-            } else if (i.battleGroupeType.battleType == "VANGUARD") {
-                this.battleVanguard =  i.battleGroupeType;
-            } else if (i.battleGroupeType.battleType == "PATHFINDER") {
-                this.battlePathfinder =  i.battleGroupeType; 
+        for (let i of this.battleGroupeTypes) {
+            if (i.battleType == "LINE") {
+                this.battleLine =  i;     
+            } else if (i.battleType == "FLAG") {
+                this.battleFlag =  i; 
+            } else if (i.battleType == "VANGUARD") {
+                this.battleVanguard =  i;
+            } else if (i.battleType == "PATHFINDER") {
+                this.battlePathfinder =  i; 
             } 
         }  
     }
