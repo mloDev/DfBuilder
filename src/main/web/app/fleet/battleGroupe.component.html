@@ -1,73 +1,76 @@
-<div class="col-md-2 text-center shipEmptyLightContainer" *ngFor="let ship of battleGroupe.lightShips">
-	<div class="col-md-12 fleetShip">
-		<div class="col-md-offset-10 col-md-2">
+<div class="col-md-3 shipWrapper" *ngFor="let ship of battleGroupe.lightShips">
+	<div class="ship">
+		<div class="col-md-12 fleetShip">
 			<div class="pull-right">
-				<button type="button" class="btn btn-primary" (click)="clickedRemove('light', ship)">
-					<span class="glyphicon glyphicon-cog"></span>
+				<button type="button" class="btn btn-icon-ship" (click)="clickedRemove(ship)">
+					<i class="fa fa-trash" aria-hidden="true"></i>
 				</button>			
 			</div>
 		</div>
-	</div>
-	<div dnd-droppable [dropZones]="['zoneLight']" (onDropSuccess)="transferDataSuccess($event)" class="isEmpty">
-	</div>
-</div>
-<div dnd-droppable [dropZones]="['zoneLight']" (onDropSuccess)="transferDataSuccess($event)" class="col-md-2 shipAddEmptyContainer isAddEmpty" *ngIf="battleGroupe.lightShips.length < battleGroupe.battleGroupeType.lightShipSize && maxShips < 4">
-	<div class="center-block">
-		<span class="center-block">ADD LIGHT</span>
+		<div class="col-md-12">
+			{{ship.name}}
+		</div>
 	</div>
 </div>
-<div class="col-md-2 shipEmptyMediumContainer" *ngFor="let ship of battleGroupe.mediumShips">
-			<div class="col-md-12 fleetShip">
-		<div class="col-md-offset-10 col-md-2">
+<div dnd-droppable [dropZones]="['zoneLight']" (onDropSuccess)="transferDataSuccess($event)" class="col-md-3 shipWrapper" *ngIf="battleGroupe.lightShips.length < battleGroupe.battleGroupeType.lightShipSize && maxShips < 4">
+	<div class="ship shipAdd">
+		<i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>
+	</div>
+</div>
+<div class="col-md-3 shipWrapper" *ngFor="let ship of battleGroupe.mediumShips">
+	<div class="ship">
+		<div class="col-md-12 fleetShip">
 			<div class="pull-right">
-				<button type="button" class="btn btn-primary" (click)="clickedRemove('medium', ship)">
-					<span class="glyphicon glyphicon-cog"></span>
+				<button type="button" class="btn btn-icon-ship" (click)="clickedRemove(ship)">
+					<i class="fa fa-trash" aria-hidden="true"></i>
 				</button>			
 			</div>
 		</div>
-	</div>
-	<div dnd-droppable [dropZones]="['zoneMedium']" (onDropSuccess)="transferDataSuccess($event)" class="isEmpty">
-	</div>
-</div>
-<div dnd-droppable [dropZones]="['zoneMedium']" (onDropSuccess)="transferDataSuccess($event)" class="col-md-2 shipAddEmptyContainer isAddEmpty" *ngIf="battleGroupe.mediumShips.length < battleGroupe.battleGroupeType.mediumShipSize && maxShips < 4">
-	<div class="center-block">
-		<span class="center-block">ADD MEDIUM</span>
+		<div class="col-md-12">
+			{{ship.name}}
+		</div>
 	</div>
 </div>
-<div class="col-md-2 shipEmptyHeavyContainer" *ngFor="let ship of battleGroupe.heavyShips">
-	<div class="col-md-12 fleetShip">
-		<div class="col-md-offset-10 col-md-2">
+<div dnd-droppable [dropZones]="['zoneMedium']" (onDropSuccess)="transferDataSuccess($event)" class="col-md-3 shipWrapper" *ngIf="battleGroupe.mediumShips.length < battleGroupe.battleGroupeType.mediumShipSize && maxShips < 4">
+	<div class="ship shipAdd">
+		<i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+	</div>
+</div>
+<div class="col-md-3 shipWrapper" *ngFor="let ship of battleGroupe.heavyShips">
+	<div class="ship">
+		<div class="col-md-12 fleetShip">
 			<div class="pull-right">
-				<button type="button" class="btn btn-primary" (click)="clickedRemove('heavy', ship)">
-					<span class="glyphicon glyphicon-cog"></span>
+				<button type="button" class="btn btn-icon-ship" (click)="clickedRemove(ship)">
+						<i class="fa fa-trash" aria-hidden="true"></i>
 				</button>			
 			</div>
 		</div>
-	</div>
-	<div dnd-droppable [dropZones]="['zoneHeavy']" (onDropSuccess)="transferDataSuccess($event)" class="isEmpty vertical-center">
-		<span>HEAVY ICON</span>
-	</div>
-</div>
-<div dnd-droppable [dropZones]="['zoneHeavy']" (onDropSuccess)="transferDataSuccess($event)" class="col-md-2 shipAddEmptyContainer isAddEmpty" *ngIf="battleGroupe.heavyShips.length < battleGroupe.battleGroupeType.heavyShipSize && maxShips < 4">
-	<div class="center-block">
-		<span class="center-block">ADD HEAVY</span>
+		<div class="col-md-12">
+			{{ship.name}}
+		</div>
 	</div>
 </div>
-<div class="col-md-2 shipEmptySuperHeavyContainer" *ngFor="let ship of battleGroupe.superHeavyShips">
-	<div class="col-md-12 fleetShip">
-		<div class="col-md-offset-10 col-md-2">
+<div dnd-droppable [dropZones]="['zoneHeavy']" (onDropSuccess)="transferDataSuccess($event)" class="col-md-3 shipWrapper" *ngIf="battleGroupe.heavyShips.length < battleGroupe.battleGroupeType.heavyShipSize && maxShips < 4">
+	<div class="ship shipAdd">
+		<i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
+	</div>
+</div>
+<div class="col-md-3 shipWrapper" *ngFor="let ship of battleGroupe.superHeavyShips">
+	<div class="ship">
+		<div class="col-md-12 fleetShip">
 			<div class="pull-right">
-				<button type="button" class="btn btn-primary" (click)="clickedRemove('superHeavy', ship)">
-					<span class="glyphicon glyphicon-cog"></span>
+				<button type="button" class="btn btn-icon-ship" (click)="clickedRemove(ship)">
+					<i class="fa fa-trash" aria-hidden="true"></i>
 				</button>			
 			</div>
 		</div>
-	</div>
-	<div dnd-droppable [dropZones]="['zoneSuperHeavy']" (onDropSuccess)="transferDataSuccess($event)" class="isEmpty">
+		<div class="col-md-12">
+			{{ship.name}}
+		</div>
 	</div>
 </div>
-<div dnd-droppable [dropZones]="['zoneSuperHeavy']" (onDropSuccess)="transferDataSuccess($event)" class="col-md-2 shipAddEmptyContainer isAddEmpty" *ngIf="battleGroupe.superHeavyShips.length < battleGroupe.battleGroupeType.superHeavyShipSize && maxShips < 4">
-	<div class="center-block">
-		<span class="center-block">ADD SH</span>
+<div dnd-droppable [dropZones]="['zoneSuperHeavy']" (onDropSuccess)="transferDataSuccess($event)" class="col-md-3 shipWrapper" *ngIf="battleGroupe.superHeavyShips.length < battleGroupe.battleGroupeType.superHeavyShipSize && maxShips < 4">
+	<div class="ship shipAdd">
+		<i class="fa fa-plus-circle fa-4x" aria-hidden="true"></i>
 	</div>
 </div>

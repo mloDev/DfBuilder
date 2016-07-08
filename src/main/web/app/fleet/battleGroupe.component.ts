@@ -37,7 +37,7 @@ export class BattleGroupeComponent {
         
     }
     
-        /**
+     /**
      * The $event is a structure:
      * {
      *   dragData: any,
@@ -54,18 +54,7 @@ export class BattleGroupeComponent {
         } else if ($event.dragData.shipType === "SUPERSHIP") {
             this.battleGroupe.superHeavyShips.push($event.dragData);
         }
-        console.log("BattlegroupeId: " +  this.battleGroupe.id);
-        console.log("LightShips: " + this.battleGroupe.lightShips.length);
-        console.log("MediumShips: " + this.battleGroupe.mediumShips.length);
-        console.log("HeavyShips: " + this.battleGroupe.heavyShips.length);
-        console.log("SuperShips: " + this.battleGroupe.superHeavyShips.length);
-        this.save();
         this.calcMaxShips();
-        
-        console.log("After ADD");
-        console.log("LightShips: " + this.battleGroupe.lightShips.length);
-        console.log(this.battleGroupe.battleGroupeType.lightShipSize);
-        console.log(this.maxShips);
     }
     
     save() {
@@ -76,7 +65,7 @@ export class BattleGroupeComponent {
         console.log(this.battleGroupe);
     }
     
-    clickedRemove(shipType, ship) {
+    clickedRemove(ship) {
         if (ship.shipType === "LIGHTSHIP") {
             this.index = this.battleGroupe.lightShips.indexOf(ship, 0);
                 if (this.index > -1) {
@@ -99,11 +88,6 @@ export class BattleGroupeComponent {
                 }
         }  
         this.calcMaxShips();
-        
-        console.log("After Remove");
-        console.log("LightShips: " + this.battleGroupe.lightShips.length);
-        console.log(this.battleGroupe.battleGroupeType.lightShipSize);
-        console.log(this.maxShips);
     }
     
     calcMaxShips() {

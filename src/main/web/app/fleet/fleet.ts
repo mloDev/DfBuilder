@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, Injectable } from '@angular/core';
 
 import {CORE_DIRECTIVES} from '@angular/common';
 import {ROUTER_DIRECTIVES} from '@angular/router';
@@ -6,7 +6,6 @@ import { GameSize } from '../model/gameSize';
 import { GameSizeSelector } from "../selector/gameSize-selector";
 import { FactionSelector } from "../selector/faction-selector";
 import { ShipList } from "../ship/ship.list";
-import { Dragula, DragulaService} from 'ng2-dragula/ng2-dragula';
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { BattleTypePipe } from '../pipes/battleType-pipe';
 import { NgForNumber } from "../pipes/ngForNumber-pipe";
@@ -14,8 +13,8 @@ import { NgForNumber } from "../pipes/ngForNumber-pipe";
 import { BattleGroupe } from "../model/battleGroupe";
 import { BattleGroupeType } from "../model/battleGroupeType";
 import { BattleGroupeService } from '../service/battleGroupe.service';
-import {Tabs} from '../navbar/tabs';
-import {Tab} from '../model/tab';
+import { Fleet } from "../model/Fleet";
+import { FleetService } from '../service/fleet.service';
 import {Ship} from '../model/ship';
 
 import {DND_PROVIDERS, DND_DIRECTIVES} from 'ng2-dnd/ng2-dnd';
@@ -25,18 +24,14 @@ import { BattleGroupeComponent } from "../fleet/battleGroupe.component";
     selector: 'fleet',
     pipes: [ BattleTypePipe, NgForNumber],
     templateUrl: 'app/fleet/fleet.html',
-    directives: [DND_DIRECTIVES, MODAL_DIRECTIVES, CORE_DIRECTIVES, ROUTER_DIRECTIVES, ShipList, GameSizeSelector, FactionSelector, Dragula, BattleGroupeComponent, Tabs, Tab ],
-    providers: [ BattleGroupeService ],
-    viewProviders: [ DragulaService ]
+    directives: [DND_DIRECTIVES, MODAL_DIRECTIVES, CORE_DIRECTIVES, ROUTER_DIRECTIVES, ShipList, GameSizeSelector, FactionSelector, BattleGroupeComponent],
+    providers: [ BattleGroupeService, FleetService ]
 
 })
 
 export class FleetComponent {
     
-    @Input() battleFlags: BattleGroupe[] = [];
-    @Input() battleLines: BattleGroupe[] = [];
-    @Input() battlePathfinders: BattleGroupe[] = [];
-    @Input() battleVanguards: BattleGroupe[] = [];
+    fleet: Fleet;
     
     @Input() battleFlag: BattleGroupeType;
     @Input() battleLine: BattleGroupeType;
@@ -54,13 +49,12 @@ export class FleetComponent {
     @Input() gameSize: GameSize;
     @Input() @Output() faction;
     ship: Ship;
+    error: any;
     
-   myShipChange(event) {
-    console.log(event);
-       this.ship =  event;
-  }
-    
-    constructor(private battleService: BattleGroupeService) {
+    myShipChange(event) {
+        this.ship =  event;
+    }
+    constructor(private battleService: BattleGroupeService, private fleetService: FleetService) {
     }
    
     
@@ -69,29 +63,28 @@ export class FleetComponent {
             if (this.gameSize.lineMin < this.gameSize.lineSize) {
                 var battleGroupeLine = new BattleGroupe();
                 battleGroupeLine.battleGroupeType = this.battleLine;
-                this.battleLines.push(battleGroupeLine);
+                this.fleet.lineBattlegroupes.push(battleGroupeLine);
                 this.gameSize.lineMin++;
-                console.log(battleGroupeLine.id);
             }
         } else if (input === "addVanguard") {
             if (this.gameSize.vanguardMin < this.gameSize.vanguardSize) {
                 var battleGroupeVanguard = new BattleGroupe();
                 battleGroupeVanguard.battleGroupeType = this.battleVanguard;
-                this.battleVanguards.push(battleGroupeVanguard);
+                this.fleet.vanguardBattlegroupes.push(battleGroupeVanguard);
                 this.gameSize.vanguardMin++;
             }
         } else if (input === "addFlag") {
             if (this.gameSize.flagMin < this.gameSize.flagSize) { 
                 var battleGroupeFlag = new BattleGroupe();
                 battleGroupeFlag.battleGroupeType = this.battleFlag;
-                this.battleFlags.push(battleGroupeFlag);
+                this.fleet.flagBattlegroupes.push(battleGroupeFlag);
                 this.gameSize.flagMin++;
             }
         } else if (input === "addPathfinder") {
             if (this.gameSize.pathfinderMin < this.gameSize.pathfinderSize) {
                 var battleGroupePathfinder = new BattleGroupe();
                 battleGroupePathfinder.battleGroupeType = this.battlePathfinder;
-                this.battlePathfinders.push(battleGroupePathfinder);
+                this.fleet.pathfinderBattlegroupes.push(battleGroupePathfinder);
                 this.gameSize.pathfinderMin++;
             }
         }
@@ -112,39 +105,36 @@ export class FleetComponent {
     ngOnInit(){
         this.getBattleGroupes();
         this.getBattleGroupeTypes();
+        this.fleet = new Fleet();
     }
     
     initBattleGoupes(game: GameSize) {
-        this.battleFlags = [];
-        this.battleLines = [];
-        this.battlePathfinders = [];
-        this.battleFlags = [];
-        if (this.gameSize.lineMin != 0) {
-            for (var i = 0; i < this.gameSize.lineMin; i++) {
+        if (game.lineMin != 0) {
+            for (var i = 0; i < game.lineMin; i++) {
                 var battleGroupeLine = new BattleGroupe();
                 battleGroupeLine.battleGroupeType = this.battleLine;
-                this.battleLines.push(battleGroupeLine);
+                this.fleet.lineBattlegroupes.push(battleGroupeLine);
             }    
         } 
-        if (this.gameSize.pathfinderMin != 0) {
-            for (var i = 0; i < this.gameSize.pathfinderMin; i++) {
+        if (game.pathfinderMin != 0) {
+            for (var i = 0; i < game.pathfinderMin; i++) {
                 var battleGroupePathfinder = new BattleGroupe();
                 battleGroupePathfinder.battleGroupeType = this.battlePathfinder;
-                this.battlePathfinders.push(battleGroupePathfinder);
+                this.fleet.pathfinderBattlegroupes.push(battleGroupePathfinder);
             }    
         } 
-        if (this.gameSize.vanguardMin != 0) {
-            for (var i = 0; i < this.gameSize.vanguardMin; i++) {
+        if (game.vanguardMin != 0) {
+            for (var i = 0; i < game.vanguardMin; i++) {
                 var battleGroupeVanguard = new BattleGroupe();
                 battleGroupeVanguard.battleGroupeType = this.battleVanguard;
-                this.battleVanguards.push(battleGroupeVanguard);    
+                this.fleet.vanguardBattlegroupes.push(battleGroupeVanguard);    
             }    
         } 
-        if (this.gameSize.flagMin != 0) {
-            for (var i = 0; i < this.gameSize.flagMin; i++) {
+        if (game.flagMin != 0) {
+            for (var i = 0; i < game.flagMin; i++) {
                 var battleGroupeFlag = new BattleGroupe();
                 battleGroupeFlag.battleGroupeType = this.battleFlag;
-                this.battleFlags.push(battleGroupeFlag);    
+                this.fleet.flagBattlegroupes.push(battleGroupeFlag);    
             }    
         }   
     }
@@ -163,55 +153,34 @@ export class FleetComponent {
         }  
     }
 
-    onItemSelected(selectedItem: GameSize) {
-        this.gameSize = selectedItem;
+    onGameSizeSelected(selectedGameSize: GameSize) {
+        this.gameSize = selectedGameSize;
         this.loadBattleGroupeTypes();
-        if (this.gameSize != null) {
-            this.initBattleGoupes(this.gameSize);
-        } 
-    }
-    
-    private onOver(args) {
-        let [e, el, container] = args;
-        // do something
-    }
-    
-    private onDrop(args) {
-        let [e, el] = args;
-        this.removeClass(e, 'shipContainer');
-        e = e.parentNode;
-        if ( e != null ) {
-            if (this.hasClass(e, 'isEmpty')) {
-                this.removeClass(e, 'isEmpty');
-                this.addClass(e, 'isFilled');
-            }
-        }
-    }
-    
-    private onDrag(args) {
-        let [e, el] = args;
-        e = e.parentNode;
-        if ( e != null ) {
-            if (this.hasClass(e, 'isFilled')) {
-                this.removeClass(e, 'isFilled');
-                this.addClass(e, 'isEmpty');
-            }
-        }
     }
 
-    private removeClass(el: any, name: string) {
-        if (this.hasClass(el, name)) {
-          el.className = el.className.replace(name, '');
-        }
+    onCreateFleet(){
+        this.fleet = new Fleet();
+        this.fleet.gameSize = this.gameSize;
+        this.fleet.faction = this.faction;
+        this.initBattleGoupes(this.fleet.gameSize);
     }
-    
-      private hasClass(el: any, name: string) {
-        return (el.className.indexOf(name) > 1); 
-      }
 
-      private addClass(el: any, name: string) {
-        if (!this.hasClass(el, name)) {
-          el.className = el.className ? [el.className, name].join('') : name;
-        }
-      }      
+    onFactionSelected(selectedFaction: string) {
+        this.faction = selectedFaction;
+    }
+
+    onSaveFleet() {
+      this.fleetService
+            .saveFleet(this.fleet)
+            .then(fleet => this.fleet = fleet)
+            .catch(error => this.error = error);
+    }
+
+    onExport() {
+        var mediaType = 'application/json';
+        var data = JSON.stringify(this.fleet);
+        var blob = new Blob([data], {type: mediaType});
+        var filename = 'test.txt';
+        saveAs(blob, filename);
+    }
 }
