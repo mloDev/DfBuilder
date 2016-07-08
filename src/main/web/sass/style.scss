@@ -21,6 +21,31 @@ img{
 #site-title {
     max-width:150px;
 }
+
+.btn-icon {
+	padding: .375rem .375rem;
+	background: transparent;
+	color: #00FF00;
+}
+
+.btn-icon-ship {
+	padding: .1rem .5rem;
+	background: transparent;
+	color: #00FF00;
+	font-size: 0.8rem;
+}
+
+.fleetTitle {
+	padding: 1px 1px 1px 1px;
+	line-height: 1;
+	border: 1px transparent;
+	background: transparent;
+}
+
+input { 
+	font-family: 'FontAwesome' !important; 
+}
+
 #size-banner{
     height: auto;
     min-height: auto;
@@ -157,7 +182,27 @@ have a fixed width and height (but it's not required).
     border-width: 1px;
     height: 75px;
     margin-bottom: 6px;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.ship {	
+	-webkit-border-top-right-radius: 15px;
+	-webkit-border-bottom-left-radius: 15px;
+	-moz-border-radius-topright: 15px;
+	-moz-border-radius-bottomleft: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+    border-style: solid;
+    border-width: 1px;
+    height: 75px;
+}
+
+.shipAdd {
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+.shipWrapper {
+	padding: 0px 3px 0px 3px;	
 }
 
 .fleetShip {
@@ -166,8 +211,8 @@ have a fixed width and height (but it's not required).
 	border-top-right-radius: 15px;
     border-style: solid;
     border-width: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-    height: 14px;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 0px;
 }
 
 .optionLine {
@@ -185,7 +230,17 @@ have a fixed width and height (but it's not required).
 }
 
 .shiplist {
-	padding: 5px 15px 5px 15px;
+	padding: 6px 6px 6px 6px;
+	-webkit-border-bottom-right-radius: 15px;
+	-webkit-border-bottom-left-radius: 15px;
+	-moz-border-radius-bottomright: 15px;
+	-moz-border-radius-bottomleft: 15px;
+	border-bottom-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+	border-width: 0px 1px 1px 1px;
+	border-color: #00FF00;
+	border-style: solid;
+	margin-right: .125rem;
 }
 
 .armyList {
@@ -198,7 +253,8 @@ have a fixed width and height (but it's not required).
 	border-width: 0px 1px 1px 1px;
 	border-color: #00FF00;
 	border-style: solid;
-	padding: 5px 5px 5px 5px;
+	padding: 6px 6px 6px 6px;
+	margin-left: .125rem;
 }
 
 .shipEmptyLightContainer {
@@ -325,57 +381,6 @@ have a fixed width and height (but it's not required).
 
 .noPadding {
 	padding: 0;
-}
-
-.shipEmptyMediumContainer {
-	border-corner-shape: bevel;
-	padding: 0px;	
-	-webkit-border-top-right-radius: 15px;
-	-webkit-border-bottom-left-radius: 15px;
-	-moz-border-radius-topright: 15px;
-	-moz-border-radius-bottomleft: 15px;
-	border-top-right-radius: 15px;
-	border-bottom-left-radius: 15px;
-    border-style: solid;
-    border-width: 1px;
-    margin: 0px;
-    height: 75px;
-    margin-left: 3px;
-    margin-right: 3px;
-}
-
-.shipEmptyHeavyContainer {
-	border-corner-shape: bevel;
-	padding: 0px;	
-	-webkit-border-top-right-radius: 15px;
-	-webkit-border-bottom-left-radius: 15px;
-	-moz-border-radius-topright: 15px;
-	-moz-border-radius-bottomleft: 15px;
-	border-top-right-radius: 15px;
-	border-bottom-left-radius: 15px;
-    border-style: solid;
-    border-width: 1px;
-    margin: 0px;
-    height: 75px;
-    margin-left: 3px;
-    margin-right: 3px;
-}
-
-.shipEmptySuperHeavyContainer {
-	border-corner-shape: bevel;
-	padding: 0px;	
-	-webkit-border-top-right-radius: 15px;
-	-webkit-border-bottom-left-radius: 15px;
-	-moz-border-radius-topright: 15px;
-	-moz-border-radius-bottomleft: 15px;
-	border-top-right-radius: 15px;
-	border-bottom-left-radius: 15px;
-    border-style: solid;
-    border-width: 1px;
-    margin: 0px;
-    height: 75px;
-    margin-left: 3px;
-    margin-right: 3px;
 }
 
 .shipAddEmptyContainer {

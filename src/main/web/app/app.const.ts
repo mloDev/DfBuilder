@@ -6,6 +6,7 @@ export let CONFIGURATION = {
         ships: 'ship',
         shipsByFaction: 'shipByFaction',
         battlegroupe: 'battlegroupe',
-        battlegroupeType: 'battlegroupeType'
-    },
+        battlegroupeType: 'battlegroupeType',
+        fleet: 'fleet'
+    }
 }

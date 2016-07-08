@@ -1,163 +1,169 @@
-		<div class="col-md-12 optionLine">
-			<div class="col-md-6">
-				<button type="button" (click)="modal.open()" class="btn btn-primary pull-left">Reset</button>
-				<button type="button" class="btn btn-primary pull-left">tonnage</button>
-				<button type="button" class="btn btn-primary pull-left">special</button>
-				<button type="button" class="btn btn-primary pull-left">type</button>
-				<button type="button" class="btn btn-primary pull-left">Export</button>
-			</div>
-			<div class="col-md-6">
-
-			</div>
-		</div>
-		
-
-
+<div class="col-md-12 optionLine">
+</div>
 <div class="container-fluid">
 	<div class="row ">
 		<div class="col-md-12">
 			<div class="col-md-offset-1 col-md-2 shipList">
-	        	<ship-list (shipChange)="myShipChange($event)" [faction]="faction" [shipType]="'LIGHT'"></ship-list>
+	        	<ship-list (shipChange)="myShipChange($event)" [faction]="fleet.faction" [shipType]="'LIGHT'"></ship-list>
 			</div>
-			<div class="col-md-8 armyList" *ngIf="gameSize">
+			<div class="col-md-8 armyList">
 				<div class="col-md-12">
 					<div class="col-md-1">
-						<span>FACTION</span>
+						<span>{{fleet.faction}}</span>
 					</div>
 					<div class="col-md-5">
 						<div class="col-md-12">
-							<span>TITLE</span>
+							<input required [(ngModel)]="fleet.name" type="text" placeholder="Standart Fleet &#xf040; " class="form-control fleetTitle" id="title">
 						</div>
 						<div class="col-md-12">
-							<span>POINTS</span>
+							<div class="col-md-4" style="padding-right: 0px;">
+								<label class="pull-right control-label" for="maxPoints" >total points / </label>
+							</div>
+							<div class="col-md-8" style="padding-left: 0px;">
+								<input required [(ngModel)]="fleet.maxPoints" type="text" placeholder="max points &#xf040;" class="form-control fleetTitle" id="points">
+							</div>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="pull-right">
-							<button type="button" class="btn btn-primary" (click)="modal.open()">
-								<span class="glyphicon glyphicon-cog"></span>
+							<button type="button" class="btn btn-icon" aria-hidden="true" (click)="modal.open()">
+								<i class="fa fa-file" aria-hidden="true"></i>
 							</button>
-							<button type="button" class="btn btn-primary" (click)="modal.open()">
-								<span class="glyphicon glyphicon-floppy-save"></span>
+							<button type="button" class="btn btn-icon" (click)="onSaveFleet()">
+								<i class="fa fa-floppy-o" aria-hidden="true"></i>
 							</button>
-							<button type="button" class="btn btn-primary" (click)="modal.open()">
-								<span class="glyphicon glyphicon-floppy-open"></span>
+							<button type="button" class="btn btn-icon disabled" (click)="onSaveFleet()">
+								<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 							</button>
-							<button type="button" class="btn btn-primary" (click)="modal.open()">
-								<span class="glyphicon glyphicon-export"></span>
+							<button type="button" class="btn btn-icon disabled" (click)="onSaveFleet()">
+								<i class="fa fa-print" aria-hidden="true"></i>
 							</button>
-							<button type="button" class="btn btn-primary" (click)="modal.open()">
-								<span class="glyphicon glyphicon-copy"></span>
+							<button type="button" class="btn btn-icon disabled" (click)="onSaveFleet()">
+								<i class="fa fa-folder-open" aria-hidden="true"></i>
+							</button>
+							<button type="button" class="btn btn-icon disabled" (click)="modal.open()">
+								<i class="fa fa-clipboard" aria-hidden="true"></i>
+							</button>
+							<button type="button" class="btn btn-icon" (click)="onExport()">
+								<i class="fa fa-download" aria-hidden="true"></i>
+							</button>
+							<button type="button" class="btn btn-icon disabled" (click)="modal.open()">
+								<i class="fa fa-upload" aria-hidden="true"></i>
 							</button>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6">
-				<div class="col-md-12" *ngIf="gameSize.lineSize > 0">
+				<div class="col-md-6" *ngIf="fleet.gameSize">
+				<div class="col-md-12" *ngIf="fleet.gameSize.lineSize > 0">
 					<div class="col-md-12">
-						<div class="col-md-6">
+						<div class="col-md-8">
 							<span>Linegruppen der Flotte</span>
 						</div>
-						<div class="col-md-4">
-							<button type="button" class="btn btn-primary-add " (click)="onClick('addLine', $event)">
-								<span class="glyphicon glyphicon-plus-sign"></span>
+						<div class="col-md-2">
+							<button type="button" class="btn btn-icon" (click)="onClick('addLine', $event)">
+								<i class="fa fa-plus-square" aria-hidden="true"></i>
 							</button>
 						</div>
 						<div class="col-md-2">
-							<span>{{gameSize.lineMin}}/{{gameSize.lineSize}}</span>					
+							<span>{{fleet.lineBattlegroupes.length}}/{{fleet.gameSize.lineSize}}</span>					
 						</div>					
 					</div>
-						<div ([ngModel])="battleLines" class="col-md-12 shipRow" *ngFor="let battleGroupe of battleLines">
+						<div ([ngModel])="battleLines" class="col-md-12 shipRow" *ngFor="let battleGroupe of fleet.lineBattlegroupes">
 							<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
 						</div>
 				</div>
-				<div class="col-md-12" *ngIf="gameSize.pathfinderSize > 0">
+				<div class="col-md-12" *ngIf="fleet.gameSize.pathfinderSize > 0">
 					<div class="col-md-12">
-						<div class="col-md-6">
+						<div class="col-md-8">
 							<span>Pathfindergruppen der Flotte</span>
 						</div>
-						<div class="col-md-4">
-							<button type="button" class="btn btn-primary-add" (click)="onClick('addPathfinder', $event)">
-								<span class="glyphicon glyphicon-plus-sign"></span>
+						<div class="col-md-2">
+							<button type="button" class="btn btn-icon" (click)="onClick('addPathfinder', $event)">
+								<i class="fa fa-plus-square" aria-hidden="true"></i>
 							</button>
 						</div>
 						<div class="col-md-2">
-							<span>{{gameSize.pathfinderMin}}/{{gameSize.pathfinderSize}}</span>				
+							<span>{{fleet.pathfinderBattlegroupes.length}}/{{gameSize.pathfinderSize}}</span>				
 						</div>					
 					</div>
-					<div ([ngModel])="battlePathfinders" class="col-md-12 shipRow" *ngFor="let battleGroupe of battlePathfinders">
+					<div ([ngModel])="battlePathfinders" class="col-md-12 shipRow" *ngFor="let battleGroupe of fleet.pathfinderBattlegroupes">
 						<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
 					</div>
 				</div>
 				</div>
-				<div class="col-md-6">
-				<div class="col-md-12" *ngIf="gameSize.vanguardSize > 0">
+				<div class="col-md-6" *ngIf="fleet.gameSize">
+				<div class="col-md-12" *ngIf="fleet.gameSize.vanguardSize > 0">
 					<div class="col-md-12">
-						<div class="col-md-6">
+						<div class="col-md-8">
 							<span>Vanguardgruppen der Flotte</span>
 						</div>
-						<div class="col-md-4">
-							<button type="button" class="btn btn-primary-add" (click)="onClick('addVanguard', $event)">
-								<span class="glyphicon glyphicon-plus-sign"></span>
+						<div class="col-md-2">
+							<button type="button" class="btn btn-icon" (click)="onClick('addVanguard', $event)">
+								<i class="fa fa-plus-square" aria-hidden="true"></i>
 							</button>
 						</div>
 						<div class="col-md-2">
-							<span>{{gameSize.vanguardMin}}/{{gameSize.vanguardSize}}</span>				
+							<span>{{fleet.vanguardBattlegroupes.length}}/{{gameSize.vanguardSize}}</span>				
 						</div>					
 					</div>
-					<div ([ngModel])="battleVanguards" class="col-md-12 shipRow" *ngFor="let battleGroupe of battleVanguards">
+					<div ([ngModel])="battleVanguards" class="col-md-12 shipRow" *ngFor="let battleGroupe of fleet.vanguardBattlegroupes">
 						<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
 					</div>
 				</div>
-				<div class="col-md-12" *ngIf="gameSize.flagSize > 0">
+				<div class="col-md-12" *ngIf="fleet.gameSize.flagSize > 0">
 					<div class="col-md-12">
-						<div class="col-md-6">
+						<div class="col-md-8">
 							<span>Flaggruppen der Flotte</span>
 						</div>
-						<div class="col-md-4">
-							<button type="button" class="btn btn-primary-add" (click)="onClick('addFlag', $event)">
-								<span class="glyphicon glyphicon-plus-sign"></span>
+						<div class="col-md-2">
+							<button type="button" class="btn btn-icon" (click)="onClick('addFlag', $event)">
+								<i class="fa fa-plus-square" aria-hidden="true"></i>
 							</button>
 						</div>
 						<div class="col-md-2">
-							<span>{{gameSize.flagMin}}/{{gameSize.flagSize}}</span>				
+							<span>{{fleet.flagBattlegroupes.length}}/{{gameSize.flagSize}}</span>				
 						</div>					
 					</div>
-					<div ([ngModel])="battleFlags" class="col-md-12 shipRow" *ngFor="let battleGroupe of battleFlags">
+					<div ([ngModel])="battleFlags" class="col-md-12 shipRow" *ngFor="let battleGroupe of fleet.flagBattlegroupes">
 						<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
 					</div>
 				</div>
 				</div>
 		</div>
 		</div>
-
-		
-
 	</div>
 </div>
-<script type="text/javascript">
-    jQuery(document).ready(function ($) {
-        $('#tabs').tab();
-    });
-</script> 
 
 
-    <modal #modal>
-        <modal-header [show-close]="true">
+    <modal id="myModal" #modal>
+        <modal-header [show-close]="false">
             <h4 class="modal-title">Select Fleet details</h4>
         </modal-header>
         <modal-body>
 	        <div class="col-md-12">
 				<div class="col-md-4">
-					<game-selector [(selected)]="gameSize" (select)="onItemSelected($event)"></game-selector>
+					<game-selector [(selected)]="gameSize" (select)="onGameSizeSelected($event)"></game-selector>
 				</div>
 				<div class="col-md-4">
-					<faction-selector (select)="faction = $event"></faction-selector>
+					<faction-selector [(selected)]="faction" (select)="onFactionSelected($event)"></faction-selector>
 				</div>
 				<div class="col-md-4">
 				
 				</div>
 			</div>
         </modal-body>
-        <modal-footer [show-default-buttons]="true"></modal-footer>
+        <modal-footer [show-default-buttons]="false">
+        	<div class="col-md-12">
+				<div class="col-md-offset-2 col-md-8">
+					<button type="button" class="btn btn-icon" aria-hidden="true" (click)="onCreateFleet(); modal.close()">
+							<i class="fa fa-plus-square" aria-hidden="true"></i>
+							<span>Create Fleet</span>
+					</button>
+					<button type="button" class="btn btn-icon" (click)="modal.close()">
+						<i class="fa fa-ban" aria-hidden="true"></i>
+						<span>Abort</span>
+					</button>
+				</div>
+			</div>	
+        </modal-footer>
     </modal>
