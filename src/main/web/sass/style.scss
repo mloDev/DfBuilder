@@ -5,9 +5,16 @@ html {
 .jumbotron-fluid {
     padding:0;
 }
+
+body {
+  background: #2e3c45;
+  color: #61727D;
+}
+
 header {
   margin-top: -15px;
 }
+
 img{
   width:100%;
   max-width: 100%;
@@ -40,10 +47,11 @@ img{
 	line-height: 1;
 	border: 1px transparent;
 	background: transparent;
+	vertical-align: 0 !important;
 }
 
 input { 
-	font-family: 'FontAwesome' !important; 
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, 'FontAwesome' !important; 
 }
 
 #size-banner{
@@ -98,6 +106,14 @@ header .display-2 {
 	height: 100%;
 }
 
+.pointsLabel {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, 'FontAwesome' !important;
+	margin: 0;
+	padding: 1px 1px 1px 1px;
+	vertical-align: 0 !important;
+}
+
+
 /* ----------------------- FOOTER ---------------------------------------*/
 .footer {
     background:#2e3c45;
@@ -125,8 +141,7 @@ header .display-2 {
 
 #wrap {
   min-height: 100%;
-  background: #2e3c45;
-  color: #61727D;
+  height: 100%;
 }
 
 #main {
