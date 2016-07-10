@@ -1,0 +1,7 @@
+---
+applications:
+- name: DfBuilder
+  memory: 1024M
+  host: DfBuilder
+  domain: cfapps.io
+  buildpack: java_buildpack

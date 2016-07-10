@@ -106,6 +106,7 @@ task npmClean(type: Delete) {
 
 task stage {
   dependsOn build
+  dependsOn bootRun
 }
 
 // run spring boot app
