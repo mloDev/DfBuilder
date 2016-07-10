@@ -11,7 +11,6 @@ export class Fleet {
     lineBattlegroupes: BattleGroupe[]  = [];
     pathfinderBattlegroupes: BattleGroupe[]  = [];
     totalPoints: number = 0;
-    maxPoints: number = 0;
-
+    maxPoints: number;
     constructor() {};
 }

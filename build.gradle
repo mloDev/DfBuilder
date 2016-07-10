@@ -104,6 +104,10 @@ task npmClean(type: Delete) {
 	delete "${webDir}/typings"
 }
 
+task stage {
+  dependsOn build
+}
+
 // run spring boot app
 bootRun {
 	addResources = true

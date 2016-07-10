@@ -32,6 +32,7 @@ import { BattleGroupeComponent } from "../fleet/battleGroupe.component";
 export class FleetComponent {
     
     fleet: Fleet;
+    isFleet: any = false;;
     
     @Input() battleFlag: BattleGroupeType;
     @Input() battleLine: BattleGroupeType;
@@ -163,6 +164,7 @@ export class FleetComponent {
         this.fleet.gameSize = this.gameSize;
         this.fleet.faction = this.faction;
         this.initBattleGoupes(this.fleet.gameSize);
+        this.isFleet = true;
     }
 
     onFactionSelected(selectedFaction: string) {

@@ -7,7 +7,7 @@ import { Component, Output, EventEmitter } from "@angular/core";
 
 export class FactionSelector{
 	@Output() select = new EventEmitter();
-	factions = ["all","UCM","PHR","Shaltari","Scourge"];
+	factions = ["UCM","PHR","Shaltari","Scourge"];
 	
 	ngOnInit(){
 		this.select.emit(this.factions[0]);

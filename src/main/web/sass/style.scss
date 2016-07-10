@@ -47,10 +47,11 @@ img{
 	line-height: 1;
 	border: 1px transparent;
 	background: transparent;
+	vertical-align: 0 !important;
 }
 
 input { 
-	font-family: 'FontAwesome' !important; 
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, 'FontAwesome' !important; 
 }
 
 #size-banner{
@@ -104,6 +105,14 @@ header .display-2 {
 .isEmpty {
 	height: 100%;
 }
+
+.pointsLabel {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, 'FontAwesome' !important;
+	margin: 0;
+	padding: 1px 1px 1px 1px;
+	vertical-align: 0 !important;
+}
+
 
 /* ----------------------- FOOTER ---------------------------------------*/
 .footer {

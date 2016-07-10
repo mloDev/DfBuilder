@@ -8,20 +8,27 @@
 			</div>
 			<div class="col-md-8 armyList">
 				<div class="col-md-12">
-					<div class="col-md-1">
-						<span>{{fleet.faction}}</span>
+					<div class="col-md-6" *ngIf="!isFleet">
+						<span>Please create new fleet</span>
 					</div>
-					<div class="col-md-5">
+					<div class="col-md-1" *ngIf="isFleet">
+						<img alt="{{fleet.faction}}" class="img-responsive" src="../images/{{fleet.faction}}_900.jpg">
+					</div>
+					<div class="col-md-5" *ngIf="isFleet">
 						<div class="col-md-12">
-							<input required [(ngModel)]="fleet.name" type="text" placeholder="Standart Fleet &#xf040; " class="form-control fleetTitle" id="title">
+							<form class = "form-inline" role = "form">
+								<div class = "form-group">
+									<input required [(ngModel)]="fleet.name" type="text" placeholder="Standart Fleet &#xf040; " class="form-control fleetTitle" id="title">
+								</div>
+							</form>
 						</div>
 						<div class="col-md-12">
-							<div class="col-md-4" style="padding-right: 0px;">
-								<label class="pull-right control-label" for="maxPoints" >total points / </label>
-							</div>
-							<div class="col-md-8" style="padding-left: 0px;">
-								<input required [(ngModel)]="fleet.maxPoints" type="text" placeholder="max points &#xf040;" class="form-control fleetTitle" id="points">
-							</div>
+							<form class = "form-inline" role = "form">
+								<div class = "form-group">
+									<label class="pointsLabel" for="points">{{fleet.totalPoints}} /</label>
+									<input required [(ngModel)]="fleet.maxPoints" type="text" placeholder="max points &#xf040;" class="form-control fleetTitle" id="points">
+								</div>
+							</form>
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -53,81 +60,81 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6" *ngIf="fleet.gameSize">
-				<div class="col-md-12" *ngIf="fleet.gameSize.lineSize > 0">
-					<div class="col-md-12">
-						<div class="col-md-8">
-							<span>Linegruppen der Flotte</span>
+				<div class="col-md-6" *ngIf="isFleet">
+					<div class="col-md-12" *ngIf="fleet.gameSize.lineSize > 0">
+						<div class="col-md-12">
+							<div class="col-md-8">
+								<span>Linegruppen der Flotte</span>
+							</div>
+							<div class="col-md-2">
+								<button type="button" class="btn btn-icon" (click)="onClick('addLine', $event)">
+									<i class="fa fa-plus-square" aria-hidden="true"></i>
+								</button>
+							</div>
+							<div class="col-md-2">
+								<span>{{fleet.lineBattlegroupes.length}}/{{fleet.gameSize.lineSize}}</span>					
+							</div>					
 						</div>
-						<div class="col-md-2">
-							<button type="button" class="btn btn-icon" (click)="onClick('addLine', $event)">
-								<i class="fa fa-plus-square" aria-hidden="true"></i>
-							</button>
-						</div>
-						<div class="col-md-2">
-							<span>{{fleet.lineBattlegroupes.length}}/{{fleet.gameSize.lineSize}}</span>					
-						</div>					
+							<div ([ngModel])="battleLines" class="col-md-12 shipRow" *ngFor="let battleGroupe of fleet.lineBattlegroupes">
+								<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
+							</div>
 					</div>
-						<div ([ngModel])="battleLines" class="col-md-12 shipRow" *ngFor="let battleGroupe of fleet.lineBattlegroupes">
+					<div class="col-md-12" *ngIf="fleet.gameSize.pathfinderSize > 0">
+						<div class="col-md-12">
+							<div class="col-md-8">
+								<span>Pathfindergruppen der Flotte</span>
+							</div>
+							<div class="col-md-2">
+								<button type="button" class="btn btn-icon" (click)="onClick('addPathfinder', $event)">
+									<i class="fa fa-plus-square" aria-hidden="true"></i>
+								</button>
+							</div>
+							<div class="col-md-2">
+								<span>{{fleet.pathfinderBattlegroupes.length}}/{{gameSize.pathfinderSize}}</span>				
+							</div>					
+						</div>
+						<div ([ngModel])="battlePathfinders" class="col-md-12 shipRow" *ngFor="let battleGroupe of fleet.pathfinderBattlegroupes">
 							<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
 						</div>
-				</div>
-				<div class="col-md-12" *ngIf="fleet.gameSize.pathfinderSize > 0">
-					<div class="col-md-12">
-						<div class="col-md-8">
-							<span>Pathfindergruppen der Flotte</span>
-						</div>
-						<div class="col-md-2">
-							<button type="button" class="btn btn-icon" (click)="onClick('addPathfinder', $event)">
-								<i class="fa fa-plus-square" aria-hidden="true"></i>
-							</button>
-						</div>
-						<div class="col-md-2">
-							<span>{{fleet.pathfinderBattlegroupes.length}}/{{gameSize.pathfinderSize}}</span>				
-						</div>					
-					</div>
-					<div ([ngModel])="battlePathfinders" class="col-md-12 shipRow" *ngFor="let battleGroupe of fleet.pathfinderBattlegroupes">
-						<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
 					</div>
 				</div>
-				</div>
-				<div class="col-md-6" *ngIf="fleet.gameSize">
-				<div class="col-md-12" *ngIf="fleet.gameSize.vanguardSize > 0">
-					<div class="col-md-12">
-						<div class="col-md-8">
-							<span>Vanguardgruppen der Flotte</span>
+				<div class="col-md-6" *ngIf="isFleet">
+					<div class="col-md-12" *ngIf="fleet.gameSize.vanguardSize > 0">
+						<div class="col-md-12">
+							<div class="col-md-8">
+								<span>Vanguardgruppen der Flotte</span>
+							</div>
+							<div class="col-md-2">
+								<button type="button" class="btn btn-icon" (click)="onClick('addVanguard', $event)">
+									<i class="fa fa-plus-square" aria-hidden="true"></i>
+								</button>
+							</div>
+							<div class="col-md-2">
+								<span>{{fleet.vanguardBattlegroupes.length}}/{{gameSize.vanguardSize}}</span>				
+							</div>					
 						</div>
-						<div class="col-md-2">
-							<button type="button" class="btn btn-icon" (click)="onClick('addVanguard', $event)">
-								<i class="fa fa-plus-square" aria-hidden="true"></i>
-							</button>
+						<div ([ngModel])="battleVanguards" class="col-md-12 shipRow" *ngFor="let battleGroupe of fleet.vanguardBattlegroupes">
+							<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
 						</div>
-						<div class="col-md-2">
-							<span>{{fleet.vanguardBattlegroupes.length}}/{{gameSize.vanguardSize}}</span>				
-						</div>					
 					</div>
-					<div ([ngModel])="battleVanguards" class="col-md-12 shipRow" *ngFor="let battleGroupe of fleet.vanguardBattlegroupes">
-						<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
-					</div>
-				</div>
-				<div class="col-md-12" *ngIf="fleet.gameSize.flagSize > 0">
-					<div class="col-md-12">
-						<div class="col-md-8">
-							<span>Flaggruppen der Flotte</span>
+					<div class="col-md-12" *ngIf="fleet.gameSize.flagSize > 0">
+						<div class="col-md-12">
+							<div class="col-md-8">
+								<span>Flaggruppen der Flotte</span>
+							</div>
+							<div class="col-md-2">
+								<button type="button" class="btn btn-icon" (click)="onClick('addFlag', $event)">
+									<i class="fa fa-plus-square" aria-hidden="true"></i>
+								</button>
+							</div>
+							<div class="col-md-2">
+								<span>{{fleet.flagBattlegroupes.length}}/{{gameSize.flagSize}}</span>				
+							</div>					
 						</div>
-						<div class="col-md-2">
-							<button type="button" class="btn btn-icon" (click)="onClick('addFlag', $event)">
-								<i class="fa fa-plus-square" aria-hidden="true"></i>
-							</button>
+						<div ([ngModel])="battleFlags" class="col-md-12 shipRow" *ngFor="let battleGroupe of fleet.flagBattlegroupes">
+							<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
 						</div>
-						<div class="col-md-2">
-							<span>{{fleet.flagBattlegroupes.length}}/{{gameSize.flagSize}}</span>				
-						</div>					
 					</div>
-					<div ([ngModel])="battleFlags" class="col-md-12 shipRow" *ngFor="let battleGroupe of fleet.flagBattlegroupes">
-						<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
-					</div>
-				</div>
 				</div>
 		</div>
 		</div>

@@ -42,7 +42,7 @@ gulp.task('libcopy', function() {
 	gulp.src(['./node_modules/atoa/**/*'])
 		.pipe(gulp.dest(staticDir + 'js/lib/atoa'));
 	gulp.src(['./node_modules/ng2-dnd/**/*'])
-	.pipe(gulp.dest(staticDir + 'js/lib/ng2-dnd'));
+		.pipe(gulp.dest(staticDir + 'js/lib/ng2-dnd'));
 
 
     // copy @angular dependencies
@@ -101,15 +101,15 @@ gulp.task('htmlcopy', function() {
 //image copy
 gulp.task('imagecopy', function() {
     // clean dest
-    del([staticDir + 'app/images/*'], {force:true});
+    del([staticDir + 'images/**'], {force:true});
 
     // copy iamgefolder
     gulp.src('./images/**/*')
-        .pipe(gulp.dest(staticDir + 'app/images'));
+        .pipe(gulp.dest(staticDir + 'images'));
 });
 
 //image js
-gulp.task('imagecopy', function() {
+gulp.task('jscopy', function() {
     // clean dest
     del([staticDir + 'app/js/*'], {force:true});
 
@@ -170,7 +170,7 @@ gulp.task('tscw', function() {
 });
 
 // build sass and ts, copy libs, copy html
-gulp.task('build', ['htmlcopy', 'imagecopy', 'sass', 'tsc', 'libcopy']);
+gulp.task('build', ['htmlcopy', 'imagecopy', "jscopy", 'sass', 'tsc', 'libcopy']);
 
 // watch sass, ts, and html
 gulp.task('watch', ['build', 'sassw', 'htmlw', 'tscw']);
