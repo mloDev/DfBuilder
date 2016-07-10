@@ -13,7 +13,7 @@ import { NgForNumber } from "../pipes/ngForNumber-pipe";
 import { BattleGroupe } from "../model/battleGroupe";
 import { BattleGroupeType } from "../model/battleGroupeType";
 import { BattleGroupeService } from '../service/battleGroupe.service';
-import { Fleet } from "../model/Fleet";
+import { Fleet } from "../model/fleet";
 import { FleetService } from '../service/fleet.service';
 import {Ship} from '../model/ship';
 
