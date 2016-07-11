@@ -2,7 +2,8 @@ function buildPdf(value) {
     var pdfContent = value;
     var dd = {
             content: [
-                    header(pdfContent),
+                    createHeader(pdfContent),
+                    hrLine(),
                     table(pdfContent.lineBattlegroupes, ['name', 'pts']),
                     table(pdfContent.pathfinderBattlegroupes, ['name', 'pts']),
                     table(pdfContent.vanguardBattlegroupes, ['name', 'pts']),
@@ -38,7 +39,12 @@ function buildTableBody(data, columns) {
 	data.lightShips.forEach(function(row) {
 			var dataRow = [];
 			columns.forEach(function(column) {
-				dataRow.push(row[column].toString());
+				if (column == 'pts') {
+					dataRow.push(row[column].toString() + 'pts');
+				} else {
+					dataRow.push(row[column].toString());
+				}
+				
 			})
 		body.push(dataRow);
 	});
@@ -46,18 +52,34 @@ function buildTableBody(data, columns) {
 	return body;
 }
 
-function header(data) {
+function createHeader(data) {
 	return                     {
 		table: {
 			widths: [50,'*', 200],
 			body: [
-					[ pdfContent.faction, pdfContent.name, { text: 'Battle', style: 'points' }],
-					[ '', '', pdfContent.totalPoints]
+					[ data.faction, data.name, { text: 'Battle', style: 'points' }],
+					[ '', '', { text: data.totalPoints + '/' + data.maxPoints + ' PTS', style: 'points' }]
 			]
 		},
 		layout: 'noBorders'
-	}
-	
+	};
+}
+
+function hrLine() {
+	return {
+	    table: {
+	            widths: ['*'],
+	            body: ['']
+	    },
+	    layout: {
+	        hLineWidth: function(i, node) {
+	            return (i === 0 || i === node.table.body.length) ? 0 : 2;
+	        },
+	        vLineWidth: function(i, node) {
+	            return 0;
+	        },
+	    }
+	};
 }
 
 function table(data, columns) {
