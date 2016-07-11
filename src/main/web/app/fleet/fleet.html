@@ -39,7 +39,7 @@
 							<button type="button" class="btn btn-icon" (click)="onSaveFleet()">
 								<i class="fa fa-floppy-o" aria-hidden="true"></i>
 							</button>
-							<button type="button" class="btn btn-icon disabled" (click)="onSaveFleet()">
+							<button type="button" class="btn btn-icon" (click)="onOpenPdf()">
 								<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 							</button>
 							<button type="button" class="btn btn-icon disabled" (click)="onSaveFleet()">
@@ -48,7 +48,7 @@
 							<button type="button" class="btn btn-icon disabled" (click)="onSaveFleet()">
 								<i class="fa fa-folder-open" aria-hidden="true"></i>
 							</button>
-							<button type="button" class="btn btn-icon" (click)="onBBSave()">
+							<button type="button" class="btn btn-icon" (click)="onBBSave(); modalBBCode.open()">
 								<i class="fa fa-clipboard" aria-hidden="true"></i>
 							</button>
 							<button type="button" class="btn btn-icon" (click)="onExport()">
@@ -172,5 +172,16 @@
 					</button>
 				</div>
 			</div>	
+        </modal-footer>
+    </modal>
+    
+        <modal id="myModalBBCode" #modalBBCode>
+        <modal-header [show-close]="true">
+            <h4 class="modal-title">Fleet as BBCode</h4>
+        </modal-header>
+        <modal-body>
+	        <textarea class="form-control" id="exampleTextarea" rows="15">{{copyBBCode}}</textarea>
+        </modal-body>
+        <modal-footer [show-default-buttons]="false">
         </modal-footer>
     </modal>

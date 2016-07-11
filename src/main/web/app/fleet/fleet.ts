@@ -21,6 +21,10 @@ import { Ship } from '../model/ship';
 import { DND_PROVIDERS, DND_DIRECTIVES } from 'ng2-dnd/ng2-dnd';
 
 import { BattleGroupeComponent } from "../fleet/battleGroupe.component";
+
+declare var pdfMake: any;
+declare var buildPdf: any;
+
 @Component({
     selector: 'fleet',
     pipes: [ BattleTypePipe, NgForNumber],
@@ -32,13 +36,17 @@ import { BattleGroupeComponent } from "../fleet/battleGroupe.component";
 
 export class FleetComponent {
     
+    pdf: any;
+    
     fleet: Fleet;
-    isFleet: any = false;;
+    isFleet: any = false;
     
     @Input() battleFlag: BattleGroupeType;
     @Input() battleLine: BattleGroupeType;
     @Input() battlePathfinder: BattleGroupeType;
     @Input() battleVanguard: BattleGroupeType;
+    
+    copyBBCode: string;
     
     battleGroupes: BattleGroupe[] = [];
     battleGroupeTypes: BattleGroupeType[] = [];
@@ -180,7 +188,7 @@ export class FleetComponent {
     }
     
     onBBSave() {
-        this.bbService.saveAsBBCode(this.fleet);    
+       this.copyBBCode = this.bbService.saveAsBBCode(this.fleet);    
     }
 
     onExport() {
@@ -189,5 +197,10 @@ export class FleetComponent {
         var blob = new Blob([data], {type: mediaType});
         var filename = 'test.txt';
         saveAs(blob, filename);
+    }
+    
+    onOpenPdf() {
+        this.pdf = pdfMake;
+        this.pdf.createPdf(buildPdf(this.fleet)).open();
     }
 }

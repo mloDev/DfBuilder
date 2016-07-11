@@ -62,11 +62,12 @@ export class BBCodeService {
         }
     }
     
-    saveAsBBCode(fleet: Fleet) {
+    saveAsBBCode(fleet: Fleet): string {
         this.fleet = fleet;
         this.generateBBHeader();
         this.generateBBGroups();
         this.bbCodeString = this.headerString + this.groupString;
         console.log(this.bbCodeString);
+        return this.bbCodeString;
     }
 }

@@ -58,7 +58,6 @@ export class BattleGroupeComponent {
         }
         this.calcMaxShips();
         this.battleGroupe.points = this.battleGroupe.points + $event.dragData.pts;
-        console.log(this.battleGroupe.points);
         this.fleet.totalPoints = this.fleet.totalPoints + this.battleGroupe.points;
     }
     
@@ -105,6 +104,5 @@ export class BattleGroupeComponent {
         this.battleGroupe.heavyShipSize =  this.battleGroupe.battleGroupeType.heavyShipMin;       
         this.battleGroupe.superHeavyShipSize =  this.battleGroupe.battleGroupeType.superHeavyShipMin; 
         this.calcMaxShips();
-        console.log(this.maxShips);
     }
 }
