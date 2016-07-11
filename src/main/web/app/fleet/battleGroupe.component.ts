@@ -6,10 +6,11 @@ import { GameSize } from '../model/gameSize';
 import { GameSizeSelector } from "../selector/gameSize-selector";
 import { FactionSelector } from "../selector/faction-selector";
 import { ShipList } from "../ship/ship.list";
-import { Dragula, DragulaService} from 'ng2-dragula/ng2-dragula';
 import { BattleTypePipe } from '../pipes/battleType-pipe';
 import { NgForNumber } from "../pipes/ngForNumber-pipe";
 import { Ship } from "../model/ship";
+import { Fleet } from "../model/fleet";
+
 
 import { DND_DIRECTIVES } from 'ng2-dnd/ng2-dnd';
 
@@ -19,7 +20,7 @@ import { BattleGroupeService } from '../service/battleGroupe.service';
     selector: 'battleGroupeComponent',
     pipes: [ BattleTypePipe, NgForNumber],
     templateUrl: 'app/fleet/battleGroupe.component.html',
-    directives: [ CORE_DIRECTIVES, ROUTER_DIRECTIVES, ShipList, GameSizeSelector, FactionSelector, Dragula, DND_DIRECTIVES ],
+    directives: [ CORE_DIRECTIVES, ROUTER_DIRECTIVES, ShipList, GameSizeSelector, FactionSelector, DND_DIRECTIVES ],
     providers: [ BattleGroupeService ]
 
 })
@@ -27,6 +28,7 @@ import { BattleGroupeService } from '../service/battleGroupe.service';
 export class BattleGroupeComponent {
         
     @Input() battleGroupe: BattleGroupe;
+    @Input() fleet: Fleet;
     shipTmp: Ship;
     error: any;
     index:any;
@@ -55,6 +57,9 @@ export class BattleGroupeComponent {
             this.battleGroupe.superHeavyShips.push($event.dragData);
         }
         this.calcMaxShips();
+        this.battleGroupe.points = this.battleGroupe.points + $event.dragData.pts;
+        console.log(this.battleGroupe.points);
+        this.fleet.totalPoints = this.fleet.totalPoints + this.battleGroupe.points;
     }
     
     save() {
@@ -62,7 +67,6 @@ export class BattleGroupeComponent {
             .saveBattleGroupe(this.battleGroupe)
             .then(battleGroupe => this.battleGroupe = battleGroupe)
             .catch(error => this.error = error);
-        console.log(this.battleGroupe);
     }
     
     clickedRemove(ship) {
@@ -88,6 +92,7 @@ export class BattleGroupeComponent {
                 }
         }  
         this.calcMaxShips();
+        this.battleGroupe.points = this.battleGroupe.points - ship.pts;
     }
     
     calcMaxShips() {

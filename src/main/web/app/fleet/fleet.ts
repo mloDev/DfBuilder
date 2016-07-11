@@ -15,17 +15,18 @@ import { BattleGroupeType } from "../model/battleGroupeType";
 import { BattleGroupeService } from '../service/battleGroupe.service';
 import { Fleet } from "../model/fleet";
 import { FleetService } from '../service/fleet.service';
-import {Ship} from '../model/ship';
+import { BBCodeService } from '../service/bbCreate.service';
+import { Ship } from '../model/ship';
 
-import {DND_PROVIDERS, DND_DIRECTIVES} from 'ng2-dnd/ng2-dnd';
+import { DND_PROVIDERS, DND_DIRECTIVES } from 'ng2-dnd/ng2-dnd';
 
 import { BattleGroupeComponent } from "../fleet/battleGroupe.component";
 @Component({
     selector: 'fleet',
     pipes: [ BattleTypePipe, NgForNumber],
     templateUrl: 'app/fleet/fleet.html',
-    directives: [DND_DIRECTIVES, MODAL_DIRECTIVES, CORE_DIRECTIVES, ROUTER_DIRECTIVES, ShipList, GameSizeSelector, FactionSelector, BattleGroupeComponent],
-    providers: [ BattleGroupeService, FleetService ]
+    directives: [ DND_DIRECTIVES, MODAL_DIRECTIVES, CORE_DIRECTIVES, ROUTER_DIRECTIVES, ShipList, GameSizeSelector, FactionSelector, BattleGroupeComponent],
+    providers: [ BattleGroupeService, FleetService, BBCodeService ]
 
 })
 
@@ -55,7 +56,7 @@ export class FleetComponent {
     myShipChange(event) {
         this.ship =  event;
     }
-    constructor(private battleService: BattleGroupeService, private fleetService: FleetService) {
+    constructor(private battleService: BattleGroupeService, private fleetService: FleetService, private bbService: BBCodeService) {
     }
    
     
@@ -176,6 +177,10 @@ export class FleetComponent {
             .saveFleet(this.fleet)
             .then(fleet => this.fleet = fleet)
             .catch(error => this.error = error);
+    }
+    
+    onBBSave() {
+        this.bbService.saveAsBBCode(this.fleet);    
     }
 
     onExport() {
