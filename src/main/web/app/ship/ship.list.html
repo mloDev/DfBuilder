@@ -1,3 +1,13 @@
+<div class="entity-list col-md-12">
+	<div class="pull-right">
+		<button type="button" class="btn btn-icon" (click)="onFilter()">
+			<i class="fa fa-repeat" aria-hidden="true"></i>
+		</button>
+		<button type="button" class="btn btn-icon" (click)="onFilter()">
+			<i class="fa fa-filter" aria-hidden="true"></i>
+		</button>			
+	</div>
+</div>
 <div class="entity-list col-md-12" ng-init="ships = []">
 	<div id="light-bag-list" class="col-md-12 shipContainer" dnd-draggable [dragEnabled]="true" [dropZones]="['zoneLight']" [dragData]="ship" *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'LIGHT'">
 		<ship-detail-small [ship]="ship" (click)="setShip(ship)" ></ship-detail-small>		

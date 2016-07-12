@@ -38,6 +38,9 @@ export class ShipList implements OnInit {
   constructor(
     private shipService: ShipService) { }
 
+    onFilter() {
+        console.log("Filter");    
+    }
     
   getShips() {
     this.shipService
