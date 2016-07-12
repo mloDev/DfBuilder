@@ -12,6 +12,7 @@ export class BattleGroupe {
     mediumShips: Ship[] = [];
     heavyShips: Ship[] = [];
     superHeavyShips: Ship[] = [];
+    points: number = 0;
     
     constructor() {};
 }

@@ -39,16 +39,13 @@
 							<button type="button" class="btn btn-icon" (click)="onSaveFleet()">
 								<i class="fa fa-floppy-o" aria-hidden="true"></i>
 							</button>
-							<button type="button" class="btn btn-icon disabled" (click)="onSaveFleet()">
+							<button type="button" class="btn btn-icon" (click)="onOpenPdf()">
 								<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-							</button>
-							<button type="button" class="btn btn-icon disabled" (click)="onSaveFleet()">
-								<i class="fa fa-print" aria-hidden="true"></i>
 							</button>
 							<button type="button" class="btn btn-icon disabled" (click)="onSaveFleet()">
 								<i class="fa fa-folder-open" aria-hidden="true"></i>
 							</button>
-							<button type="button" class="btn btn-icon disabled" (click)="modal.open()">
+							<button type="button" class="btn btn-icon" (click)="onBBSave(); modalBBCode.open()">
 								<i class="fa fa-clipboard" aria-hidden="true"></i>
 							</button>
 							<button type="button" class="btn btn-icon" (click)="onExport()">
@@ -76,7 +73,7 @@
 							</div>					
 						</div>
 							<div ([ngModel])="battleLines" class="col-md-12 shipRow" *ngFor="let battleGroupe of fleet.lineBattlegroupes">
-								<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
+								<battleGroupeComponent [fleet]="fleet" [battleGroupe]="battleGroupe"></battleGroupeComponent>
 							</div>
 					</div>
 					<div class="col-md-12" *ngIf="fleet.gameSize.pathfinderSize > 0">
@@ -94,7 +91,7 @@
 							</div>					
 						</div>
 						<div ([ngModel])="battlePathfinders" class="col-md-12 shipRow" *ngFor="let battleGroupe of fleet.pathfinderBattlegroupes">
-							<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
+							<battleGroupeComponent [fleet]="fleet" [battleGroupe]="battleGroupe"></battleGroupeComponent>
 						</div>
 					</div>
 				</div>
@@ -114,7 +111,7 @@
 							</div>					
 						</div>
 						<div ([ngModel])="battleVanguards" class="col-md-12 shipRow" *ngFor="let battleGroupe of fleet.vanguardBattlegroupes">
-							<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
+							<battleGroupeComponent [fleet]="fleet" [battleGroupe]="battleGroupe"></battleGroupeComponent>
 						</div>
 					</div>
 					<div class="col-md-12" *ngIf="fleet.gameSize.flagSize > 0">
@@ -132,7 +129,7 @@
 							</div>					
 						</div>
 						<div ([ngModel])="battleFlags" class="col-md-12 shipRow" *ngFor="let battleGroupe of fleet.flagBattlegroupes">
-							<battleGroupeComponent [battleGroupe]="battleGroupe"></battleGroupeComponent>
+							<battleGroupeComponent [fleet]="fleet" [battleGroupe]="battleGroupe"></battleGroupeComponent>
 						</div>
 					</div>
 				</div>
@@ -172,5 +169,16 @@
 					</button>
 				</div>
 			</div>	
+        </modal-footer>
+    </modal>
+    
+        <modal id="myModalBBCode" #modalBBCode>
+        <modal-header [show-close]="true">
+            <h4 class="modal-title">Fleet as BBCode</h4>
+        </modal-header>
+        <modal-body>
+	        <textarea class="form-control" id="exampleTextarea" rows="15">{{copyBBCode}}</textarea>
+        </modal-body>
+        <modal-footer [show-default-buttons]="false">
         </modal-footer>
     </modal>
