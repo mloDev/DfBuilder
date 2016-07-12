@@ -8,6 +8,7 @@ import {ShipService} from '../service/ship.service';
 import { Ship } from '../model/ship';
 import { ShipTypePipe } from '../pipes/ship-type-pipe';
 import { ShipFactionPipe } from '../pipes/ship-faction-pipe';
+import { ShipNamePipe } from '../pipes/ship-name-pipe';
 import { FactionSelector } from '../selector/faction-selector';
 import { ShipDetailSmall } from "../ship/ship.detail.small";
 import { Dragula, DragulaService} from 'ng2-dragula/ng2-dragula';
@@ -15,7 +16,7 @@ import { DND_DIRECTIVES } from 'ng2-dnd/ng2-dnd';
 
 @Component({
     selector: 'ship-list',
-    pipes: [ShipTypePipe, ShipFactionPipe ],
+    pipes: [ShipTypePipe, ShipFactionPipe, ShipNamePipe ],
     templateUrl: 'app/ship/ship.list.html',
     providers: [ShipService],
     directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, FactionSelector, ShipDetailSmall, DND_DIRECTIVES, Dragula]
@@ -34,23 +35,35 @@ export class ShipList implements OnInit {
     @Output() superHeavyShips: Ship [];
     
     @Output() shipChange = new EventEmitter();
+    
+    searchString: string = "";
 
   constructor(
     private shipService: ShipService) { }
-
     
-  getShips() {
-    this.shipService
-        .getShips()
-        .then(ships => this.ships = ships);
-  }
+    enterQuery($event) {
+        console.log($event);
+    }
     
-  ngOnInit() {
-    this.getShips();
-  }
+    getQuery($event) {
+        console.log(this.searchString);
+    }
     
-  setShip(ship) {
-    this.shipChange.emit(
-        ship)  
-  }
+    resetQuery() {
+        
+    }
+    
+    getShips() {
+        this.shipService
+            .getShips()
+            .then(ships => this.ships = ships);
+    }
+        
+    ngOnInit() {
+        this.getShips();
+    }
+        
+    setShip(ship) {
+        this.shipChange.emit(ship)  
+    }
 }

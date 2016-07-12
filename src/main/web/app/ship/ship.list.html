@@ -1,14 +1,51 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+            <div class="input-group" id="adv-search">
+                <input type="text" [(ngModel)]="searchString" class="form-control" placeholder="Search for ship" />
+                <div class="input-group-btn">
+                    <div class="btn-group" role="group">
+                        <div class="dropdown dropdown-lg">
+                            <button type="button" class="btn btn-icon disabled" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-caret-down" aria-hidden="true"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                <form class="form-horizontal" role="form">
+                                  <div class="form-group">
+                                    <label for="filter">Filter by</label>
+                                    <select class="form-control">
+                                        <option value="0" selected>All Snippets</option>
+                                        <option value="1">Featured</option>
+                                        <option value="2">Most popular</option>
+                                        <option value="3">Top rated</option>
+                                        <option value="4">Most commented</option>
+                                    </select>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="contain">Contains the words</label>
+                                    <input class="form-control" type="text" />
+                                  </div>
+                                  <button type="submit" (click)="getQuery($event)" class="btn btn-icon"><i class="fa fa-search" aria-hidden="true"></i>
+								  </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+	</div>
 <div class="entity-list col-md-12" ng-init="ships = []">
-	<div id="light-bag-list" class="col-md-12 shipContainer" dnd-draggable [dragEnabled]="true" [dropZones]="['zoneLight']" [dragData]="ship" *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'LIGHT'">
+	<div id="light-bag-list" class="col-md-12 shipContainer" dnd-draggable [dragEnabled]="true" [dropZones]="['zoneLight']" [dragData]="ship" *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'LIGHT' | shipNamePipe: searchString">
 		<ship-detail-small [ship]="ship" (click)="setShip(ship)" ></ship-detail-small>		
 	</div>
-	<div id="medium-bag-list" class="col-md-12 shipContainer" dnd-draggable [dragEnabled]="true" [dropZones]="['zoneMedium']" [dragData]="ship" *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'MEDIUM'">
+	<div id="medium-bag-list" class="col-md-12 shipContainer" dnd-draggable [dragEnabled]="true" [dropZones]="['zoneMedium']" [dragData]="ship" *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'MEDIUM' | shipNamePipe: searchString">
 		<ship-detail-small [ship]="ship" (click)="setShip(ship)"></ship-detail-small>
 	</div>
-	<div id="heavy-bag-list" class="col-md-12 shipContainer" dnd-draggable [dragEnabled]="true" [dropZones]="['zoneHeavy']" [dragData]="ship" *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'HEAVY'">
+	<div id="heavy-bag-list" class="col-md-12 shipContainer" dnd-draggable [dragEnabled]="true" [dropZones]="['zoneHeavy']" [dragData]="ship" *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'HEAVY' | shipNamePipe: searchString">
 		<ship-detail-small [ship]="ship" (click)="setShip(ship)"></ship-detail-small>		 
 	</div>
-	<div id="superHeavy-bag-list" class="col-md-12 shipContainer" dnd-draggable [dragEnabled]="true" [dropZones]="['zoneSuperHeavy']" [dragData]="ship" *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'SUPER'">
+	<div id="superHeavy-bag-list" class="col-md-12 shipContainer" dnd-draggable [dragEnabled]="true" [dropZones]="['zoneSuperHeavy']" [dragData]="ship" *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'SUPER' | shipNamePipe: searchString">
 		<ship-detail-small [ship]="ship" (click)="setShip(ship)"></ship-detail-small>		
 	</div>
 </div>
