@@ -19,7 +19,7 @@ function buildPdf(value) {
         		},
             content: [
                     createHeader(pdfContent),
-                    {canvas: [{ type: 'line', x1: 0, y1: 5, x2: 595-2*60, y2: 5, lineWidth: 1 }]},
+                    {canvas: [{ type: 'line', x1: 0, y1: 5, x2: 595-2*60, y2: 5, lineWidth: 1, style: 'hrcanvas' }]},
                     table(pdfContent.lineBattlegroupes, ['name', 'pts']),
                     table(pdfContent.pathfinderBattlegroupes, ['name', 'pts']),
                     table(pdfContent.vanguardBattlegroupes, ['name', 'pts']),
@@ -38,6 +38,10 @@ function buildPdf(value) {
         		subheader: {
         			fontSize: 10,
         			bold: true
+        		},
+        		hrcanvas: {
+        			color: '#26bdbf',
+        			background: '#26bdbf'
         		},
         		ship: {
         			fontSize: 10,

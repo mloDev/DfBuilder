@@ -1,6 +1,6 @@
 	<div>
-		<select #sel (change)="select.emit(sel.value)">
-			<option *ngFor="let faction of factions">
+		<select class="selector" #sel (change)="select.emit(sel.value)">
+			<option *ngFor="let faction of factions" class="option">
 				{{faction}}
 			</option>
 		</select>
