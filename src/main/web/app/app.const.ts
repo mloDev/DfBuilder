@@ -1,6 +1,6 @@
 export let CONFIGURATION = {
     baseUrls: {
-        server: 'http://localhost:3000/',
+        server: 'http://dfbackend.herokuapp.com/',
         apiUrl: 'api/',
         gameSizes: 'gameSizes',
         ships: 'ship',
