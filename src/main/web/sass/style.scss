@@ -508,6 +508,11 @@ have a fixed width and height (but it's not required).
 	border-style: solid;
 }
 
+
+.noPadRight {
+	padding-right: 0px !important;
+	padding-left: 10px;
+}
 /* ----------------------- DRAGULA ---------------------------------------*/
 .gu-mirror {
   position: fixed !important;

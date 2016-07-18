@@ -48,17 +48,25 @@ export class BattleGroupeComponent {
      */
     transferDataSuccess($event) {
         if ($event.dragData.shipType === "LIGHTSHIP") {
-            this.battleGroupe.lightShips.push($event.dragData);
-        } else if ($event.dragData.shipType === "MEDIUMSHIP") {
-            this.battleGroupe.mediumShips.push($event.dragData);
+            var newObject = JSON.parse(JSON.stringify($event.dragData));
+            newObject.gcurrent = newObject.gmin;
+            this.battleGroupe.lightShips.push(newObject);
+        } else if ($event.dragData.shipType === "MEDIUMSHIP") {            
+            var newObject = JSON.parse(JSON.stringify($event.dragData));
+            newObject.gcurrent = newObject.gmin;
+            this.battleGroupe.mediumShips.push(newObject);
         } else if ($event.dragData.shipType === "HEAVYSHIP") {
-            this.battleGroupe.heavyShips.push($event.dragData);
+            var newObject = JSON.parse(JSON.stringify($event.dragData));
+            newObject.gcurrent = newObject.gmin;
+            this.battleGroupe.heavyShips.push(newObject);
         } else if ($event.dragData.shipType === "SUPERSHIP") {
-            this.battleGroupe.superHeavyShips.push($event.dragData);
+            var newObject = JSON.parse(JSON.stringify($event.dragData));
+            newObject.gcurrent = newObject.gmin;
+            this.battleGroupe.superHeavyShips.push(newObject);
         }
-        this.calcMaxShips();
         this.battleGroupe.points = this.battleGroupe.points + $event.dragData.pts;
-        this.fleet.totalPoints = this.fleet.totalPoints + this.battleGroupe.points;
+        this.fleet.totalPoints = this.fleet.totalPoints + $event.dragData.pts;
+        this.calcMaxShips();
     }
     
     save() {
@@ -66,6 +74,28 @@ export class BattleGroupeComponent {
             .saveBattleGroupe(this.battleGroupe)
             .then(battleGroupe => this.battleGroupe = battleGroupe)
             .catch(error => this.error = error);
+    }
+    
+    removeShip(ship) {
+        console.log(ship);
+        this.fleet.totalPoints = this.fleet.totalPoints - ship.pts;
+        this.battleGroupe.points = this.battleGroupe.points - ship.pts;
+        ship.pts =  (ship.pts / ship.gcurrent) * (ship.gcurrent - 1);
+        ship.gcurrent--;
+        this.battleGroupe.points = this.battleGroupe.points + ship.pts;
+        this.fleet.totalPoints = this.fleet.totalPoints + ship.pts;
+        this.calcMaxShips();
+    }
+    
+    addShip(ship) {
+        console.log(ship);
+        this.fleet.totalPoints = this.fleet.totalPoints - ship.pts;
+        this.battleGroupe.points = this.battleGroupe.points - ship.pts;
+        ship.pts =  (ship.pts / ship.gcurrent) * (ship.gcurrent + 1);
+        ship.gcurrent++;
+        this.battleGroupe.points = this.battleGroupe.points + ship.pts;
+        this.fleet.totalPoints = this.fleet.totalPoints + ship.pts;
+        this.calcMaxShips();
     }
     
     clickedRemove(ship) {
@@ -90,8 +120,9 @@ export class BattleGroupeComponent {
                     this.battleGroupe.superHeavyShips.splice(this.index, 1);
                 }
         }  
-        this.calcMaxShips();
         this.battleGroupe.points = this.battleGroupe.points - ship.pts;
+        this.fleet.totalPoints = this.fleet.totalPoints - ship.pts;
+        this.calcMaxShips();
     }
     
     calcMaxShips() {

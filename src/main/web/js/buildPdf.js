@@ -72,7 +72,7 @@ function buildTableBody(data, columns) {
 				if (column == 'pts') {
 					dataRow.push({text: row[column].toString() + ' pts', style: 'pts' });
 				} else {
-					dataRow.push(row[column].toString());
+					dataRow.push({ text: row[column].toString() + ": " + row.gcurrent + "x " + row[column].toString()});
 				}
 				
 			})

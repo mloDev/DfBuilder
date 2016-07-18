@@ -49,16 +49,16 @@ export class BBCodeService {
     
     appendShip(group: BattleGroupe) {
         for (let ship of group.lightShips) {
-            this.groupString =  this.groupString + "[*]" + ship.shipType + ": " + ship.name + " [" + ship.pts + " pts]";    
+            this.groupString =  this.groupString + "[*]" + ship.shipType + ": " + ship.gcurrent + "x " + ship.name + " [" + ship.pts + " pts]";    
         }
         for (let ship of group.mediumShips) {
-            this.groupString =  this.groupString + "[*]" + ship.shipType + ": " + ship.name + " [" + ship.pts + " pts]";    
+            this.groupString =  this.groupString + "[*]" + ship.shipType + ": " + ship.gcurrent + "x " + ship.name + " [" + ship.pts + " pts]";    
         }
         for (let ship of group.heavyShips) {
-            this.groupString =  this.groupString + "[*]" + ship.shipType + ": " + ship.name + " [" + ship.pts + " pts]";    
+            this.groupString =  this.groupString + "[*]" + ship.shipType + ": " + ship.gcurrent + "x " + ship.name + " [" + ship.pts + " pts]";    
         }
         for (let ship of group.superHeavyShips) {
-            this.groupString =  this.groupString + "[*]" + ship.shipType + ": " + ship.name + " [" + ship.pts + " pts]";    
+            this.groupString =  this.groupString + "[*]" + ship.shipType + ": " + ship.gcurrent + "x " + ship.name + " [" + ship.pts + " pts]";    
         }
     }
     
