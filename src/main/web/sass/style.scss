@@ -185,6 +185,66 @@ have a fixed width and height (but it's not required).
     float: left;
 }
 
+
+
+/*------------------------ Modal ---------------------------------------*/
+
+.modal-content {
+    -webkit-border-top-right-radius: 15px;
+	-webkit-border-bottom-left-radius: 15px;
+	-moz-border-radius-topright: 15px;
+	-moz-border-radius-bottomleft: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+    border-style: solid;
+    border-width: 2px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-color: #26bdbf;
+}
+
+.modal-footer {
+	border: 0;
+}
+
+.modal-header {
+	border-color: #26bdbf;
+	color: #fff;
+}
+	
+.modal-body .form-control {
+	background-color: transparent;    
+	-webkit-border-top-right-radius: 15px;
+	-webkit-border-bottom-left-radius: 15px;
+	-moz-border-radius-topright: 15px;
+	-moz-border-radius-bottomleft: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #26bdbf;
+    color: #fff;
+}
+
+.modal-body .selector {
+	background-color: transparent;
+	-webkit-border-top-right-radius: 15px;
+	-webkit-border-bottom-left-radius: 15px;
+	-moz-border-radius-topright: 15px;
+	-moz-border-radius-bottomleft: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #26bdbf;
+    color: #fff;
+    padding: 0px 3px;
+}
+
+.modal-body .option {
+	background-color: transparent;
+    border: 0;
+    color: #fff;
+}
 /* ----------------------- SHIPS ---------------------------------------*/
 .shipContainer {
     -webkit-border-top-right-radius: 15px;

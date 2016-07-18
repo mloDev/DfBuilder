@@ -1,5 +1,5 @@
 	<div>
-		<select [(ngModel)]="gameSize" (ngModelChange)="select.emit(gameSize)">
+		<select class="selector" [(ngModel)]="gameSize" (ngModelChange)="select.emit(gameSize)">
 			<option *ngFor="let g of games" [ngValue]="g">
 				{{g.name}}
 			</option>

@@ -144,7 +144,7 @@
             <h4 class="modal-title">Select Fleet details</h4>
         </modal-header>
         <modal-body>
-	        <div class="col-md-12">
+	        <div class="col-md-12 center-block" style="height: 200px;">
 				<div class="col-md-4">
 					<game-selector [(selected)]="gameSize" (select)="onGameSizeSelected($event)"></game-selector>
 				</div>
@@ -157,8 +157,7 @@
 			</div>
         </modal-body>
         <modal-footer [show-default-buttons]="false">
-        	<div class="col-md-12">
-				<div class="col-md-offset-2 col-md-8">
+        	<div class="col-md-12 center-block">
 					<button type="button" class="btn btn-icon" aria-hidden="true" (click)="onCreateFleet(); modal.close()">
 							<i class="fa fa-plus-square" aria-hidden="true"></i>
 							<span>Create Fleet</span>
@@ -167,12 +166,11 @@
 						<i class="fa fa-ban" aria-hidden="true"></i>
 						<span>Abort</span>
 					</button>
-				</div>
 			</div>	
         </modal-footer>
     </modal>
     
-        <modal id="myModalBBCode" #modalBBCode>
+    <modal id="myModalBBCode" #modalBBCode>
         <modal-header [show-close]="true">
             <h4 class="modal-title">Fleet as BBCode</h4>
         </modal-header>
