@@ -50,22 +50,26 @@ export class BattleGroupeComponent {
         if ($event.dragData.shipType === "LIGHTSHIP") {
             var newObject = JSON.parse(JSON.stringify($event.dragData));
             newObject.gcurrent = newObject.gmin;
+            newObject.pts = newObject.pts * newObject.gcurrent;
             this.battleGroupe.lightShips.push(newObject);
         } else if ($event.dragData.shipType === "MEDIUMSHIP") {            
             var newObject = JSON.parse(JSON.stringify($event.dragData));
             newObject.gcurrent = newObject.gmin;
+            newObject.pts = newObject.pts * newObject.gcurrent;
             this.battleGroupe.mediumShips.push(newObject);
         } else if ($event.dragData.shipType === "HEAVYSHIP") {
             var newObject = JSON.parse(JSON.stringify($event.dragData));
             newObject.gcurrent = newObject.gmin;
+            newObject.pts = newObject.pts * newObject.gcurrent;
             this.battleGroupe.heavyShips.push(newObject);
         } else if ($event.dragData.shipType === "SUPERSHIP") {
             var newObject = JSON.parse(JSON.stringify($event.dragData));
             newObject.gcurrent = newObject.gmin;
+            newObject.pts = newObject.pts * newObject.gcurrent;
             this.battleGroupe.superHeavyShips.push(newObject);
         }
-        this.battleGroupe.points = this.battleGroupe.points + $event.dragData.pts;
-        this.fleet.totalPoints = this.fleet.totalPoints + $event.dragData.pts;
+        this.battleGroupe.points = this.battleGroupe.points + $event.dragData.pts * $event.dragData.gmin;
+        this.fleet.totalPoints = this.fleet.totalPoints + $event.dragData.pts * $event.dragData.gmin;
         this.calcMaxShips();
     }
     
@@ -77,7 +81,6 @@ export class BattleGroupeComponent {
     }
     
     removeShip(ship) {
-        console.log(ship);
         this.fleet.totalPoints = this.fleet.totalPoints - ship.pts;
         this.battleGroupe.points = this.battleGroupe.points - ship.pts;
         ship.pts =  (ship.pts / ship.gcurrent) * (ship.gcurrent - 1);
@@ -88,7 +91,6 @@ export class BattleGroupeComponent {
     }
     
     addShip(ship) {
-        console.log(ship);
         this.fleet.totalPoints = this.fleet.totalPoints - ship.pts;
         this.battleGroupe.points = this.battleGroupe.points - ship.pts;
         ship.pts =  (ship.pts / ship.gcurrent) * (ship.gcurrent + 1);

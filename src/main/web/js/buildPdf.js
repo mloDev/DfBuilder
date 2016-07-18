@@ -39,6 +39,10 @@ function buildPdf(value) {
         			fontSize: 10,
         			bold: true
         		},
+        		ship: {
+        			fontSize: 10,
+        			bold: false
+        		},
         		subheaderPts: {
         			fontSize: 10,
         			bold: true,
@@ -72,7 +76,7 @@ function buildTableBody(data, columns) {
 				if (column == 'pts') {
 					dataRow.push({text: row[column].toString() + ' pts', style: 'pts' });
 				} else {
-					dataRow.push({ text: row[column].toString() + ": " + row.gcurrent + "x " + row[column].toString()});
+					dataRow.push({ style: 'subheader', text: [row.shipType +  ": ", { text: row.gcurrent + "x " + row[column].toString(), style: 'ship'}]});
 				}
 				
 			})
@@ -84,7 +88,7 @@ function buildTableBody(data, columns) {
 			if (column == 'pts') {
 				dataRow.push({text: row[column].toString() + ' pts', style: 'pts' });
 			} else {
-				dataRow.push(row[column].toString());
+				dataRow.push({ style: 'subheader', text: [row.shipType +  ": ", { text: row.gcurrent + "x " + row[column].toString(), style: 'ship'}]});
 			}
 			
 		})
@@ -96,7 +100,7 @@ function buildTableBody(data, columns) {
 			if (column == 'pts') {
 				dataRow.push({text: row[column].toString() + ' pts', style: 'pts' });
 			} else {
-				dataRow.push(row[column].toString());
+				dataRow.push({ style: 'subheader', text: [row.shipType +  ": ", { text: row.gcurrent + "x " + row[column].toString(), style: 'ship'}]});
 			}
 			
 		})
@@ -108,7 +112,7 @@ function buildTableBody(data, columns) {
 			if (column == 'pts') {
 				dataRow.push({text: row[column].toString() + ' pts', style: 'pts' });
 			} else {
-				dataRow.push(row[column].toString());
+				dataRow.push({ style: 'subheader', text: [row.shipType +  ": ", { text: row.gcurrent + "x " + row[column].toString(), style: 'ship'}]});
 			}
 			
 		})
