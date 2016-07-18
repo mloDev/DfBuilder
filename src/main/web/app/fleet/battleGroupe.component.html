@@ -1,11 +1,22 @@
 <div class="col-md-3 shipWrapper" *ngFor="let ship of battleGroupe.lightShips">
 	<div class="ship">
 		<div class="col-md-12 fleetShip">
-			<div class="pull-right">
-				<button type="button" class="btn btn-icon-ship" (click)="clickedRemove(ship)">
-					<i class="fa fa-trash" aria-hidden="true"></i>
-				</button>			
+			<div class="col-md-8 noPadRight">
+				<button type="button" class="btn btn-icon-ship" (click)="removeShip(ship)" *ngIf="ship.gcurrent > ship.gmin">
+					<i class="fa fa-minus-square" aria-hidden="true"></i>
+				</button>
+				<span>{{ship.gcurrent}}</span>			
+				<button type="button" class="btn btn-icon-ship" (click)="addShip(ship)" *ngIf="ship.gcurrent < ship.gmax">
+					<i class="fa fa-plus-square" aria-hidden="true"></i>
+				</button>	
 			</div>
+			<div class="col-md-4 noPadRight">
+				<div class="pull-right">
+					<button type="button" class="btn btn-icon-ship" (click)="clickedRemove(ship)">
+						<i class="fa fa-trash" aria-hidden="true"></i>
+					</button>			
+				</div>
+			</div>	
 		</div>
 		<div class="col-md-12">
 			{{ship.name}}
@@ -20,11 +31,22 @@
 <div class="col-md-3 shipWrapper" *ngFor="let ship of battleGroupe.mediumShips">
 	<div class="ship">
 		<div class="col-md-12 fleetShip">
-			<div class="pull-right">
-				<button type="button" class="btn btn-icon-ship" (click)="clickedRemove(ship)">
-					<i class="fa fa-trash" aria-hidden="true"></i>
-				</button>			
+			<div class="col-md-8 noPadRight">
+				<button type="button" class="btn btn-icon-ship" (click)="removeShip(ship)" *ngIf="ship.gcurrent > ship.gmin">
+					<i class="fa fa-minus-square" aria-hidden="true"></i>
+				</button>
+				<span>{{ship.gcurrent}}</span>			
+				<button type="button" class="btn btn-icon-ship" (click)="addShip(ship)" *ngIf="ship.gcurrent < ship.gmax">
+					<i class="fa fa-plus-square" aria-hidden="true"></i>
+				</button>	
 			</div>
+			<div class="col-md-4 noPadRight">
+				<div class="pull-right">
+					<button type="button" class="btn btn-icon-ship" (click)="clickedRemove(ship)">
+						<i class="fa fa-trash" aria-hidden="true"></i>
+					</button>			
+				</div>
+			</div>	
 		</div>
 		<div class="col-md-12">
 			{{ship.name}}
@@ -39,11 +61,22 @@
 <div class="col-md-3 shipWrapper" *ngFor="let ship of battleGroupe.heavyShips">
 	<div class="ship">
 		<div class="col-md-12 fleetShip">
-			<div class="pull-right">
-				<button type="button" class="btn btn-icon-ship" (click)="clickedRemove(ship)">
-						<i class="fa fa-trash" aria-hidden="true"></i>
-				</button>			
+			<div class="col-md-8 noPadRight">
+				<button type="button" class="btn btn-icon-ship" (click)="removeShip(ship)" *ngIf="ship.gcurrent > ship.gmin">
+					<i class="fa fa-minus-square" aria-hidden="true"></i>
+				</button>
+				<span>{{ship.gcurrent}}</span>			
+				<button type="button" class="btn btn-icon-ship" (click)="addShip(ship)" *ngIf="ship.gcurrent < ship.gmax">
+					<i class="fa fa-plus-square" aria-hidden="true"></i>
+				</button>	
 			</div>
+			<div class="col-md-4 noPadRight">
+				<div class="pull-right">
+					<button type="button" class="btn btn-icon-ship" (click)="clickedRemove(ship)">
+						<i class="fa fa-trash" aria-hidden="true"></i>
+					</button>			
+				</div>
+			</div>	
 		</div>
 		<div class="col-md-12">
 			{{ship.name}}
@@ -58,11 +91,22 @@
 <div class="col-md-3 shipWrapper" *ngFor="let ship of battleGroupe.superHeavyShips">
 	<div class="ship">
 		<div class="col-md-12 fleetShip">
-			<div class="pull-right">
-				<button type="button" class="btn btn-icon-ship" (click)="clickedRemove(ship)">
-					<i class="fa fa-trash" aria-hidden="true"></i>
-				</button>			
+			<div class="col-md-8 noPadRight">
+				<button type="button" class="btn btn-icon-ship" (click)="removeShip(ship)" *ngIf="ship.gcurrent > ship.gmin">
+					<i class="fa fa-minus-square" aria-hidden="true"></i>
+				</button>
+				<span>{{ship.gcurrent}}</span>			
+				<button type="button" class="btn btn-icon-ship" (click)="addShip(ship)" *ngIf="ship.gcurrent < ship.gmax">
+					<i class="fa fa-plus-square" aria-hidden="true"></i>
+				</button>	
 			</div>
+			<div class="col-md-4 noPadRight">
+				<div class="pull-right">
+					<button type="button" class="btn btn-icon-ship" (click)="clickedRemove(ship)">
+						<i class="fa fa-trash" aria-hidden="true"></i>
+					</button>			
+				</div>
+			</div>	
 		</div>
 		<div class="col-md-12">
 			{{ship.name}}

@@ -352,6 +352,9 @@ have a fixed width and height (but it's not required).
 
 .entity-list {
 	font-size: 10px;
+	
+	height: 80%;
+	overflow-y:scroll;
 }
 
 .btn-primary:hover {
@@ -508,6 +511,11 @@ have a fixed width and height (but it's not required).
 	border-style: solid;
 }
 
+
+.noPadRight {
+	padding-right: 0px !important;
+	padding-left: 10px;
+}
 /* ----------------------- DRAGULA ---------------------------------------*/
 .gu-mirror {
   position: fixed !important;

@@ -2,14 +2,18 @@ export class Ship {
   id: number;
   name: string;
   scan: number;
-  sig: number;
+  sig: string;
   thrust: number;
   hull: number;
-  a: number;
+  a: string;
   pd: number;
-  g: string;
+  gmin: number;
+  gmax: number;
+  gcurrent: number = 0;
   t: string;
   faction: string;
   pts: number;
   shipType: string;
+    
+  constructor() {};
 }
