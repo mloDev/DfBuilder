@@ -12,5 +12,10 @@ export class Fleet {
     pathfinderBattlegroupes: BattleGroupe[]  = [];
     totalPoints: number = 0;
     maxPoints: number;
+    lineCurrent: number;
+    flagCurrent: number;
+    vanguardCurrent: number;
+    pathfinderCurrent: number;
+    
     constructor() {};
 }

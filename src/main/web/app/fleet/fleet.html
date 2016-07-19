@@ -59,17 +59,17 @@
 				</div>
 				<div class="col-md-6" *ngIf="isFleet">
 					<div class="col-md-12" *ngIf="fleet.gameSize.lineSize > 0">
-						<div class="col-md-12">
-							<div class="col-md-8">
+						<div class="col-md-12 noPadding">
+							<div class="col-md-10 noPadding">
 								<span>Linegruppen der Flotte</span>
-							</div>
-							<div class="col-md-2">
 								<button type="button" class="btn btn-icon" (click)="onClick('addLine', $event)">
 									<i class="fa fa-plus-square" aria-hidden="true"></i>
 								</button>
 							</div>
 							<div class="col-md-2">
-								<span>{{fleet.lineBattlegroupes.length}}/{{fleet.gameSize.lineSize}}</span>					
+								<div class="pull-right">
+									<span>{{fleet.lineBattlegroupes.length}}/{{fleet.gameSize.lineSize}}</span>	
+								</div>					
 							</div>					
 						</div>
 							<div ([ngModel])="battleLines" class="col-md-12 shipRow" *ngFor="let battleGroupe of fleet.lineBattlegroupes">
@@ -77,17 +77,17 @@
 							</div>
 					</div>
 					<div class="col-md-12" *ngIf="fleet.gameSize.pathfinderSize > 0">
-						<div class="col-md-12">
-							<div class="col-md-8">
+						<div class="col-md-12 noPadding">
+							<div class="col-md-10 noPadding">
 								<span>Pathfindergruppen der Flotte</span>
-							</div>
-							<div class="col-md-2">
 								<button type="button" class="btn btn-icon" (click)="onClick('addPathfinder', $event)">
 									<i class="fa fa-plus-square" aria-hidden="true"></i>
 								</button>
 							</div>
 							<div class="col-md-2">
-								<span>{{fleet.pathfinderBattlegroupes.length}}/{{gameSize.pathfinderSize}}</span>				
+								<div class="pull-right">
+									<span>{{fleet.pathfinderBattlegroupes.length}}/{{gameSize.pathfinderSize}}</span>
+								</div>				
 							</div>					
 						</div>
 						<div ([ngModel])="battlePathfinders" class="col-md-12 shipRow" *ngFor="let battleGroupe of fleet.pathfinderBattlegroupes">
@@ -97,17 +97,17 @@
 				</div>
 				<div class="col-md-6" *ngIf="isFleet">
 					<div class="col-md-12" *ngIf="fleet.gameSize.vanguardSize > 0">
-						<div class="col-md-12">
-							<div class="col-md-8">
+						<div class="col-md-12 noPadding">
+							<div class="col-md-10 noPadding">
 								<span>Vanguardgruppen der Flotte</span>
-							</div>
-							<div class="col-md-2">
 								<button type="button" class="btn btn-icon" (click)="onClick('addVanguard', $event)">
 									<i class="fa fa-plus-square" aria-hidden="true"></i>
 								</button>
 							</div>
 							<div class="col-md-2">
-								<span>{{fleet.vanguardBattlegroupes.length}}/{{gameSize.vanguardSize}}</span>				
+								<div class="pull-right">
+									<span>{{fleet.vanguardBattlegroupes.length}}/{{gameSize.vanguardSize}}</span>
+								</div>				
 							</div>					
 						</div>
 						<div ([ngModel])="battleVanguards" class="col-md-12 shipRow" *ngFor="let battleGroupe of fleet.vanguardBattlegroupes">
@@ -115,19 +115,18 @@
 						</div>
 					</div>
 					<div class="col-md-12" *ngIf="fleet.gameSize.flagSize > 0">
-						<div class="col-md-12">
-							<div class="col-md-8">
+						<div class="col-md-12 noPadding">
+							<div class="col-md-10 noPadding">
 								<span>Flaggruppen der Flotte</span>
-							</div>
-							<div class="col-md-2">
 								<button type="button" class="btn btn-icon" (click)="onClick('addFlag', $event)">
 									<i class="fa fa-plus-square" aria-hidden="true"></i>
 								</button>
 							</div>
 							<div class="col-md-2">
-								<span>{{fleet.flagBattlegroupes.length}}/{{gameSize.flagSize}}</span>				
-							</div>					
-						</div>
+								<div class="pull-right"> 
+									<span>{{fleet.flagBattlegroupes.length}}/{{gameSize.flagSize}}</span>	
+								</div>			
+							</div>
 						<div ([ngModel])="battleFlags" class="col-md-12 shipRow" *ngFor="let battleGroupe of fleet.flagBattlegroupes">
 							<battleGroupeComponent [fleet]="fleet" [battleGroupe]="battleGroupe"></battleGroupeComponent>
 						</div>
@@ -152,7 +151,7 @@
 					<faction-selector [(selected)]="faction" (select)="onFactionSelected($event)"></faction-selector>
 				</div>
 				<div class="col-md-4">
-				
+					<a href="#" tooltipPlacement="left" tooltip="On the Left!">left</a>
 				</div>
 			</div>
         </modal-body>

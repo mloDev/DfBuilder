@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, Injectable } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewChild, Injectable } from '@angular/core';
 
 import {CORE_DIRECTIVES} from '@angular/common';
 import {ROUTER_DIRECTIVES} from '@angular/router';
@@ -9,6 +9,7 @@ import { ShipList } from "../ship/ship.list";
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { BattleTypePipe } from '../pipes/battleType-pipe';
 import { NgForNumber } from "../pipes/ngForNumber-pipe";
+import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 
 import { BattleGroupe } from "../model/battleGroupe";
 import { BattleGroupeType } from "../model/battleGroupeType";
@@ -29,8 +30,9 @@ declare var buildPdf: any;
     selector: 'fleet',
     pipes: [ BattleTypePipe, NgForNumber],
     templateUrl: 'app/fleet/fleet.html',
-    directives: [ DND_DIRECTIVES, MODAL_DIRECTIVES, CORE_DIRECTIVES, ROUTER_DIRECTIVES, ShipList, GameSizeSelector, FactionSelector, BattleGroupeComponent],
-    providers: [ BattleGroupeService, FleetService, BBCodeService ]
+    directives: [ TOOLTIP_DIRECTIVES, DND_DIRECTIVES, MODAL_DIRECTIVES, CORE_DIRECTIVES, ROUTER_DIRECTIVES, ShipList, GameSizeSelector, FactionSelector, BattleGroupeComponent],
+    providers: [ BattleGroupeService, FleetService, BBCodeService ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 
 })
 
@@ -70,32 +72,32 @@ export class FleetComponent {
     
     onClick(input, $event) {
         if (input === "addLine") {
-            if (this.gameSize.lineMin < this.gameSize.lineSize) {
+            if (this.fleet.lineCurrent < this.gameSize.lineSize) {
                 var battleGroupeLine = new BattleGroupe();
                 battleGroupeLine.battleGroupeType = this.battleLine;
                 this.fleet.lineBattlegroupes.push(battleGroupeLine);
-                this.gameSize.lineMin++;
+                this.fleet.lineCurrent++;
             }
         } else if (input === "addVanguard") {
-            if (this.gameSize.vanguardMin < this.gameSize.vanguardSize) {
+            if (this.fleet.vanguardCurrent < this.gameSize.vanguardSize) {
                 var battleGroupeVanguard = new BattleGroupe();
                 battleGroupeVanguard.battleGroupeType = this.battleVanguard;
                 this.fleet.vanguardBattlegroupes.push(battleGroupeVanguard);
-                this.gameSize.vanguardMin++;
+                this.fleet.vanguardCurrent++;
             }
         } else if (input === "addFlag") {
-            if (this.gameSize.flagMin < this.gameSize.flagSize) { 
+            if (this.fleet.flagCurrent < this.gameSize.flagSize) { 
                 var battleGroupeFlag = new BattleGroupe();
                 battleGroupeFlag.battleGroupeType = this.battleFlag;
                 this.fleet.flagBattlegroupes.push(battleGroupeFlag);
-                this.gameSize.flagMin++;
+                this.fleet.flagCurrent++;
             }
         } else if (input === "addPathfinder") {
-            if (this.gameSize.pathfinderMin < this.gameSize.pathfinderSize) {
+            if (this.fleet.pathfinderCurrent < this.gameSize.pathfinderSize) {
                 var battleGroupePathfinder = new BattleGroupe();
                 battleGroupePathfinder.battleGroupeType = this.battlePathfinder;
                 this.fleet.pathfinderBattlegroupes.push(battleGroupePathfinder);
-                this.gameSize.pathfinderMin++;
+                this.fleet.pathfinderCurrent++;
             }
         }
     }
@@ -146,7 +148,12 @@ export class FleetComponent {
                 battleGroupeFlag.battleGroupeType = this.battleFlag;
                 this.fleet.flagBattlegroupes.push(battleGroupeFlag);    
             }    
-        }   
+        } 
+        this.fleet.lineCurrent = this.gameSize.lineMin;
+        this.fleet.flagCurrent = this.gameSize.flagMin;
+        this.fleet.vanguardCurrent = this.gameSize.vanguardMin;
+        this.fleet.pathfinderCurrent = this.gameSize.pathfinderMin;
+        
     }
     
     loadBattleGroupeTypes() {

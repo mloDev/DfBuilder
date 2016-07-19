@@ -1,120 +1,129 @@
-<div class="col-md-3 shipWrapper" *ngFor="let ship of battleGroupe.lightShips">
-	<div class="ship">
-		<div class="col-md-12 fleetShip">
-			<div class="col-md-8 noPadRight">
-				<button type="button" class="btn btn-icon-ship" (click)="removeShip(ship)" *ngIf="ship.gcurrent > ship.gmin">
-					<i class="fa fa-minus-square" aria-hidden="true"></i>
-				</button>
-				<span>{{ship.gcurrent}}</span>			
-				<button type="button" class="btn btn-icon-ship" (click)="addShip(ship)" *ngIf="ship.gcurrent < ship.gmax">
-					<i class="fa fa-plus-square" aria-hidden="true"></i>
-				</button>	
-			</div>
-			<div class="col-md-4 noPadRight">
-				<div class="pull-right">
-					<button type="button" class="btn btn-icon-ship" (click)="clickedRemove(ship)">
-						<i class="fa fa-trash" aria-hidden="true"></i>
-					</button>			
+<div class="col-md-12 battleGroupHeader">
+	<div class="pull-right">
+		<button type="button" class="btn btn-icon-ship" (click)="removeBattleGroupe()">
+			<i class="fa fa-minus-square" aria-hidden="true"></i>
+		</button>
+	</div>
+</div>
+<div class="col-md-12 battleGroupContainer">	
+	<div class="col-md-3 shipWrapper" *ngFor="let ship of battleGroupe.lightShips">
+		<div class="ship" (mouseover)="over(ship)">
+			<div class="col-md-12 fleetShip">
+				<div class="col-md-8 noPadRight">
+					<button type="button" class="btn btn-icon-ship" (click)="removeShip(ship)" *ngIf="ship.gcurrent > ship.gmin">
+						<i class="fa fa-minus-square" aria-hidden="true"></i>
+					</button>
+					<span>{{ship.gcurrent}}</span>			
+					<button type="button" class="btn btn-icon-ship" (click)="addShip(ship)" *ngIf="ship.gcurrent < ship.gmax">
+						<i class="fa fa-plus-square" aria-hidden="true"></i>
+					</button>	
 				</div>
-			</div>	
-		</div>
-		<div class="col-md-12">
-			{{ship.name}}
-		</div>
-	</div>
-</div>
-<div dnd-droppable [dropZones]="['zoneLight']" (onDropSuccess)="transferDataSuccess($event)" class="col-md-3 shipWrapper" *ngIf="battleGroupe.lightShips.length < battleGroupe.battleGroupeType.lightShipSize && maxShips < 4">
-	<div class="ship shipAdd">
-		<i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>
-	</div>
-</div>
-<div class="col-md-3 shipWrapper" *ngFor="let ship of battleGroupe.mediumShips">
-	<div class="ship">
-		<div class="col-md-12 fleetShip">
-			<div class="col-md-8 noPadRight">
-				<button type="button" class="btn btn-icon-ship" (click)="removeShip(ship)" *ngIf="ship.gcurrent > ship.gmin">
-					<i class="fa fa-minus-square" aria-hidden="true"></i>
-				</button>
-				<span>{{ship.gcurrent}}</span>			
-				<button type="button" class="btn btn-icon-ship" (click)="addShip(ship)" *ngIf="ship.gcurrent < ship.gmax">
-					<i class="fa fa-plus-square" aria-hidden="true"></i>
-				</button>	
+				<div class="col-md-4 noPadRight">
+					<div class="pull-right">
+						<button type="button" class="btn btn-icon-ship" (click)="clickedRemove(ship)">
+							<i class="fa fa-trash" aria-hidden="true"></i>
+						</button>			
+					</div>
+				</div>	
 			</div>
-			<div class="col-md-4 noPadRight">
-				<div class="pull-right">
-					<button type="button" class="btn btn-icon-ship" (click)="clickedRemove(ship)">
-						<i class="fa fa-trash" aria-hidden="true"></i>
-					</button>			
-				</div>
-			</div>	
-		</div>
-		<div class="col-md-12">
-			{{ship.name}}
-		</div>
-	</div>
-</div>
-<div dnd-droppable [dropZones]="['zoneMedium']" (onDropSuccess)="transferDataSuccess($event)" class="col-md-3 shipWrapper" *ngIf="battleGroupe.mediumShips.length < battleGroupe.battleGroupeType.mediumShipSize && maxShips < 4">
-	<div class="ship shipAdd">
-		<i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
-	</div>
-</div>
-<div class="col-md-3 shipWrapper" *ngFor="let ship of battleGroupe.heavyShips">
-	<div class="ship">
-		<div class="col-md-12 fleetShip">
-			<div class="col-md-8 noPadRight">
-				<button type="button" class="btn btn-icon-ship" (click)="removeShip(ship)" *ngIf="ship.gcurrent > ship.gmin">
-					<i class="fa fa-minus-square" aria-hidden="true"></i>
-				</button>
-				<span>{{ship.gcurrent}}</span>			
-				<button type="button" class="btn btn-icon-ship" (click)="addShip(ship)" *ngIf="ship.gcurrent < ship.gmax">
-					<i class="fa fa-plus-square" aria-hidden="true"></i>
-				</button>	
+			<div class="col-md-12">
+				{{ship.name}}
 			</div>
-			<div class="col-md-4 noPadRight">
-				<div class="pull-right">
-					<button type="button" class="btn btn-icon-ship" (click)="clickedRemove(ship)">
-						<i class="fa fa-trash" aria-hidden="true"></i>
-					</button>			
+		</div>
+	</div>
+	<div dnd-droppable [dropZones]="['zoneLight']" (onDropSuccess)="transferDataSuccess($event)" class="col-md-3 shipWrapper" *ngIf="battleGroupe.lightShips.length < battleGroupe.battleGroupeType.lightShipSize && maxShips < 4">
+		<div class="ship shipAdd">
+			<i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>
+		</div>
+	</div>
+	<div class="col-md-3 shipWrapper" *ngFor="let ship of battleGroupe.mediumShips">
+		<div class="ship">
+			<div class="col-md-12 fleetShip">
+				<div class="col-md-8 noPadRight">
+					<button type="button" class="btn btn-icon-ship" (click)="removeShip(ship)" *ngIf="ship.gcurrent > ship.gmin">
+						<i class="fa fa-minus-square" aria-hidden="true"></i>
+					</button>
+					<span>{{ship.gcurrent}}</span>			
+					<button type="button" class="btn btn-icon-ship" (click)="addShip(ship)" *ngIf="ship.gcurrent < ship.gmax">
+						<i class="fa fa-plus-square" aria-hidden="true"></i>
+					</button>	
 				</div>
-			</div>	
-		</div>
-		<div class="col-md-12">
-			{{ship.name}}
-		</div>
-	</div>
-</div>
-<div dnd-droppable [dropZones]="['zoneHeavy']" (onDropSuccess)="transferDataSuccess($event)" class="col-md-3 shipWrapper" *ngIf="battleGroupe.heavyShips.length < battleGroupe.battleGroupeType.heavyShipSize && maxShips < 4">
-	<div class="ship shipAdd">
-		<i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
-	</div>
-</div>
-<div class="col-md-3 shipWrapper" *ngFor="let ship of battleGroupe.superHeavyShips">
-	<div class="ship">
-		<div class="col-md-12 fleetShip">
-			<div class="col-md-8 noPadRight">
-				<button type="button" class="btn btn-icon-ship" (click)="removeShip(ship)" *ngIf="ship.gcurrent > ship.gmin">
-					<i class="fa fa-minus-square" aria-hidden="true"></i>
-				</button>
-				<span>{{ship.gcurrent}}</span>			
-				<button type="button" class="btn btn-icon-ship" (click)="addShip(ship)" *ngIf="ship.gcurrent < ship.gmax">
-					<i class="fa fa-plus-square" aria-hidden="true"></i>
-				</button>	
+				<div class="col-md-4 noPadRight">
+					<div class="pull-right">
+						<button type="button" class="btn btn-icon-ship" (click)="clickedRemove(ship)">
+							<i class="fa fa-trash" aria-hidden="true"></i>
+						</button>			
+					</div>
+				</div>	
 			</div>
-			<div class="col-md-4 noPadRight">
-				<div class="pull-right">
-					<button type="button" class="btn btn-icon-ship" (click)="clickedRemove(ship)">
-						<i class="fa fa-trash" aria-hidden="true"></i>
-					</button>			
-				</div>
-			</div>	
-		</div>
-		<div class="col-md-12">
-			{{ship.name}}
+			<div class="col-md-12">
+				{{ship.name}}
+			</div>
 		</div>
 	</div>
-</div>
-<div dnd-droppable [dropZones]="['zoneSuperHeavy']" (onDropSuccess)="transferDataSuccess($event)" class="col-md-3 shipWrapper" *ngIf="battleGroupe.superHeavyShips.length < battleGroupe.battleGroupeType.superHeavyShipSize && maxShips < 4">
-	<div class="ship shipAdd">
-		<i class="fa fa-plus-circle fa-4x" aria-hidden="true"></i>
+	<div dnd-droppable [dropZones]="['zoneMedium']" (onDropSuccess)="transferDataSuccess($event)" class="col-md-3 shipWrapper" *ngIf="battleGroupe.mediumShips.length < battleGroupe.battleGroupeType.mediumShipSize && maxShips < 4">
+		<div class="ship shipAdd">
+			<i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+		</div>
+	</div>
+	<div class="col-md-3 shipWrapper" *ngFor="let ship of battleGroupe.heavyShips">
+		<div class="ship">
+			<div class="col-md-12 fleetShip">
+				<div class="col-md-8 noPadRight">
+					<button type="button" class="btn btn-icon-ship" (click)="removeShip(ship)" *ngIf="ship.gcurrent > ship.gmin">
+						<i class="fa fa-minus-square" aria-hidden="true"></i>
+					</button>
+					<span>{{ship.gcurrent}}</span>			
+					<button type="button" class="btn btn-icon-ship" (click)="addShip(ship)" *ngIf="ship.gcurrent < ship.gmax">
+						<i class="fa fa-plus-square" aria-hidden="true"></i>
+					</button>	
+				</div>
+				<div class="col-md-4 noPadRight">
+					<div class="pull-right">
+						<button type="button" class="btn btn-icon-ship" (click)="clickedRemove(ship)">
+							<i class="fa fa-trash" aria-hidden="true"></i>
+						</button>			
+					</div>
+				</div>	
+			</div>
+			<div class="col-md-12">
+				{{ship.name}}
+			</div>
+		</div>
+	</div>
+	<div dnd-droppable [dropZones]="['zoneHeavy']" (onDropSuccess)="transferDataSuccess($event)" class="col-md-3 shipWrapper" *ngIf="battleGroupe.heavyShips.length < battleGroupe.battleGroupeType.heavyShipSize && maxShips < 4">
+		<div class="ship shipAdd">
+			<i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
+		</div>
+	</div>
+	<div class="col-md-3 shipWrapper" *ngFor="let ship of battleGroupe.superHeavyShips">
+		<div class="ship">
+			<div class="col-md-12 fleetShip">
+				<div class="col-md-8 noPadRight">
+					<button type="button" class="btn btn-icon-ship" (click)="removeShip(ship)" *ngIf="ship.gcurrent > ship.gmin">
+						<i class="fa fa-minus-square" aria-hidden="true"></i>
+					</button>
+					<span>{{ship.gcurrent}}</span>			
+					<button type="button" class="btn btn-icon-ship" (click)="addShip(ship)" *ngIf="ship.gcurrent < ship.gmax">
+						<i class="fa fa-plus-square" aria-hidden="true"></i>
+					</button>	
+				</div>
+				<div class="col-md-4 noPadRight">
+					<div class="pull-right">
+						<button type="button" class="btn btn-icon-ship" (click)="clickedRemove(ship)">
+							<i class="fa fa-trash" aria-hidden="true"></i>
+						</button>			
+					</div>
+				</div>	
+			</div>
+			<div class="col-md-12">
+				{{ship.name}}
+			</div>
+		</div>
+	</div>
+	<div dnd-droppable [dropZones]="['zoneSuperHeavy']" (onDropSuccess)="transferDataSuccess($event)" class="col-md-3 shipWrapper" *ngIf="battleGroupe.superHeavyShips.length < battleGroupe.battleGroupeType.superHeavyShipSize && maxShips < 4">
+		<div class="ship shipAdd">
+			<i class="fa fa-plus-circle fa-4x" aria-hidden="true"></i>
+		</div>
 	</div>
 </div>
