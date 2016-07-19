@@ -127,6 +127,39 @@ export class BattleGroupeComponent {
         this.calcMaxShips();
     }
     
+    over(ship) {
+        console.log(ship);    
+    }
+    
+    removeBattleGroupe() {        
+        if (this.battleGroupe.battleGroupeType.battleType === "LINE") {
+            this.index = this.fleet.lineBattlegroupes.indexOf(this.battleGroupe, 0);
+                if (this.index > -1) {
+                    this.fleet.lineBattlegroupes.splice(this.index, 1);
+                    this.fleet.lineCurrent--;
+                }
+        } else if (this.battleGroupe.battleGroupeType.battleType === "FLAG") {
+            this.index = this.fleet.flagBattlegroupes.indexOf(this.battleGroupe, 0);
+                if (this.index > -1) {
+                    this.fleet.flagBattlegroupes.splice(this.index, 1);
+                    this.fleet.flagCurrent--;
+                }
+        } else if (this.battleGroupe.battleGroupeType.battleType === "VANGUARD") {
+            this.index = this.fleet.vanguardBattlegroupes.indexOf(this.battleGroupe, 0);
+                if (this.index > -1) {
+                    this.fleet.vanguardBattlegroupes.splice(this.index, 1);
+                    this.fleet.vanguardCurrent--;
+                }
+        } else if (this.battleGroupe.battleGroupeType.battleType === "PATHFINDER") {
+            this.index = this.fleet.pathfinderBattlegroupes.indexOf(this.battleGroupe, 0);
+                if (this.index > -1) {
+                    this.fleet.pathfinderBattlegroupes.splice(this.index, 1);
+                    this.fleet.pathfinderCurrent--;
+                }
+        }
+        this.fleet.totalPoints = this.fleet.totalPoints - this.battleGroupe.points;
+    }
+    
     calcMaxShips() {
         this.maxShips = this.battleGroupe.lightShips.length + this.battleGroupe.mediumShips.length + this.battleGroupe.heavyShips.length + this.battleGroupe.superHeavyShips.length;
     }
