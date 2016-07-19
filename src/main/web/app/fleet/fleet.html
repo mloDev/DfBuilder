@@ -18,7 +18,7 @@
 						<div class="col-md-12">
 							<form class = "form-inline" role = "form">
 								<div class = "form-group">
-									<input required [(ngModel)]="fleet.name" type="text" placeholder="Standart Fleet &#xf040; " class="form-control fleetTitle" id="title">
+									<input required [(ngModel)]="fleet.name" type="text" placeholder="Standart Fleet &#xf040; " class="form-control fleetTitle" id="title" tooltipPlacement="top" tooltip="Set fleet title.">
 								</div>
 							</form>
 						</div>
@@ -26,32 +26,32 @@
 							<form class = "form-inline" role = "form">
 								<div class = "form-group">
 									<label class="pointsLabel" for="points">{{fleet.totalPoints}} /</label>
-									<input required [(ngModel)]="fleet.maxPoints" type="text" placeholder="max points &#xf040;" class="form-control fleetTitle" id="points">
+									<input required [(ngModel)]="fleet.maxPoints" type="text" placeholder="max points &#xf040;" class="form-control fleetTitle" id="points" tooltipPlacement="top" tooltip="Set fleet max. points.">
 								</div>
 							</form>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="pull-right">
-							<button type="button" class="btn btn-icon" aria-hidden="true" (click)="modal.open()">
+							<button type="button" class="btn btn-icon" aria-hidden="true" (click)="modal.open()" tooltipPlacement="top" tooltip="Create new fleet.">
 								<i class="fa fa-file" aria-hidden="true"></i>
 							</button>
-							<button type="button" class="btn btn-icon" (click)="onSaveFleet()">
+							<button type="button" class="btn btn-icon" (click)="onSaveFleet()" tooltipPlacement="top" tooltip="Save fleet to cloud.">
 								<i class="fa fa-floppy-o" aria-hidden="true"></i>
 							</button>
-							<button type="button" class="btn btn-icon" (click)="onOpenPdf()">
+							<button type="button" class="btn btn-icon" (click)="onOpenPdf()" tooltipPlacement="top" tooltip="Generate PDF">
 								<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 							</button>
-							<button type="button" class="btn btn-icon disabled" (click)="onSaveFleet()">
+							<button type="button" class="btn btn-icon disabled" (click)="onSaveFleet()" tooltipPlacement="top" tooltip="Load fleet from cloud.">
 								<i class="fa fa-folder-open" aria-hidden="true"></i>
 							</button>
-							<button type="button" class="btn btn-icon" (click)="onBBSave(); modalBBCode.open()">
+							<button type="button" class="btn btn-icon" (click)="onBBSave(); modalBBCode.open()" tooltipPlacement="top" tooltip="Generate BBCode for fleet.">
 								<i class="fa fa-clipboard" aria-hidden="true"></i>
 							</button>
-							<button type="button" class="btn btn-icon" (click)="onExport()">
+							<button type="button" class="btn btn-icon" (click)="onExport()" tooltipPlacement="top" tooltip="Download fleet as file.">
 								<i class="fa fa-download" aria-hidden="true"></i>
 							</button>
-							<button type="button" class="btn btn-icon disabled" (click)="modal.open()">
+							<button type="button" class="btn btn-icon disabled" (click)="modal.open()" tooltipPlacement="top" tooltip="Upload fleet file.">
 								<i class="fa fa-upload" aria-hidden="true"></i>
 							</button>
 						</div>
@@ -62,7 +62,7 @@
 						<div class="col-md-12 noPadding">
 							<div class="col-md-10 noPadding">
 								<span>Linegruppen der Flotte</span>
-								<button type="button" class="btn btn-icon" (click)="onClick('addLine', $event)">
+								<button type="button" class="btn btn-icon" (click)="onClick('addLine', $event)" tooltipPlacement="top" tooltip="Add line group.">
 									<i class="fa fa-plus-square" aria-hidden="true"></i>
 								</button>
 							</div>
@@ -80,7 +80,7 @@
 						<div class="col-md-12 noPadding">
 							<div class="col-md-10 noPadding">
 								<span>Pathfindergruppen der Flotte</span>
-								<button type="button" class="btn btn-icon" (click)="onClick('addPathfinder', $event)">
+								<button type="button" class="btn btn-icon" (click)="onClick('addPathfinder', $event)" tooltipPlacement="top" tooltip="Add pathfinder group.">
 									<i class="fa fa-plus-square" aria-hidden="true"></i>
 								</button>
 							</div>
@@ -100,7 +100,7 @@
 						<div class="col-md-12 noPadding">
 							<div class="col-md-10 noPadding">
 								<span>Vanguardgruppen der Flotte</span>
-								<button type="button" class="btn btn-icon" (click)="onClick('addVanguard', $event)">
+								<button type="button" class="btn btn-icon" (click)="onClick('addVanguard', $event)" tooltipPlacement="top" tooltip="Add vanguard group.">
 									<i class="fa fa-plus-square" aria-hidden="true"></i>
 								</button>
 							</div>
@@ -118,7 +118,7 @@
 						<div class="col-md-12 noPadding">
 							<div class="col-md-10 noPadding">
 								<span>Flaggruppen der Flotte</span>
-								<button type="button" class="btn btn-icon" (click)="onClick('addFlag', $event)">
+								<button type="button" class="btn btn-icon" (click)="onClick('addFlag', $event)" tooltipPlacement="top" tooltip="Add flag group.">
 									<i class="fa fa-plus-square" aria-hidden="true"></i>
 								</button>
 							</div>
@@ -145,13 +145,12 @@
         <modal-body>
 	        <div class="col-md-12 center-block" style="height: 200px;">
 				<div class="col-md-4">
-					<game-selector [(selected)]="gameSize" (select)="onGameSizeSelected($event)"></game-selector>
+					<game-selector [(selected)]="gameSize" (select)="onGameSizeSelected($event)" tooltipPlacement="top" tooltip="Select game size."></game-selector>
 				</div>
 				<div class="col-md-4">
-					<faction-selector [(selected)]="faction" (select)="onFactionSelected($event)"></faction-selector>
+					<faction-selector [(selected)]="faction" (select)="onFactionSelected($event)" tooltipPlacement="top" tooltip="Select faction of the fleet."></faction-selector>
 				</div>
 				<div class="col-md-4">
-					<a href="#" tooltipPlacement="left" tooltip="On the Left!">left</a>
 				</div>
 			</div>
         </modal-body>
