@@ -144,14 +144,15 @@ function createHeader(data) {
 
 function createHeaderShipDetails() {
 	return {
-		 text: data.faction, style: 'header', pageBreak:'before'
+		 text: 'Ship details', style: 'header', pageBreak:'before'
 	};
 }
 
 function shipDetails(data, value){
 	var a = [];
+	console.log(data);
 	if (value) {
-		data.forEach(function(entry) {
+		for (var ship in data) {
 			var b = {
 					margin: [0, 2, 0, 0],
 					table: {
@@ -164,7 +165,7 @@ function shipDetails(data, value){
 												table: {
 	    												body: [
 	    													[ 'Name', 'Scan', 'Sig', 'Thrust', 'A', 'PD', 'G', 'T', 'Special'],
-	    													[ entry.name, '2', '3', '1', '2', '3', '1', '2', '3']
+	    													[ ship.name, '2', '3', '1', '2', '3', '1', '2', '3']
 	    												]
 												},
 											},
@@ -190,7 +191,7 @@ function shipDetails(data, value){
 					},
 					layout: 'noBorders'};
 			a.push(b);
-		});
+		};
 		return a;
 	}
 }
