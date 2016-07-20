@@ -9,7 +9,7 @@ import { ShipList } from "../ship/ship.list";
 import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { BattleTypePipe } from '../pipes/battleType-pipe';
 import { NgForNumber } from "../pipes/ngForNumber-pipe";
-import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
+import { TOOLTIP_DIRECTIVES } from 'ng2-tooltip';
 
 import { BattleGroupe } from "../model/battleGroupe";
 import { BattleGroupeType } from "../model/battleGroupeType";

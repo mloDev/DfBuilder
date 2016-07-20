@@ -1,3 +1,7 @@
+import { Weapon } from '../model/weapon';
+import { Load } from '../model/load';
+import { Special } from '../model/special';
+
 export class Ship {
   id: number;
   name: string;
@@ -14,6 +18,10 @@ export class Ship {
   faction: string;
   pts: number;
   shipType: string;
+    
+  weapons: Weapon[];
+  specials: Special[];
+  loads: Load[];
     
   constructor() {};
 }

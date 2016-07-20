@@ -1,50 +1,94 @@
+    <modal id="myModalShipDetail" #modalShipDetail>
+        <modal-header [show-close]="true">
+            <h4 class="modal-title">Details of {{ship.name}}</h4>
+        </modal-header>
+        <modal-body>
+            <table class="table table-condensed">
+			    <thead>
+			      <tr>
+			        <th>SCAN</th>
+			        <th>SIG</th>
+			        <th>THRUST</th>
+			        <th>HULL</th>
+			        <th>A</th>
+			        <th>PD</th>
+			        <th>G</th>
+			        <th>T</th>
+			        <th>SPECIAL</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <tr>
+			        <td>{{ship.scan}}</td>
+			        <td>{{ship.sig}}</td>
+			        <td>{{ship.thrust}}"</td>
+			        <td>{{ship.hull}}</td>
+			        <td>{{ship.a}}+</td>
+			        <td>{{ship.pd}}</td>
+			        <td>{{ship.gmin}}-{{ship.gmax}}</td>
+			        <td>{{ship.t}}</td>
+			        <td><div *ngFor="let special of ship.specials">{{special.name}}</div></td>
+			      </tr>
+			    </tbody>
+			 </table>
+        
+        	<table class="table table-condensed">
+			    <thead>
+			      <tr>
+			        <th>WEAPON</th>
+			        <th>LOCK</th>
+			        <th>ATTACK</th>
+			        <th>DAMAGE</th>
+			        <th>ARC</th>
+			        <th>SPECIAL</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <tr *ngFor="let weapon of ship.weapons">
+			        <td>{{weapon.name}}</td>
+			        <td>{{weapon.lock}}+</td>
+			        <td>{{weapon.attack}}</td>
+			        <td>{{weapon.damage}}</td>
+			        <td>{{weapon.arc}}</td>
+			        <td><div *ngFor="let special of weapon.specials">{{special.name}}</div></td>
+			      </tr>
+			    </tbody>
+			 </table>
+			<table class="table table-condensed" *ngIf="ship.loads.length > 0">
+			    <thead>
+			      <tr>
+			        <th>LOAD</th>
+			        <th>LAUNCH</th>
+			        <th>SPECIAL</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <tr *ngFor="let load of ship.loads">
+			        <td>{{load.name}}</td>
+			        <td>{{load.launch}}</td>
+			        <td><div *ngFor="let special of load.specials">{{special.name}}</div></td>
+			      </tr>
+			    </tbody>
+			 </table>
+        </modal-body>
+        <modal-footer [show-default-buttons]="false">
+        </modal-footer>
+    </modal>
+ 
  <div class="row text-center">
 	<div class="col-md-12">
 		<div class="col-md-6">
 			<div>SHIP_ICON</div>
+			<div class="center-block">
+				<button type="button" class="btn btn-icon" aria-hidden="true" (click)="modalShipDetail.open()">
+					<i class="fa fa-info-circle" aria-hidden="true"></i>
+				</button>			
+			</div>
 		</div>
 		<div class="col-md-6">
 			<div>{{ship.name}}</div>
-			<div>{{ship.faction}}</div>
 			<div>{{ship.shipType}}</div>
+			<div>{{ship.pts}} pts</div>
 		</div>
 	</div>
-	<!-- <div class="col-md-12">
-		<div class="col-md-1">
-			<div class="col-md-12">SCAN</div>
-			<div class="col-md-12">{{ship.scan}}</div>
-		</div>
-		<div class="col-md-1">
-			<div class="col-md-12">SIG</div>
-			<div class="col-md-12">{{ship.sig}}</div>
-		</div>
-		<div class="col-md-1">
-			<div class="col-md-12">THRUST</div>
-			<div class="col-md-12">{{ship.thrust}}</div>
-		</div>
-		<div class="col-md-1">
-			<div class="col-md-12">HULL</div>
-			<div class="col-md-12">{{ship.hull}}</div>
-		</div>
-		<div class="col-md-1">
-			<div class="col-md-12">A</div>
-			<div class="col-md-12">{{ship.a}}</div>
-		</div>
-		<div class="col-md-1">
-			<div class="col-md-12">PD</div>
-			<div class="col-md-12">{{ship.pd}}</div>
-		</div>
-		<div class="col-md-1">
-			<div class="col-md-12">G</div>
-			<div class="col-md-12">{{ship.g}}</div>
-		</div>
-		<div class="col-md-1">
-			<div class="col-md-12">T</div>
-			<div class="col-md-12">{{ship.t}}</div>
-		</div>
-		<div class="col-md-4">
-			<div class="col-md-12">SPECIAL</div>
-			<div class="col-md-12"></div>
-		</div>
-	</div> -->
 </div>

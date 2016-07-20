@@ -39,7 +39,8 @@
     "dragula":"3.7.1",
     "ng2-dragula": "1.1.9",
     "ng2-dnd": "1.8.2",
-    "ng2-bs3-modal": "0.6.1"
+    "ng2-bs3-modal": "0.6.1",
+    "ng2-tooltip": "0.0.2"
 
   },
   "devDependencies": {
