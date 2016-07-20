@@ -15,6 +15,26 @@ header {
   margin-top: -15px;
 }
 
+.table th {
+	padding: .1rem .3rem;
+	border-top: 0;
+}
+.table td {
+    border-style: solid;
+    border-width: 0px 0px 1px 0px;
+    border-color: #26bdbf;
+    padding: .1rem .3rem;
+	font-size: .9rem;
+}
+
+.table thead th {
+	background-color: rgba(38, 189, 191, 0.3);
+	color: #ffffff;
+    border-style: solid;
+    border-width: 0px 0px 0px 0px;
+    border-color: #26bdbf;
+}
+
 img{
   width:100%;
   max-width: 100%;
@@ -23,6 +43,11 @@ img{
 .card-img-top{
   width:100%;
   height:auto;
+}
+
+.shipTooltip {
+	max-width: 350px;
+	width: 500px;
 }
 
 #site-title {

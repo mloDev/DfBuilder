@@ -43,6 +43,8 @@ gulp.task('libcopy', function() {
 		.pipe(gulp.dest(staticDir + 'js/lib/atoa'));
 	gulp.src(['./node_modules/ng2-dnd/**/*'])
 		.pipe(gulp.dest(staticDir + 'js/lib/ng2-dnd'));
+	gulp.src(['./node_modules/ng2-tooltip/**/*'])
+		.pipe(gulp.dest(staticDir + 'js/lib/ng2-tooltip'));
 
 
     // copy @angular dependencies
