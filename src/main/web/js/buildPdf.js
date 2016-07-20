@@ -1,5 +1,7 @@
-function buildPdf(value) {
+function buildPdf(value, ships, printShipDetails) {
     var pdfContent = value;
+    var printShips = ships;
+    console.log(printShips);
     var dd = {
     		footer: 
                 function(currentPage, pageCount) { return [
@@ -23,7 +25,9 @@ function buildPdf(value) {
                     table(pdfContent.lineBattlegroupes, ['name', 'pts']),
                     table(pdfContent.pathfinderBattlegroupes, ['name', 'pts']),
                     table(pdfContent.vanguardBattlegroupes, ['name', 'pts']),
-                    table(pdfContent.flagBattlegroupes, ['name', 'pts'])
+                    table(pdfContent.flagBattlegroupes, ['name', 'pts']),
+                    createHeaderShipDetails(),
+                    shipDetails(printShips, printShipDetails)
             ],
         	styles: {
         		header: {
@@ -138,7 +142,58 @@ function createHeader(data) {
 	};
 }
 
+function createHeaderShipDetails() {
+	return {
+		 text: data.faction, style: 'header', pageBreak:'before'
+	};
+}
 
+function shipDetails(data, value){
+	var a = [];
+	if (value) {
+		data.forEach(function(entry) {
+			var b = {
+					margin: [0, 2, 0, 0],
+					table: {
+						body: [
+								[
+										{ text: 'shipimage'
+										},
+										[
+											{
+												table: {
+	    												body: [
+	    													[ 'Name', 'Scan', 'Sig', 'Thrust', 'A', 'PD', 'G', 'T', 'Special'],
+	    													[ entry.name, '2', '3', '1', '2', '3', '1', '2', '3']
+	    												]
+												},
+											},
+											{
+												table: {
+	    												body: [
+	    													[ 'Type', 'Lock', 'Attack', 'Damage', 'Special'],
+	    													[ '1', '2', '3', '4', '5']
+	    												]
+	    											},
+											},
+											{
+												table: {
+	    												body: [
+	    													[ 'Load', 'Launch', 'Special'],
+	    													[ '1', '2', '3']
+	    												]
+	    											},
+											}
+										]
+								]
+						]
+					},
+					layout: 'noBorders'};
+			a.push(b);
+		});
+		return a;
+	}
+}
 
 
 function table(data, columns) {
