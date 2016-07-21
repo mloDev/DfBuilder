@@ -43,6 +43,9 @@ export class FleetComponent {
     fleet: Fleet;
     isFleet: any = false;
     printShipDetails = true;
+    armylist = true;
+    modelList = true;
+    shoppinglist = false;
     
     @Input() battleFlag: BattleGroupeType;
     @Input() battleLine: BattleGroupeType;
@@ -210,22 +213,110 @@ export class FleetComponent {
     }
     
     createShipList() {
-    
         for (let bat of this.fleet.lineBattlegroupes) {
+            for (let ship of bat.lightShips) {
+                    this.shipList.push(ship);  
+                }
+            for (let ship of bat.mediumShips) {
+                    this.shipList.push(ship);  
+                }
+            for (let ship of bat.heavyShips) {
+                    this.shipList.push(ship);  
+                }
+            for (let ship of bat.superHeavyShips) {
+                    this.shipList.push(ship);  
+                }
+        }
+        for (let bat of this.fleet.pathfinderBattlegroupes) {
                 for (let ship of bat.lightShips) {
+                    this.shipList.push(ship);  
+                }
+            for (let ship of bat.mediumShips) {
+                    this.shipList.push(ship);  
+                }
+            for (let ship of bat.heavyShips) {
+                    this.shipList.push(ship);  
+                }
+            for (let ship of bat.superHeavyShips) {
+                    this.shipList.push(ship);  
+                }
+        }
+        for (let bat of this.fleet.vanguardBattlegroupes) {
+                for (let ship of bat.lightShips) {
+                    this.shipList.push(ship);  
+                }
+            for (let ship of bat.mediumShips) {
+                    this.shipList.push(ship);  
+                }
+            for (let ship of bat.heavyShips) {
+                    this.shipList.push(ship);  
+                }
+            for (let ship of bat.superHeavyShips) {
+                    this.shipList.push(ship);  
+                }
+        }
+        for (let bat of this.fleet.flagBattlegroupes) {
+                for (let ship of bat.lightShips) {
+                    this.shipList.push(ship);  
+                }
+            for (let ship of bat.mediumShips) {
+                    this.shipList.push(ship);  
+                }
+            for (let ship of bat.heavyShips) {
+                    this.shipList.push(ship);  
+                }
+            for (let ship of bat.superHeavyShips) {
                     this.shipList.push(ship);  
                 }
         }
     }
     
+    removeDubs(values) {
+        var arr = values;
+        arr.sort( function( a, b){ return a.name - b.name; } );
+        
+        // delete all duplicates from the array
+        for( var i=0; i<arr.length-1; i++ ) {
+          if ( arr[i].name == arr[i+1].name ) {
+            delete arr[i];
+          }
+        }
+        
+        // remove the "undefined entries"
+        arr = arr.filter( function( el ){ return (typeof el !== "undefined"); } );
+        return arr;
+    }
+    
+    countShipsForList(values) {
+        console.log(values);
+        var output = [];
+        var arr = values;
+        arr.sort( function( a, b){ return a.name - b.name; } );
+        var cnt = 1;
+        var name = '';
+        for (var i = 0; i < arr.length-1; i++) {
+            if (arr[i].name == arr[i+1].name ) {
+                cnt++;
+            } else {
+                output.push({name: arr[i].name, count: cnt});
+                cnt = 1;
+            }
+        }
+        return output;    
+    }
     
     onOpenPdf() {
-        
+        var printShips = [];
+        var modelListShips = [];
+        this.shipList = [];
+        this.createShipList();
         if (this.printShipDetails) {
-            this.createShipList(); 
-            console.log(this.shipList);   
+            printShips = this.removeDubs(this.shipList);
+        } else if (this.modelList) {
+            modelListShips = this.countShipsForList(this.shipList);
         }
+        console.log(modelListShips);
         this.pdf = pdfMake;
-        this.pdf.createPdf(buildPdf(this.fleet, this.shipList, this.printShipDetails)).open();
+        this.pdf.createPdf(buildPdf(this.fleet,  printShips, this.armylist, this.printShipDetails, this.modelList, this.shoppinglist)).open();
     }
 }

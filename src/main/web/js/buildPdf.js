@@ -1,7 +1,7 @@
-function buildPdf(value, ships, printShipDetails) {
+function buildPdf(value, ships, armyList, printShipDetails, modelList, shoppingList) {
     var pdfContent = value;
     var printShips = ships;
-    console.log(printShips);
+    console.log(printShipDetails);
     var dd = {
     		footer: 
                 function(currentPage, pageCount) { return [
@@ -20,14 +20,25 @@ function buildPdf(value, ships, printShipDetails) {
         			}];
         		},
             content: [
-                    createHeader(pdfContent),
-                    {canvas: [{ type: 'line', x1: 0, y1: 5, x2: 595-2*60, y2: 5, lineWidth: 1, style: 'hrcanvas' }]},
-                    table(pdfContent.lineBattlegroupes, ['name', 'pts']),
-                    table(pdfContent.pathfinderBattlegroupes, ['name', 'pts']),
-                    table(pdfContent.vanguardBattlegroupes, ['name', 'pts']),
-                    table(pdfContent.flagBattlegroupes, ['name', 'pts']),
-                    createHeaderShipDetails(),
-                    shipDetails(printShips, printShipDetails)
+                    createHeader(pdfContent, armyList),
+                    addCanvas(armyList, armyList),
+                    table(pdfContent.lineBattlegroupes, ['name', 'pts'], armyList),
+                    table(pdfContent.pathfinderBattlegroupes, ['name', 'pts'], armyList),
+                    table(pdfContent.vanguardBattlegroupes, ['name', 'pts'], armyList),
+                    table(pdfContent.flagBattlegroupes, ['name', 'pts'], armyList),
+                    addPageBreak(armyList),
+                    //stats of fleet ships
+                    createHeaderShipDetails(pdfContent, printShipDetails),
+                    addCanvas(printShipDetails),
+                    shipDetails(printShips, printShipDetails),
+                    addPageBreak(printShipDetails),
+                    //add model list if modelList
+                    createHeaderModelList(pdfContent, modelList),
+                    addCanvas(modelList),
+                    addPageBreak(modelList),
+                    //add shopping list if shoppinList
+                    createHeaderShipDetails(pdfContent, shoppingList),
+                    addCanvas(shoppingList)
             ],
         	styles: {
         		header: {
@@ -72,7 +83,6 @@ function buildPdf(value, ships, printShipDetails) {
 	     		fontSize: 10,
 	     	}
         }
-    console.log(dd);
     return dd;
 }
 
@@ -129,32 +139,83 @@ function buildTableBody(data, columns) {
 	return body;
 }
 
-function createHeader(data) {
-	return                     {
-		table: {
-			widths: [50,'*', 200],
-			body: [
-					[ { text: data.faction, style: 'header'}, { text: data.name, style: 'header'}, { text: data.gameSize.name, style: 'headerRight' }],
-					[ '', '', { text: data.totalPoints + '/' + data.maxPoints + ' PTS', style: 'headerPts' }]
-			]
-		},
-		layout: 'noBorders'
-	};
+function createHeader(data, value) {
+	var header = {
+			table: {
+				widths: [50,'*', 200],
+				body: [
+						[ { text: data.faction, style: 'header'}, { text: data.name, style: 'header'}, { text: data.gameSize.name, style: 'headerRight' } ],
+						[ '', '', { text: data.totalPoints + '/' + data.maxPoints + ' PTS', style: 'headerPts' } ]
+				]
+			},
+			layout: 'noBorders'
+		};
+	if(value) {
+		return header;
+	} else {
+		return [];
+	}
+	
 }
 
-function createHeaderShipDetails() {
-	return {
-		 text: 'Ship details', style: 'header', pageBreak:'before'
-	};
+function createHeaderShipDetails(data, value) {
+	var returnHeader = {
+			table: {
+				widths: [50, '*', 200],
+				body: [
+						[ { text: data.faction, style: 'header'}, { text: data.name, style: 'header'}, { text: "REFERENCE SHEET", style: 'headerRight' } ]
+				]
+			},
+			layout: 'noBorders'
+		};
+	if (value) {
+		return returnHeader;
+	} else {
+		return [];
+	}
+}
+
+function createHeaderModelList(data, value) {
+	var returnHeader = {
+			table: {
+				widths: [50, '*', 200],
+				body: [
+						[ { text: data.faction, style: 'header'}, { text: data.name, style: 'header'}, { text: "MODEL LIST", style: 'headerRight' } ]
+				]
+			},
+			layout: 'noBorders'
+		};
+	if (value) {
+		return returnHeader;
+	} else {
+		return [];
+	}
+}
+
+function addCanvas(value) {
+	var canvas = {canvas: [{ type: 'line', x1: 0, y1: 5, x2: 595-2*60, y2: 5, lineWidth: 1, style: 'hrcanvas' }]};
+	if (value) {
+		return canvas;
+	} else {
+		return [];
+	}
+}
+
+function addPageBreak(value) {
+	var pageBreak = { text: '', pageBreak: 'after'};
+	if (value) {
+		return pageBreak;
+	} else {
+		return [];
+	}
 }
 
 function shipDetails(data, value){
 	var a = [];
-	console.log(data);
 	if (value) {
-		for (var ship in data) {
+		data.forEach(function(ship) {
 			var b = {
-					margin: [0, 2, 0, 0],
+					margin: [0, 10, 10, 0],
 					table: {
 						body: [
 								[
@@ -191,56 +252,58 @@ function shipDetails(data, value){
 					},
 					layout: 'noBorders'};
 			a.push(b);
-		};
-		return a;
+		});
 	}
+	return a;
 }
 
 
-function table(data, columns) {
+function table(data, columns, value) {
 	var a = [];
 	var battleType;
-	data.forEach(function(entry) {
-		if (entry.battleGroupeType.battleType === 'LINE') {
-			battleType = {
-					color: '#697641',
-					text: 'Linegroup', 
-					style: 'subheader' };
-		} else if (entry.battleGroupeType.battleType == 'VANGUARD') {
-			battleType = {
-					color: '#98741F',
-					text: 'Vanguardgroup', 
-					style: 'subheader' };	
-		} else if (entry.battleGroupeType.battleType == 'PATHFINDER') {
-			battleType = {
-					color: '#915591',
-					text: 'Pathfindergroup', 
-					style: 'subheader' };
-		} else if (entry.battleGroupeType.battleType == 'FLAG') {
-			battleType = {
-					color: '#436BA3',
-					text: 'Flaggroup', 
-					style: 'subheader' };	
-		}
-		var c = {
-				margin: [0, 5, 0, 0],
+	if(value) {
+		data.forEach(function(entry) {
+			if (entry.battleGroupeType.battleType === 'LINE') {
+				battleType = {
+						color: '#697641',
+						text: 'Linegroup', 
+						style: 'subheader' };
+			} else if (entry.battleGroupeType.battleType == 'VANGUARD') {
+				battleType = {
+						color: '#98741F',
+						text: 'Vanguardgroup', 
+						style: 'subheader' };	
+			} else if (entry.battleGroupeType.battleType == 'PATHFINDER') {
+				battleType = {
+						color: '#915591',
+						text: 'Pathfindergroup', 
+						style: 'subheader' };
+			} else if (entry.battleGroupeType.battleType == 'FLAG') {
+				battleType = {
+						color: '#436BA3',
+						text: 'Flaggroup', 
+						style: 'subheader' };	
+			}
+			var c = {
+					margin: [0, 5, 0, 0],
+					table: {
+						widths: [150,'*', 150],
+						body: [
+								[ battleType, '', {text: entry.points + ' pts', style: 'subheaderPts' }]
+						]
+					},
+					layout: 'noBorders'
+				};
+			a.push(c);
+			var b = {
+				margin: [10, 0, 0, 0],
 				table: {
-					widths: [150,'*', 150],
-					body: [
-							[ battleType, '', {text: entry.points + ' pts', style: 'subheaderPts' }]
-					]
+					widths: ['*', 100],
+					body: buildTableBody(entry, columns)
 				},
-				layout: 'noBorders'
-			};
-		a.push(c);
-		var b = {
-			margin: [10, 0, 0, 0],
-			table: {
-				widths: ['*', 100],
-				body: buildTableBody(entry, columns)
-			},
-			layout: 'noBorders'};
-		a.push(b);
-	})
+				layout: 'noBorders'};
+			a.push(b);
+		});
+	}
 	return a;
 }

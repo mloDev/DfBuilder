@@ -39,7 +39,7 @@
 							<button type="button" class="btn btn-icon" (click)="onSaveFleet()" tooltipPlacement="top" tooltip="Save fleet to cloud.">
 								<i class="fa fa-floppy-o" aria-hidden="true"></i>
 							</button>
-							<button type="button" class="btn btn-icon" (click)="onOpenPdf()" tooltipPlacement="top" tooltip="Generate PDF">
+							<button type="button" class="btn btn-icon" (click)="modalPrintPDF.open()" tooltipPlacement="top" tooltip="Generate PDF">
 								<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 							</button>
 							<button type="button" class="btn btn-icon disabled" (click)="onSaveFleet()" tooltipPlacement="top" tooltip="Load fleet from cloud.">
@@ -156,14 +156,14 @@
         </modal-body>
         <modal-footer [show-default-buttons]="false">
         	<div class="col-md-12 center-block">
-					<button type="button" class="btn btn-icon" aria-hidden="true" (click)="onCreateFleet(); modal.close()">
-							<i class="fa fa-plus-square" aria-hidden="true"></i>
-							<span>Create Fleet</span>
-					</button>
-					<button type="button" class="btn btn-icon" (click)="modal.close()">
-						<i class="fa fa-ban" aria-hidden="true"></i>
-						<span>Abort</span>
-					</button>
+				<button type="button" class="btn btn-icon" aria-hidden="true" (click)="onCreateFleet(); modal.close()">
+						<i class="fa fa-plus-square" aria-hidden="true"></i>
+						<span>Create Fleet</span>
+				</button>
+				<button type="button" class="btn btn-icon" (click)="modal.close()">
+					<i class="fa fa-ban" aria-hidden="true"></i>
+					<span>Abort</span>
+				</button>
 			</div>	
         </modal-footer>
     </modal>
@@ -176,5 +176,37 @@
 	        <textarea class="form-control" id="exampleTextarea" rows="15">{{copyBBCode}}</textarea>
         </modal-body>
         <modal-footer [show-default-buttons]="false">
+        </modal-footer>
+    </modal>
+
+    <modal id="myModalPrintPDF" #modalPrintPDF>
+        <modal-header [show-close]="true">
+            <h4 class="modal-title">Print options</h4>
+        </modal-header>
+        <modal-body>
+        	<div class="col-md-12 center-block">
+	        	<label> <input type="checkbox" [(ngModel)]="armylist"/> Army lists </label>
+			</div>
+			<div class="col-md-12 center-block">
+	        	<label> <input type="checkbox" [(ngModel)]="printShipDetails" /> Stats References </label>
+			</div>
+			<div class="col-md-12 center-block">
+	        	<label> <input type="checkbox" [(ngModel)]="modelList"/> Model list </label>
+			</div>
+			<div class="col-md-12 center-block">
+	        	<label> <input type="checkbox" [(ngModel)]="shoppinglist" disabled/> Shopping list </label>
+			</div>
+        </modal-body>
+        <modal-footer [show-default-buttons]="false">
+        	<div class="col-md-12 center-block">
+				<button type="button" class="btn btn-icon" aria-hidden="true" (click)="onOpenPdf(); modalPrintPDF.close()">
+						<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+						<span>Print fleet</span>
+				</button>
+				<button type="button" class="btn btn-icon" (click)="modalPrintPDF.close()">
+					<i class="fa fa-ban" aria-hidden="true"></i>
+					<span>Abort</span>
+				</button>
+			</div>	
         </modal-footer>
     </modal>
