@@ -42,6 +42,7 @@ export class FleetComponent {
     
     fleet: Fleet;
     isFleet: any = false;
+    printShipDetails = true;
     
     @Input() battleFlag: BattleGroupeType;
     @Input() battleLine: BattleGroupeType;
@@ -62,6 +63,8 @@ export class FleetComponent {
     @Input() @Output() faction;
     ship: Ship;
     error: any;
+    
+    shipList: Ship[] = [];
     
     myShipChange(event) {
         this.ship =  event;
@@ -206,8 +209,23 @@ export class FleetComponent {
         saveAs(blob, filename);
     }
     
+    createShipList() {
+    
+        for (let bat of this.fleet.lineBattlegroupes) {
+                for (let ship of bat.lightShips) {
+                    this.shipList.push(ship);  
+                }
+        }
+    }
+    
+    
     onOpenPdf() {
+        
+        if (this.printShipDetails) {
+            this.createShipList(); 
+            console.log(this.shipList);   
+        }
         this.pdf = pdfMake;
-        this.pdf.createPdf(buildPdf(this.fleet)).open();
+        this.pdf.createPdf(buildPdf(this.fleet, this.shipList, this.printShipDetails)).open();
     }
 }
