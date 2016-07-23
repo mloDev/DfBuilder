@@ -127,8 +127,7 @@ export class BattleGroupeComponent {
         this.calcMaxShips();
     }
     
-    over(ship) {
-        console.log(ship);    
+    over(ship) {   
     }
     
     removeBattleGroupe() {        
