@@ -273,7 +273,7 @@ export class FleetComponent {
     
     removeDubs(values) {
         var arr = values;
-        arr.sort( function( a, b){ return a.name - b.name; } );
+        arr.sort( this.compare );
         
         // delete all duplicates from the array
         for( var i=0; i<arr.length-1; i++ ) {
@@ -287,19 +287,36 @@ export class FleetComponent {
         return arr;
     }
     
+    compare(a,b) {
+      if (a.name < b.name)
+        return -1;
+      if (a.name > b.name)
+        return 1;
+      return 0;
+    }
+    
     countShipsForList(values) {
-        console.log(values);
         var output = [];
         var arr = values;
-        arr.sort( function( a, b){ return a.name - b.name; } );
-        var cnt = 1;
-        var name = '';
+        arr.sort( this.compare );
+        var cnt = arr[0].gcurrent;
+        // if array has only one element push element to array
+        if (arr.length == 1) {
+            output.push({name: arr[0].name, count: cnt});
+        }
+        // if array has more than one element
         for (var i = 0; i < arr.length-1; i++) {
+            // if two elements are the same inkrement count value
             if (arr[i].name == arr[i+1].name ) {
-                cnt++;
+                cnt = arr[i+1].gcurrent + cnt;
+            // if next element is diffrent push to array and reset count to new element
             } else {
                 output.push({name: arr[i].name, count: cnt});
-                cnt = 1;
+                cnt = arr[i+1].gcurrent;
+            }
+            //push to array if last element and not equal to the element before
+            if (i+1 == arr.length-1) {
+                output.push({name: arr[i+1].name, count: cnt});    
             }
         }
         return output;    
@@ -311,12 +328,14 @@ export class FleetComponent {
         this.shipList = [];
         this.createShipList();
         if (this.printShipDetails) {
-            printShips = this.removeDubs(this.shipList);
-        } else if (this.modelList) {
-            modelListShips = this.countShipsForList(this.shipList);
+            var ships = JSON.parse(JSON.stringify(this.shipList));
+            printShips = this.removeDubs(ships);
+        } 
+        if (this.modelList) {
+            var ships = JSON.parse(JSON.stringify(this.shipList));
+            modelListShips = this.countShipsForList(ships);
         }
-        console.log(modelListShips);
         this.pdf = pdfMake;
-        this.pdf.createPdf(buildPdf(this.fleet,  printShips, this.armylist, this.printShipDetails, this.modelList, this.shoppinglist)).open();
+        this.pdf.createPdf(buildPdf(this.fleet,  printShips, this.armylist, this.printShipDetails, this.modelList, this.shoppinglist, modelListShips)).open();
     }
 }

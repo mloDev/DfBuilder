@@ -1,7 +1,6 @@
-function buildPdf(value, ships, armyList, printShipDetails, modelList, shoppingList) {
+function buildPdf(value, ships, armyList, printShipDetails, modelList, shoppingList, modelShips) {
     var pdfContent = value;
     var printShips = ships;
-    console.log(printShipDetails);
     var dd = {
     		footer: 
                 function(currentPage, pageCount) { return [
@@ -35,12 +34,17 @@ function buildPdf(value, ships, armyList, printShipDetails, modelList, shoppingL
                     //add model list if modelList
                     createHeaderModelList(pdfContent, modelList),
                     addCanvas(modelList),
+                    addModelShips(modelList, modelShips),
                     addPageBreak(modelList),
                     //add shopping list if shoppinList
                     createHeaderShipDetails(pdfContent, shoppingList),
                     addCanvas(shoppingList)
             ],
         	styles: {
+        		tableDetails: {
+        			fontSize: 6,
+        			bold: false
+        		},
         		header: {
         			fontSize: 13,
         			bold: true
@@ -84,6 +88,64 @@ function buildPdf(value, ships, armyList, printShipDetails, modelList, shoppingL
 	     	}
         }
     return dd;
+}
+
+function buildTableWeapons(data) {
+	var body = [];
+	var tmp = [];
+	tmp.push({text: 'TYPE'});
+	tmp.push({text: 'LOCK'});
+	tmp.push({text: 'ATTACK'});
+	tmp.push({text: 'DAMAGE'});
+	tmp.push({text: 'ARC'});
+	tmp.push({text: 'SPECIAL'});
+	body.push(tmp);
+	data.forEach(function(weapon){
+		var specialString = '';
+		weapon.specials.forEach(function(special) {
+			if (weapon.specials.length == 1) {
+				specialString = special.name;
+			} else {
+				specialString = special.name + ", " + specialString;
+			}
+		});
+		tmp = [];
+		tmp.push({text: weapon.name});
+		tmp.push({text: weapon.lock.toString() + "+"});
+		tmp.push({text: weapon.attack});
+		tmp.push({text: weapon.damage.toString()});
+		tmp.push({text: weapon.arc});
+		tmp.push({text: specialString});
+
+		body.push(tmp);
+	});
+	return body;
+}
+
+function buildTableLoads(data) {
+	var body = [];
+	var tmp = [];
+	tmp.push({text: 'LOAD'});
+	tmp.push({text: 'LAUNCH'});
+	tmp.push({text: 'SPECIAL'});
+	body.push(tmp);
+	data.forEach(function(load){
+		tmp = [];
+		var specialString = '';
+		load.specials.forEach(function(special) {
+			if (load.specials.length == 1) {
+				specialString = special.name;
+			} else {
+				specialString = special.name + ", " + specialString;
+			}
+		});
+		console.log(load);
+		tmp.push({text: load.name});
+		tmp.push({text: load.launch.toString()});
+		tmp.push({text: specialString});
+		body.push(tmp);
+	});
+	return body;
 }
 
 function buildTableBody(data, columns) {
@@ -210,12 +272,39 @@ function addPageBreak(value) {
 	}
 }
 
+function addModelShips(modelList, modelShips) {
+	var a = [];
+	if (modelList) {
+		modelShips.forEach(function(ship) {
+			var b = {text: ship.count + "x " + ship.name, margin: [0, 10, 0, 0]}
+			a.push(b);
+		});
+	}
+	return a;
+}
+
 function shipDetails(data, value){
 	var a = [];
+	var load = [];
+	var weapon = [];
+	var shipSpecial;
+	var weaponSpecial;
+	var loadSpecial;
 	if (value) {
 		data.forEach(function(ship) {
+			shipSpecial = '';
+			ship.specials.forEach(function(special) {
+				if (ship.specials.length == 1) {
+					shipSpecial = special.name;
+				} else {
+					shipSpecial = special.name + ", " + shipSpecial;
+				}
+			});
+			console.log(shipSpecial);
+			console.log(ship);
 			var b = {
-					margin: [0, 10, 10, 0],
+					style: 'tableDetails',
+					margin: [0,10,0,0],
 					table: {
 						body: [
 								[
@@ -223,29 +312,18 @@ function shipDetails(data, value){
 										},
 										[
 											{
+												style: 'tableDetails',
 												table: {
+														widths: [100,'auto','auto','auto','auto','auto','auto','auto','auto', 'auto'],
+														margin: [0,00,0,0],
 	    												body: [
-	    													[ 'Name', 'Scan', 'Sig', 'Thrust', 'A', 'PD', 'G', 'T', 'Special'],
-	    													[ ship.name, '2', '3', '1', '2', '3', '1', '2', '3']
+	    													[ 'NAME', 'SCAN', 'SIG', 'THRUST', 'HULL', 'A', 'PD', 'G', 'T', 'SPECIAL'],
+	    													[ ship.name, ship.scan.toString(), ship.sig, ship.thrust.toString() + "\"", ship.hull.toString(), ship.a + "+", ship.pd.toString(), ship.gmin.toString() + "-" + ship.gmax.toString(), ship.t, shipSpecial]
 	    												]
 												},
 											},
-											{
-												table: {
-	    												body: [
-	    													[ 'Type', 'Lock', 'Attack', 'Damage', 'Special'],
-	    													[ '1', '2', '3', '4', '5']
-	    												]
-	    											},
-											},
-											{
-												table: {
-	    												body: [
-	    													[ 'Load', 'Launch', 'Special'],
-	    													[ '1', '2', '3']
-	    												]
-	    											},
-											}
+											weaponTable(ship),
+											loadTable(ship)
 										]
 								]
 						]
@@ -257,6 +335,39 @@ function shipDetails(data, value){
 	return a;
 }
 
+function weaponTable(ship) {
+	var a = [];
+	if (ship.weapons.length > 0) {
+		var b =
+			{
+				style: 'tableDetails',
+				table: {
+						margin: [0,0,0,0],
+						widths: [100,'auto','auto','auto', 'auto', 'auto'],
+						body: buildTableWeapons(ship.weapons)
+					},
+			}
+		a.push(b);
+	}
+	return a;
+}
+
+function loadTable(ship) {
+	var a = [];
+	if (ship.loads.length > 0) {
+		var b =
+			{
+				style: 'tableDetails',
+				table: {
+						margin: [0,0,0,0],
+						widths: [100,'auto', 'auto'],
+						body: buildTableLoads(ship.loads)
+					},
+			}
+		a.push(b);
+	}
+	return a;
+}
 
 function table(data, columns, value) {
 	var a = [];
