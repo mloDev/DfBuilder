@@ -32,8 +32,12 @@
 		</div>
 	</div>
 	<div dnd-droppable [dropZones]="['zoneLight']" (onDropSuccess)="transferDataSuccess($event)" class="col-md-3 shipWrapper" *ngIf="battleGroupe.lightShips.length < battleGroupe.battleGroupeType.lightShipSize && maxShips < 4">
-		<div class="ship shipAdd">
-			<i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>
+		<div class="ship col-md-12">
+			<div class="shipAddParent col-md-12">
+				<div class="shipAdd"> 
+					<div><img src="../images/LIGHTSHIP.png" alt="HeavyShip"/></div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="col-md-3 shipWrapper" *ngFor="let ship of battleGroupe.mediumShips">
@@ -62,8 +66,12 @@
 		</div>
 	</div>
 	<div dnd-droppable [dropZones]="['zoneMedium']" (onDropSuccess)="transferDataSuccess($event)" class="col-md-3 shipWrapper" *ngIf="battleGroupe.mediumShips.length < battleGroupe.battleGroupeType.mediumShipSize && maxShips < 4">
-		<div class="ship shipAdd">
-			<i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+		<div class="ship col-md-12">
+			<div class="shipAddParent col-md-12">
+				<div class="shipAdd"> 
+					<div><img src="../images/MEDIUMSHIP.png" alt="HeavyShip"/></div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="col-md-3 shipWrapper" *ngFor="let ship of battleGroupe.heavyShips">
@@ -92,8 +100,12 @@
 		</div>
 	</div>
 	<div dnd-droppable [dropZones]="['zoneHeavy']" (onDropSuccess)="transferDataSuccess($event)" class="col-md-3 shipWrapper" *ngIf="battleGroupe.heavyShips.length < battleGroupe.battleGroupeType.heavyShipSize && maxShips < 4">
-		<div class="ship shipAdd">
-			<i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
+		<div class="ship col-md-12">
+			<div class="shipAddParent col-md-12">
+				<div class="shipAdd"> 
+					<div><img src="../images/HEAVYSHIP.png" alt="HeavyShip"/></div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="col-md-3 shipWrapper" *ngFor="let ship of battleGroupe.superHeavyShips">
@@ -122,8 +134,12 @@
 		</div>
 	</div>
 	<div dnd-droppable [dropZones]="['zoneSuperHeavy']" (onDropSuccess)="transferDataSuccess($event)" class="col-md-3 shipWrapper" *ngIf="battleGroupe.superHeavyShips.length < battleGroupe.battleGroupeType.superHeavyShipSize && maxShips < 4">
-		<div class="ship shipAdd">
-			<i class="fa fa-plus-circle fa-4x" aria-hidden="true"></i>
+		<div class="ship col-md-12">
+			<div class="shipAddParent col-md-12">
+				<div class="shipAdd"> 
+					<div><img src="../images/SUPERSHIP.png" alt="HeavyShip"/></div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
