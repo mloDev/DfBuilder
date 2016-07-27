@@ -2,6 +2,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { RouteParams } from '@angular/router-deprecated';
 
+
+import {TranslateService, TranslatePipe} from 'ng2-translate';
+
 import {CORE_DIRECTIVES} from '@angular/common';
 import {ROUTER_DIRECTIVES} from '@angular/router';
 import {ShipService} from '../service/ship.service';
@@ -16,7 +19,7 @@ import { DND_DIRECTIVES } from 'ng2-dnd/ng2-dnd';
 
 @Component({
     selector: 'ship-list',
-    pipes: [ShipTypePipe, ShipFactionPipe, ShipNamePipe ],
+    pipes: [ShipTypePipe, ShipFactionPipe, ShipNamePipe, TranslatePipe ],
     templateUrl: 'app/ship/ship.list.html',
     providers: [ShipService],
     directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, FactionSelector, ShipDetailSmall, DND_DIRECTIVES, Dragula]
@@ -38,7 +41,7 @@ export class ShipList implements OnInit {
     
     searchString: string = "";
 
-  constructor(
+  constructor(public translate: TranslateService,
     private shipService: ShipService) { }
     
     enterQuery($event) {

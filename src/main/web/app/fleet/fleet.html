@@ -9,7 +9,7 @@
 			<div class="col-md-8 armyList">
 				<div class="col-md-12">
 					<div class="col-md-6" *ngIf="!isFleet">
-						<span>Please create new fleet</span>
+						<span>{{ 'FLEETWELCOME' | translate }}</span>
 					</div>
 					<div class="col-md-1" *ngIf="isFleet">
 						<img alt="{{fleet.faction}}" class="img-responsive" src="../images/{{fleet.faction}}.png">
@@ -18,7 +18,7 @@
 						<div class="col-md-12">
 							<form class = "form-inline" role = "form">
 								<div class = "form-group">
-									<input required [(ngModel)]="fleet.name" type="text" placeholder="Standart Fleet &#xf040; " class="form-control fleetTitle" id="title" tooltipPlacement="top" tooltip="Set fleet title.">
+									<input required [(ngModel)]="fleet.name" type="text" placeholder="{{ 'FLEETNAME' | translate }} &#xf040; " class="form-control fleetTitle" id="title" tooltipPlacement="top" tooltip="{{ 'FLEETNAMETOOLTIP' | translate }}">
 								</div>
 							</form>
 						</div>
@@ -26,32 +26,32 @@
 							<form class = "form-inline" role = "form">
 								<div class = "form-group">
 									<label class="pointsLabel" for="points">{{fleet.totalPoints}} /</label>
-									<input required [(ngModel)]="fleet.maxPoints" type="text" placeholder="max points &#xf040;" class="form-control fleetTitle" id="points" tooltipPlacement="top" tooltip="Set fleet max. points.">
+									<input required [(ngModel)]="fleet.maxPoints" type="text" placeholder="{{ 'MAXPOINTS' | translate }} &#xf040;" class="form-control fleetTitle" id="points" tooltipPlacement="top" tooltip="{{ 'MAXPOINTSTOOLTIP' | translate }}">
 								</div>
 							</form>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="pull-right">
-							<button type="button" class="btn btn-icon" aria-hidden="true" (click)="modal.open()" tooltipPlacement="top" tooltip="Create new fleet.">
+							<button type="button" class="btn btn-icon" aria-hidden="true" (click)="modal.open()" tooltipPlacement="top" tooltip="{{ 'CREATENEWFLEET' | translate }}">
 								<i class="fa fa-file" aria-hidden="true"></i>
 							</button>
-							<button type="button" class="btn btn-icon" (click)="onSaveFleet()" tooltipPlacement="top" tooltip="Save fleet to cloud.">
+							<button type="button" class="btn btn-icon" (click)="onSaveFleet()" tooltipPlacement="top" tooltip="{{ 'SAVEFLEETCLOUD' | translate }}">
 								<i class="fa fa-floppy-o" aria-hidden="true"></i>
 							</button>
-							<button type="button" class="btn btn-icon" (click)="modalPrintPDF.open()" tooltipPlacement="top" tooltip="Generate PDF">
+							<button type="button" class="btn btn-icon" (click)="modalPrintPDF.open()" tooltipPlacement="top" tooltip="{{ 'GENERATEPDF' | translate }}">
 								<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 							</button>
-							<button type="button" class="btn btn-icon disabled" (click)="onSaveFleet()" tooltipPlacement="top" tooltip="Load fleet from cloud.">
+							<button type="button" class="btn btn-icon disabled" (click)="onSaveFleet()" tooltipPlacement="top" tooltip="{{ 'LOADFLEETCLOUD' | translate }}">
 								<i class="fa fa-folder-open" aria-hidden="true"></i>
 							</button>
-							<button type="button" class="btn btn-icon" (click)="onBBSave(); modalBBCode.open()" tooltipPlacement="top" tooltip="Generate BBCode for fleet.">
+							<button type="button" class="btn btn-icon" (click)="onBBSave(); modalBBCode.open()" tooltipPlacement="top" tooltip="{{ 'GENERATEBBCODE' | translate }}">
 								<i class="fa fa-clipboard" aria-hidden="true"></i>
 							</button>
-							<button type="button" class="btn btn-icon" (click)="onExport()" tooltipPlacement="top" tooltip="Download fleet as file.">
+							<button type="button" class="btn btn-icon" (click)="onExport()" tooltipPlacement="top" tooltip="{{ 'DOWNLOADFLEET' | translate }}">
 								<i class="fa fa-download" aria-hidden="true"></i>
 							</button>
-							<button type="button" class="btn btn-icon disabled" (click)="modal.open()" tooltipPlacement="top" tooltip="Upload fleet file.">
+							<button type="button" class="btn btn-icon disabled" (click)="modal.open()" tooltipPlacement="top" tooltip="{{ 'UPLOADFLEET' | translate }}">
 								<i class="fa fa-upload" aria-hidden="true"></i>
 							</button>
 						</div>
@@ -61,8 +61,8 @@
 					<div class="col-md-12" *ngIf="fleet.gameSize.lineSize > 0">
 						<div class="col-md-12 noPadding">
 							<div class="col-md-10 noPadding">
-								<span>Linegruppen der Flotte</span>
-								<button type="button" class="btn btn-icon" (click)="onClick('addLine', $event)" tooltipPlacement="top" tooltip="Add line group.">
+								<b>{{ 'LINEGROUP' | translate }}</b>
+								<button type="button" class="btn btn-icon" (click)="onClick('addLine', $event)" tooltipPlacement="top" tooltip="{{ 'ADDLINE' | translate }}">
 									<i class="fa fa-plus-square" aria-hidden="true"></i>
 								</button>
 							</div>
@@ -79,8 +79,8 @@
 					<div class="col-md-12" *ngIf="fleet.gameSize.pathfinderSize > 0">
 						<div class="col-md-12 noPadding">
 							<div class="col-md-10 noPadding">
-								<span>Pathfindergruppen der Flotte</span>
-								<button type="button" class="btn btn-icon" (click)="onClick('addPathfinder', $event)" tooltipPlacement="top" tooltip="Add pathfinder group.">
+								<b>{{ 'PATHFINDERGROUP' | translate }}</b>
+								<button type="button" class="btn btn-icon" (click)="onClick('addPathfinder', $event)" tooltipPlacement="top" tooltip="{{ 'ADDPATHFINDER' | translate }}">
 									<i class="fa fa-plus-square" aria-hidden="true"></i>
 								</button>
 							</div>
@@ -99,8 +99,8 @@
 					<div class="col-md-12" *ngIf="fleet.gameSize.vanguardSize > 0">
 						<div class="col-md-12 noPadding">
 							<div class="col-md-10 noPadding">
-								<span>Vanguardgruppen der Flotte</span>
-								<button type="button" class="btn btn-icon" (click)="onClick('addVanguard', $event)" tooltipPlacement="top" tooltip="Add vanguard group.">
+								<b>{{ 'VANGUARDGROUP' | translate }}</b>
+								<button type="button" class="btn btn-icon" (click)="onClick('addVanguard', $event)" tooltipPlacement="top" tooltip="{{ 'ADDVANGUARD' | translate }}">
 									<i class="fa fa-plus-square" aria-hidden="true"></i>
 								</button>
 							</div>
@@ -117,8 +117,8 @@
 					<div class="col-md-12" *ngIf="fleet.gameSize.flagSize > 0">
 						<div class="col-md-12 noPadding">
 							<div class="col-md-10 noPadding">
-								<span>Flaggruppen der Flotte</span>
-								<button type="button" class="btn btn-icon" (click)="onClick('addFlag', $event)" tooltipPlacement="top" tooltip="Add flag group.">
+								<b>{{ 'FLAGGROUP' | translate }}</b>
+								<button type="button" class="btn btn-icon" (click)="onClick('addFlag', $event)" tooltipPlacement="top" tooltip="{{ 'ADDFLAG' | translate }}">
 									<i class="fa fa-plus-square" aria-hidden="true"></i>
 								</button>
 							</div>
@@ -140,15 +140,15 @@
 
     <modal id="myModal" #modal>
         <modal-header [show-close]="false">
-            <h4 class="modal-title">Select Fleet details</h4>
+            <h4 class="modal-title">{{ 'FLEETDETAILS' | translate }}</h4>
         </modal-header>
         <modal-body>
 	        <div class="col-md-12 center-block" style="height: 200px;">
 				<div class="col-md-4">
-					<game-selector [(selected)]="gameSize" (select)="onGameSizeSelected($event)" tooltipPlacement="top" tooltip="Select game size."></game-selector>
+					<game-selector [(selected)]="gameSize" (select)="onGameSizeSelected($event)" tooltipPlacement="top" tooltip="{{ 'SELECTGAMESIZE' | translate }}"></game-selector>
 				</div>
 				<div class="col-md-4">
-					<faction-selector [(selected)]="faction" (select)="onFactionSelected($event)" tooltipPlacement="top" tooltip="Select faction of the fleet."></faction-selector>
+					<faction-selector [(selected)]="faction" (select)="onFactionSelected($event)" tooltipPlacement="top" tooltip="{{ 'SELECTFACTION' | translate }}"></faction-selector>
 				</div>
 				<div class="col-md-4">
 				</div>
@@ -158,11 +158,11 @@
         	<div class="col-md-12 center-block">
 				<button type="button" class="btn btn-icon" aria-hidden="true" (click)="onCreateFleet(); modal.close()">
 						<i class="fa fa-plus-square" aria-hidden="true"></i>
-						<span>Create Fleet</span>
+						<span>{{ 'CREATEFLEET' | translate }}</span>
 				</button>
 				<button type="button" class="btn btn-icon" (click)="modal.close()">
 					<i class="fa fa-ban" aria-hidden="true"></i>
-					<span>Abort</span>
+					<span>{{ 'ABORT' | translate }}</span>
 				</button>
 			</div>	
         </modal-footer>
@@ -170,7 +170,7 @@
     
     <modal id="myModalBBCode" #modalBBCode>
         <modal-header [show-close]="true">
-            <h4 class="modal-title">Fleet as BBCode</h4>
+            <h4 class="modal-title">{{ 'FLEETBB' | translate }}</h4>
         </modal-header>
         <modal-body>
 	        <textarea class="form-control" id="exampleTextarea" rows="15">{{copyBBCode}}</textarea>
@@ -181,31 +181,31 @@
 
     <modal id="myModalPrintPDF" #modalPrintPDF>
         <modal-header [show-close]="true">
-            <h4 class="modal-title">Print options</h4>
+            <h4 class="modal-title">{{ 'FLEETPRINTOPTIONS' | translate }}</h4>
         </modal-header>
         <modal-body>
         	<div class="col-md-12 center-block">
-	        	<label> <input type="checkbox" [(ngModel)]="armylist"/> Army lists </label>
+	        	<label> <input type="checkbox" [(ngModel)]="armylist"/>{{ 'ARMYLIST' | translate }}</label>
 			</div>
 			<div class="col-md-12 center-block">
-	        	<label> <input type="checkbox" [(ngModel)]="printShipDetails" /> Stats References </label>
+	        	<label> <input type="checkbox" [(ngModel)]="printShipDetails" />{{ 'STATSANDREFS' | translate }}</label>
 			</div>
 			<div class="col-md-12 center-block">
-	        	<label> <input type="checkbox" [(ngModel)]="modelList"/> Model list </label>
+	        	<label> <input type="checkbox" [(ngModel)]="modelList"/>{{ 'MODELLIST' | translate }}</label>
 			</div>
 			<div class="col-md-12 center-block">
-	        	<label> <input type="checkbox" [(ngModel)]="shoppinglist" disabled/> Shopping list </label>
+	        	<label> <input type="checkbox" [(ngModel)]="shoppinglist" disabled/>{{ 'SHOPPINGLIST' | translate }}</label>
 			</div>
         </modal-body>
         <modal-footer [show-default-buttons]="false">
         	<div class="col-md-12 center-block">
 				<button type="button" class="btn btn-icon" aria-hidden="true" (click)="onOpenPdf(); modalPrintPDF.close()">
 						<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-						<span>Print fleet</span>
+						<span>{{ 'PRINTFLEET' | translate }}</span>
 				</button>
 				<button type="button" class="btn btn-icon" (click)="modalPrintPDF.close()">
 					<i class="fa fa-ban" aria-hidden="true"></i>
-					<span>Abort</span>
+					<span>{{ 'ABORT' | translate }}</span>
 				</button>
 			</div>	
         </modal-footer>
