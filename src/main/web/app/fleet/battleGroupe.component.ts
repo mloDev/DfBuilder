@@ -10,7 +10,7 @@ import { BattleTypePipe } from '../pipes/battleType-pipe';
 import { NgForNumber } from "../pipes/ngForNumber-pipe";
 import { Ship } from "../model/ship";
 import { Fleet } from "../model/fleet";
-
+import {TranslateService, TranslatePipe} from 'ng2-translate';
 
 import { DND_DIRECTIVES } from 'ng2-dnd/ng2-dnd';
 
@@ -18,7 +18,7 @@ import { BattleGroupe } from "../model/battleGroupe";
 import { BattleGroupeService } from '../service/battleGroupe.service';
 @Component({
     selector: 'battleGroupeComponent',
-    pipes: [ BattleTypePipe, NgForNumber],
+    pipes: [ BattleTypePipe, NgForNumber, TranslatePipe],
     templateUrl: 'app/fleet/battleGroupe.component.html',
     directives: [ CORE_DIRECTIVES, ROUTER_DIRECTIVES, ShipList, GameSizeSelector, FactionSelector, DND_DIRECTIVES ],
     providers: [ BattleGroupeService ]

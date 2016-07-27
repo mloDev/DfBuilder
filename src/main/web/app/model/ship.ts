@@ -18,6 +18,7 @@ export class Ship {
   faction: string;
   pts: number;
   shipType: string;
+  factionLogoURL: string;
     
   weapons: Weapon[];
   specials: Special[];

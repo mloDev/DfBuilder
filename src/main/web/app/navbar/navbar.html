@@ -2,8 +2,13 @@
 <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
   <div class="container-fluid">
     <ul class="nav navbar-nav">
+      <li class="nav-item pull-xs-right"> 
+		<select (change)="translate.use($event.target.value)">
+			<option *ngFor="#lang of ['de', 'en']" [selected]="lang === translate.currentLang">{{lang}}</option>
+		</select>
+      </li>
       <li *ngFor="let menuItem of menuItems" [ngClass]="getMenuItemClasses(menuItem)">
-        <a [routerLink]="[menuItem.path]" [ngClass]="getMenuItemAnchorClasses(menuItem)">{{menuItem.title}}</a>
+        <a [routerLink]="[menuItem.path]" [ngClass]="getMenuItemAnchorClasses(menuItem)">{{menuItem.title | translate}}</a>
       </li>
     </ul>
   </div>

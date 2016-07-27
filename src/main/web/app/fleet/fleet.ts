@@ -11,6 +11,8 @@ import { BattleTypePipe } from '../pipes/battleType-pipe';
 import { NgForNumber } from "../pipes/ngForNumber-pipe";
 import { TOOLTIP_DIRECTIVES } from 'ng2-tooltip';
 
+import {TranslateService, TranslatePipe} from 'ng2-translate';
+
 import { BattleGroupe } from "../model/battleGroupe";
 import { BattleGroupeType } from "../model/battleGroupeType";
 import { BattleGroupeService } from '../service/battleGroupe.service';
@@ -28,7 +30,7 @@ declare var buildPdf: any;
 
 @Component({
     selector: 'fleet',
-    pipes: [ BattleTypePipe, NgForNumber],
+    pipes: [ BattleTypePipe, NgForNumber, TranslatePipe],
     templateUrl: 'app/fleet/fleet.html',
     directives: [ TOOLTIP_DIRECTIVES, DND_DIRECTIVES, MODAL_DIRECTIVES, CORE_DIRECTIVES, ROUTER_DIRECTIVES, ShipList, GameSizeSelector, FactionSelector, BattleGroupeComponent],
     providers: [ BattleGroupeService, FleetService, BBCodeService ],
@@ -72,7 +74,7 @@ export class FleetComponent {
     myShipChange(event) {
         this.ship =  event;
     }
-    constructor(private battleService: BattleGroupeService, private fleetService: FleetService, private bbService: BBCodeService) {
+    constructor(private battleService: BattleGroupeService, private fleetService: FleetService, private bbService: BBCodeService, public translate: TranslateService) {
     }
    
     

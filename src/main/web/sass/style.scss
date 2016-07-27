@@ -15,6 +15,13 @@ header {
   margin-top: -15px;
 }
 
+.shipIcon {
+	padding-top: .75rem;
+	padding-bottom: .75rem;
+	padding-right: .75rem;
+	padding-left: .2rem;
+}
+
 .table th {
 	padding: .1rem .3rem;
 	border-top: 0;
@@ -295,7 +302,6 @@ have a fixed width and height (but it's not required).
 	border-bottom-left-radius: 15px;
     border-style: solid;
     border-width: 1px;
-    height: 75px;
     margin-bottom: 6px;
     background-color: rgba(0, 0, 0, 0.2);
 }
@@ -309,12 +315,50 @@ have a fixed width and height (but it's not required).
 	border-bottom-left-radius: 15px;
     border-style: solid;
     border-width: 1px;
-    height: 75px;
+    width: 100%;
+}
+
+.shipAddParent {
+    display: table;
+    table-layout: fixed;
 }
 
 .shipAdd {
 	background-color: transparent;
+    display:table-cell;
+    vertical-align:middle;
+    text-align:center;
+    float: none;
+    height: auto;
+    padding: 0.5rem;
 }
+
+.factionIcon {
+	background-color: transparent;
+    display:table-cell;
+    vertical-align:middle;
+    text-align:center;
+    float: none;
+    height: auto;
+    padding-right: 0.5rem;
+    padding-left: 0.25rem;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+}
+
+.shipIcon {
+	background-color: transparent;
+    display:table-cell;
+    vertical-align:middle;
+    text-align:center;
+    float: none;
+    height: auto;
+    padding-right: 0.25rem;
+    padding-left: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+}
+
 
 .shipWrapper {
 	padding: 0px 3px 0px 3px;	
@@ -517,7 +561,7 @@ have a fixed width and height (but it's not required).
     height: 75px;
 }
 
-.shipContainer col-md-12 col-md- {
+.shipContainer {
 	padding: 0px;
 }
 

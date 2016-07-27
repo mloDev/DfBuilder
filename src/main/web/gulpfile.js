@@ -10,6 +10,13 @@ var tsProject = ts.createProject('tsconfig.json', {typescript: require('typescri
 // vars
 var staticDir = '../../../build/generated-web-resources/static/';
 
+gulp.task('i18n', function() {
+	del.sync([staticDir + 'i18n/**'], {force: true});
+	
+    gulp.src('./i18n/**/*.json')
+    	.pipe(gulp.dest(staticDir + 'i18n'));
+});
+
 // lib copy
 gulp.task('libcopy', function() {
    // clean dest using sync
@@ -45,6 +52,8 @@ gulp.task('libcopy', function() {
 		.pipe(gulp.dest(staticDir + 'js/lib/ng2-dnd'));
 	gulp.src(['./node_modules/ng2-tooltip/**/*'])
 		.pipe(gulp.dest(staticDir + 'js/lib/ng2-tooltip'));
+	gulp.src(['./node_modules/ng2-translate/**/*'])
+	.pipe(gulp.dest(staticDir + 'js/lib/ng2-translate'));
 
 
     // copy @angular dependencies
@@ -172,7 +181,7 @@ gulp.task('tscw', function() {
 });
 
 // build sass and ts, copy libs, copy html
-gulp.task('build', ['htmlcopy', 'imagecopy', "jscopy", 'sass', 'tsc', 'libcopy']);
+gulp.task('build', ['htmlcopy', 'imagecopy', "i18n", "jscopy", 'sass', 'tsc', 'libcopy']);
 
 // watch sass, ts, and html
 gulp.task('watch', ['build', 'sassw', 'htmlw', 'tscw']);

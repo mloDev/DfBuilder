@@ -9,6 +9,7 @@ import { FORM_PROVIDERS } from '@angular/common';
 import { FactionSelector } from './selector/faction-selector';
 import { NgForNumber } from "./pipes/ngForNumber-pipe";
 import {DND_PROVIDERS} from 'ng2-dnd/ng2-dnd';
+import {TRANSLATE_PROVIDERS} from 'ng2-translate';
 
 bootstrap( AppComponent, [
     provide(APP_BASE_HREF, {useValue: '/'}),
@@ -24,4 +25,7 @@ bootstrap( AppComponent, [
     FORM_PROVIDERS,
     ROUTER_PROVIDERS,
     DND_PROVIDERS,
-    HTTP_PROVIDERS, FactionSelector, NgForNumber ] );
+    HTTP_PROVIDERS,
+    TRANSLATE_PROVIDERS,
+    FactionSelector,
+    NgForNumber ] );
