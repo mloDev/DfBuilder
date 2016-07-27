@@ -1,9 +1,11 @@
 import { Component, Output } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { ROUTES, MenuType, RouteInfo } from '../routes';
+import {TranslateService, TranslatePipe} from 'ng2-translate';
 
 @Component({
   selector: 'navbar',
+  pipes: [TranslatePipe],
   properties: ['routes'],
   templateUrl: 'app/navbar/navbar.html',
   styles: [
@@ -18,8 +20,14 @@ import { ROUTES, MenuType, RouteInfo } from '../routes';
 export class Navbar {
   public menuItems: RouteInfo[];
 
-  constructor() {
+  constructor(public translate: TranslateService) {
     this.menuItems = ROUTES;
+        // use navigator lang if available
+        var userLang = navigator.language.split('-')[0];
+        userLang = /(de|en)/gi.test(userLang) ? userLang : 'en';
+
+        // this trigger the use of the german or english language after setting the translations
+        translate.use(userLang);
   }
 
   public getMenuItemClasses(menuItem: RouteInfo) {

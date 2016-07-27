@@ -17,7 +17,8 @@
     'atoa': 					  'js/lib/atoa/atoa.js',
     'ng2-bs3-modal': 			  'js/lib/ng2-bs3-modal',
     'ng2-dnd':					  'js/lib/ng2-dnd',
-    'ng2-tooltip':				  'js/lib/ng2-tooltip'
+    'ng2-tooltip':				  'js/lib/ng2-tooltip',
+    'ng2-translate':			  'js/lib/ng2-translate'
   };
 
   // packages tells the System loader how to load when no filename and/or no extension
@@ -32,7 +33,8 @@
     'contra': 			  		  { main: 'contra.js', defaultExtension: 'js' },
     'ng2-bs3-modal': 			  { main: 'ng2-bs3-modal.js', defaultExtension: 'js' },
     'ng2-dnd': 			 		  { main: 'ng2-dnd.js', defaultExtension: 'js' },
-    'ng2-tooltip':				  { main: 'index.js', defaultExtension: 'js' }
+    'ng2-tooltip':				  { main: 'index.js', defaultExtension: 'js' },
+    'ng2-translate':			  { main: 'ng2-translate.js', defaultExtension: 'js' }
   };
   
   var packageNames = [

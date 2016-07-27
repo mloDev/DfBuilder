@@ -37,8 +37,8 @@ export declare class RouteInfo implements RouteInfoMetadata {
 
 export const ROUTES: RouteInfo[] = [
   { path: '/', component: HomeComponent, title: "DropFleet Builder", menuType: MenuType.BRAND },
-  { path: '/fleet', component: FleetComponent, title: "Fleet", menuType: MenuType.LEFT },
-  { path: '/about', component: AboutUsComponent, title: "About Us", menuType: MenuType.RIGHT },
-  { path: '/contact', component: ContactComponent, title: "Contact", menuType: MenuType.RIGHT },
-  { path: '/ships', component: ShipComponent, title: "Ships", menuType: MenuType.RIGHT }
+  { path: '/fleet', component: FleetComponent, title: "FLEET", menuType: MenuType.LEFT },
+  { path: '/about', component: AboutUsComponent, title: "ABOUTUS", menuType: MenuType.RIGHT },
+  { path: '/contact', component: ContactComponent, title: "CONTACT", menuType: MenuType.RIGHT },
+  { path: '/ships', component: ShipComponent, title: "SHIPS", menuType: MenuType.RIGHT }
 ]
