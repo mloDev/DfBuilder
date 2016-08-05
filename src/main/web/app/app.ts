@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import {HTTP_PROVIDERS} from '@angular/http';
-import { Routes , ROUTER_DIRECTIVES, Router} from '@angular/router';
+import { HTTP_PROVIDERS } from '@angular/http';
+import { Router, ROUTER_DIRECTIVES } from '@angular/router';
 import { Navbar } from './navbar/navbar';
-import { ROUTES } from './routes';
 import { Footer } from './footer/footer';
+import { Auth }  from './service/auth.service';
 
 
 
@@ -13,8 +13,9 @@ import { Footer } from './footer/footer';
   directives: [ Footer, Navbar, ROUTER_DIRECTIVES ]
 
 })
-@Routes(ROUTES)
+    
 export class AppComponent {
+        
   public title = 'Df Builder';
-  constructor(private router:Router) {}
+  constructor(private auth: Auth) {}
 }

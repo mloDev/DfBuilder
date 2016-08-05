@@ -2,10 +2,12 @@ import { Component, Output } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { ROUTES, MenuType, RouteInfo } from '../routes';
 import {TranslateService, TranslatePipe} from 'ng2-translate';
+import { Auth } from '../service/auth.service';
 
 @Component({
   selector: 'navbar',
   pipes: [TranslatePipe],
+  providers: [ Auth ],
   properties: ['routes'],
   templateUrl: 'app/navbar/navbar.html',
   styles: [
@@ -19,8 +21,8 @@ import {TranslateService, TranslatePipe} from 'ng2-translate';
 })
 export class Navbar {
   public menuItems: RouteInfo[];
-
-  constructor(public translate: TranslateService) {
+    
+  constructor(public translate: TranslateService, private auth: Auth) {
     this.menuItems = ROUTES;
         // use navigator lang if available
         var userLang = navigator.language.split('-')[0];
@@ -33,7 +35,7 @@ export class Navbar {
   public getMenuItemClasses(menuItem: RouteInfo) {
     let menuItemClass = {
       "nav-item": menuItem.menuType === MenuType.LEFT || menuItem.menuType === MenuType.RIGHT,
-      "pull-xs-right": menuItem.menuType === MenuType.RIGHT
+      "pull-right": menuItem.menuType === MenuType.RIGHT
     }
     return menuItemClass;
   }
