@@ -31,5 +31,9 @@
   "MAXPOINTSTOOLTIP": "Set fleet max. points.",
   "FLEETNAME": "Standart fleet",
   "FLEETNAMETOOLTIP": "Set fleet name.",
-  "FLEETWELCOME": "Please create new fleet."
+  "FLEETWELCOME": "Please create new fleet.",
+  "LINEGROUP": "Fleet's line groups:",
+  "VANGUARDGROUP": "Fleet's vanguard groups:",
+  "PATHFINDERGROUP": "Fleet's pathfinder groups:",
+  "FLAGGROUP": "Fleet's flag groups:"
 }

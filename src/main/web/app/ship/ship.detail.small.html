@@ -1,8 +1,9 @@
     <modal id="myModalShipDetail" #modalShipDetail>
         <modal-header [show-close]="true">
-            <h4 class="modal-title">Details of {{ship.name}}</h4>
+            <h4 class="modal-title">{{ship.name}}</h4>
         </modal-header>
         <modal-body>
+        	<div><img class="shipImage" src="../images/ships/{{ship.faction}}/{{ship.name}}.png" alt="{{ship.name}}"/></div>
             <table class="table table-condensed">
 			    <thead>
 			      <tr>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, trigger, state, style, transition, animate } from '@angular/core';
 
 import {CORE_DIRECTIVES} from '@angular/common';
 import {ROUTER_DIRECTIVES} from '@angular/router';
@@ -21,8 +21,15 @@ import { BattleGroupeService } from '../service/battleGroupe.service';
     pipes: [ BattleTypePipe, NgForNumber, TranslatePipe],
     templateUrl: 'app/fleet/battleGroupe.component.html',
     directives: [ CORE_DIRECTIVES, ROUTER_DIRECTIVES, ShipList, GameSizeSelector, FactionSelector, DND_DIRECTIVES ],
-    providers: [ BattleGroupeService ]
-
+    providers: [ BattleGroupeService ],
+    animations: [
+        trigger('shipColorTrigger', [
+                state('noHighlight', style({ backgroundColor: '#FFFFFF', color: '#E74C3C' })),
+                state('highlight', style({ backgroundColor: '#E74C3C', color: '#FFFFFF' })),
+                transition('noHighlight => highlight', animate('200ms ease-in')),
+                transition('highlight => noHighlight', animate('200ms 200ms ease-out'))
+            ])
+        ]
 })
 
 export class BattleGroupeComponent {
@@ -33,10 +40,18 @@ export class BattleGroupeComponent {
     error: any;
     index:any;
     
+    highlighted = false;
+    highlightedState = 'highlight';
+    
     maxShips: number;
     
     constructor(private battleGroupeService: BattleGroupeService) {
         
+    }
+    
+    toggleHighlightedState() {
+        this.highlightedState = this.highlighted ? 'noHighlight' : 'highlight';
+        this.highlighted = !this.highlighted;
     }
     
      /**
