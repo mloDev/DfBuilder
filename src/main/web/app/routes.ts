@@ -5,7 +5,7 @@ import { ContactComponent } from './home/contact/contact';
 import { ShipComponent } from './ship/ship.component';
 import { FleetComponent } from './fleet/fleet';
 import { provideRouter, RouterConfig} from '@angular/router';
-import { AuthGuard } from './guards/auth.guard';
+import { AuthGuardAdmin, AuthGuardUser } from './guards/auth.guard';
 import { UnauthorizedComponent } from './errorPages/unauthorized.component';
 
 export enum MenuType {
@@ -52,13 +52,15 @@ export const route: RouterConfig = [
   { path: 'fleet', component: FleetComponent },
   { path: 'about', component: AboutUsComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'ships', component: ShipComponent, canActivate: [AuthGuard] },
+  { path: 'ships', component: ShipComponent, canActivate: [AuthGuardAdmin] },
+  { path: 'fleetList', component: ShipComponent, canActivate: [AuthGuardUser] },
   { path: 'unauthorized', component: UnauthorizedComponent },
   { path: '**', redirectTo: ''}
 ];
 
 export const appRouterProviders = [
     
-    AuthGuard,
+    AuthGuardAdmin,
+    AuthGuardUser,
     provideRouter(route)
 ];
