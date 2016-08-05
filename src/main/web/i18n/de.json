@@ -31,5 +31,9 @@
   "MAXPOINTSTOOLTIP": "Max. Punkte angeben.",
   "FLEETNAME": "Standart Flotte",
   "FLEETNAMETOOLTIP": "Flottename angeben.",
-  "FLEETWELCOME": "Bitte neue Flotte anlegen."
+  "FLEETWELCOME": "Bitte neue Flotte anlegen.",
+  "LINEGROUP": "Linegruppen der Flotte:",
+  "VANGUARDGROUP": "Vanguardgruppen der Flotte:",
+  "PATHFINDERGROUP": "Pathfindergruppen der Flotte:",
+  "FLAGGROUP": "Flaggruppen der Flotte:"
 }
