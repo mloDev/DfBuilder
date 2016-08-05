@@ -1,5 +1,3 @@
-<div class="container">
-	<div class="row">
 		<div class="col-md-12">
             <div class="input-group" id="adv-search">
                 <input type="text" [(ngModel)]="searchString" class="form-control" placeholder="Search for ship" />
@@ -33,8 +31,6 @@
                 </div>
             </div>
           </div>
-        </div>
-	</div>
 <div class="entity-list col-md-12" ng-init="ships = []">
 	<div id="light-bag-list" class="col-md-12 shipContainer" dnd-draggable [dragEnabled]="true" [dropZones]="['zoneLight']" [dragData]="ship" *ngFor="let ship of ships | shipFactionPipe: faction | shipTypePipe: 'LIGHT' | shipNamePipe: searchString">
 		<ship-detail-small [ship]="ship" (click)="setShip(ship)"></ship-detail-small>		

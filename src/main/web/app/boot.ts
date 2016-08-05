@@ -1,5 +1,4 @@
 import { bootstrap } from '@angular/platform-browser-dynamic';
-import { ROUTER_PROVIDERS } from '@angular/router';
 import { Http, HTTP_PROVIDERS} from '@angular/http';
 import { AppComponent } from './app';
 import {provide} from '@angular/core';
@@ -10,8 +9,11 @@ import { FactionSelector } from './selector/faction-selector';
 import { NgForNumber } from "./pipes/ngForNumber-pipe";
 import {DND_PROVIDERS} from 'ng2-dnd/ng2-dnd';
 import {TRANSLATE_PROVIDERS} from 'ng2-translate';
+import { appRouterProviders } from './routes';
+import { Auth } from './service/auth.service';
 
 bootstrap( AppComponent, [
+    appRouterProviders,
     provide(APP_BASE_HREF, {useValue: '/'}),
     provide(LocationStrategy, {useClass: HashLocationStrategy}),
     provide(AuthHttp, {
@@ -23,7 +25,7 @@ bootstrap( AppComponent, [
       deps: [Http]
     }),
     FORM_PROVIDERS,
-    ROUTER_PROVIDERS,
+    Auth,
     DND_PROVIDERS,
     HTTP_PROVIDERS,
     TRANSLATE_PROVIDERS,

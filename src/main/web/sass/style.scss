@@ -37,11 +37,11 @@ header {
 
 .langSelector {
 	border: none;
+	padding: 15px;
 	background-color: transparent;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-	line-height: 1.5;
 	font-size: 1rem;
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
@@ -51,6 +51,18 @@ header {
   border-top:1px solid #26bdbf;
 }
 
+button:active {
+	outline: none !important;
+	border: none !important;
+}
+
+button:focus { 
+	outline:0 !important; 
+}
+
+.nav>li>a:focus, .nav>li>a:hover{
+	background: none;
+}
 .shipIcon {
 	padding-top: .75rem;
 	padding-bottom: .75rem;
@@ -669,6 +681,26 @@ have a fixed width and height (but it's not required).
     margin-left: 0;
     margin-right: 0;
 }
+
+.navbar-dark .navbar-brand {
+    color: #fff;
+}
+
+.navbar-nav .nav-link {
+    display: block;
+	font-size: 1rem;
+}
+
+.logButton {
+	font-size: 1rem;
+	padding: 15px;
+    border: none;
+}
+
+.navbar-nav {
+	width: 100%;
+}
+
 .form-group .form-control:last-child {
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;

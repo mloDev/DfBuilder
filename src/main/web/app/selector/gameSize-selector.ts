@@ -10,7 +10,7 @@ import 'rxjs/add/operator/toPromise';
 })
 
 export class GameSizeSelector implements OnInit {
-    @Output() select: EventEmitter<GameSize> = new EventEmitter();
+    @Output() select: EventEmitter<GameSize> = new EventEmitter<GameSize>();
     @Input() games: GameSize[] = [];
     @Output() gameSize: GameSize;
     

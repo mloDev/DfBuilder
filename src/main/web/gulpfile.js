@@ -112,7 +112,7 @@ gulp.task('htmlcopy', function() {
 //image copy
 gulp.task('imagecopy', function() {
     // clean dest
-    del([staticDir + 'images/**'], {force:true});
+    del([staticDir + 'images/**/*'], {force:true});
 
     // copy iamgefolder
     gulp.src('./images/**/*')
