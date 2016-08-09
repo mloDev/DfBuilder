@@ -464,6 +464,19 @@ have a fixed width and height (but it's not required).
 	margin-left: .125rem;
 }
 
+.fleetListList {
+    -webkit-border-bottom-right-radius: 15px;
+	-webkit-border-bottom-left-radius: 15px;
+	-moz-border-radius-bottomright: 15px;
+	-moz-border-radius-bottomleft: 15px;
+	border-bottom-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+	border-width: 0px 1px 1px 1px;
+	border-color: #26bdbf;
+	border-style: solid;
+	padding: 6px 6px 6px 6px;
+}
+
 .shipEmptyLightContainer {
 	padding: 0px;
 	-webkit-border-top-right-radius: 15px;
@@ -710,6 +723,13 @@ have a fixed width and height (but it's not required).
 .navbar-nav {
 	width: 100%;
 }
+
+.navbar {
+    border: 0px 0px 1px 0px;
+    border-style: solid;
+    border-color: #26bdbf;
+}
+    
 
 .form-group .form-control:last-child {
     border-top-left-radius: 4px;

@@ -10,6 +10,7 @@ import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { BattleTypePipe } from '../pipes/battleType-pipe';
 import { NgForNumber } from "../pipes/ngForNumber-pipe";
 import { TOOLTIP_DIRECTIVES } from 'ng2-tooltip';
+import { Auth } from '../service/auth.service';
 
 import {TranslateService, TranslatePipe} from 'ng2-translate';
 
@@ -33,7 +34,7 @@ declare var buildPdf: any;
     pipes: [ BattleTypePipe, NgForNumber, TranslatePipe],
     templateUrl: 'app/fleet/fleet.html',
     directives: [ TOOLTIP_DIRECTIVES, DND_DIRECTIVES, MODAL_DIRECTIVES, CORE_DIRECTIVES, ROUTER_DIRECTIVES, ShipList, GameSizeSelector, FactionSelector, BattleGroupeComponent],
-    providers: [ BattleGroupeService, FleetService, BBCodeService ],
+    providers: [ BattleGroupeService, FleetService, BBCodeService, Auth ],
     changeDetection: ChangeDetectionStrategy.OnPush
 
 })
@@ -74,7 +75,7 @@ export class FleetComponent {
     myShipChange(event) {
         this.ship =  event;
     }
-    constructor(private battleService: BattleGroupeService, private fleetService: FleetService, private bbService: BBCodeService, public translate: TranslateService) {
+    constructor(private auth: Auth, private battleService: BattleGroupeService, private fleetService: FleetService, private bbService: BBCodeService, public translate: TranslateService) {
     }
    
     
@@ -196,6 +197,7 @@ export class FleetComponent {
     }
 
     onSaveFleet() {
+      this.fleet.userId = this.auth.userProfile.user_id;
       this.fleetService
             .saveFleet(this.fleet)
             .then(fleet => this.fleet = fleet)

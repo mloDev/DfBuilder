@@ -23,6 +23,14 @@ export class FleetService {
                .then(response => response.json());
     }
     
+    getFleetsByUserId(userId: string): Promise<Fleet[]> {
+        console.log(this.actionUrl + CONFIGURATION.baseUrls.fleetByUserId);
+        console.log(userId);
+        return this.http.get(this.actionUrl +
+            CONFIGURATION.baseUrls.fleetByUserId + "/" + userId).toPromise()
+               .then(response => response.json());
+    }
+    
     saveFleet(fleet: Fleet): Promise<Fleet> {
         if (fleet.id) {
             return this.put(fleet);    

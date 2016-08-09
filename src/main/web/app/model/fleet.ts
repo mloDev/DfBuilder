@@ -16,6 +16,7 @@ export class Fleet {
     flagCurrent: number;
     vanguardCurrent: number;
     pathfinderCurrent: number;
+    userId: string;
     
     constructor() {};
 }
