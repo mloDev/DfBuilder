@@ -64,7 +64,12 @@ export class Auth {
         && this.userProfile.app_metadata.roles.indexOf('admin') > -1;
     }
     
-    
+     public isUser() {
+      return this.userProfile && this.userProfile.app_metadata
+        && this.userProfile.app_metadata.roles
+        && this.userProfile.app_metadata.roles.indexOf('user') > -1;
+    }
+       
   public logout() {
     // Remove token from localStorage
     localStorage.removeItem('id_token');
