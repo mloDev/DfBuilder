@@ -4,6 +4,7 @@ import { AboutUsComponent } from './home/about/about';
 import { ContactComponent } from './home/contact/contact';
 import { ShipComponent } from './ship/ship.component';
 import { FleetComponent } from './fleet/fleet';
+import { FleetListComponent } from './fleet/fleetList';
 import { provideRouter, RouterConfig} from '@angular/router';
 import { AuthGuardAdmin, AuthGuardUser } from './guards/auth.guard';
 import { UnauthorizedComponent } from './errorPages/unauthorized.component';
@@ -53,7 +54,7 @@ export const route: RouterConfig = [
   { path: 'about', component: AboutUsComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'ships', component: ShipComponent, canActivate: [AuthGuardAdmin] },
-  { path: 'fleetList', component: ShipComponent, canActivate: [AuthGuardUser] },
+  { path: 'fleetList', component: FleetListComponent, canActivate: [AuthGuardUser] },
   { path: 'unauthorized', component: UnauthorizedComponent },
   { path: '**', redirectTo: ''}
 ];

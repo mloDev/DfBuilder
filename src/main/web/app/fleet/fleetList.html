@@ -1,7 +1,36 @@
 <div class="container-fluid">
-	<div class="row ">
-		<div class="col-md-12">
-			<h1>{{ "FLEETLIST" | translate }}</h1>
-		</div>
+	<div class="col-md-10 col-md-offset-1 fleetListList">
+	  <div class="table-responsive" *ngIf="fleets.length > 0">
+	  <table class="table">
+	    <thead>
+	      <tr>
+	        <th>{{ 'FACTION' | translate }}</th>
+	        <th>{{ 'NAME' | translate }}</th>
+	        <th>{{ 'GAMESIZE' | translate }}</th>
+	        <th>{{ 'POINTS' | translate }}</th>
+	        <th>{{ 'ACTIONS' | translate }}</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr *ngFor="let fleet of fleets">
+	        <td>{{fleet.faction}}</td>
+	        <td>{{fleet.name}}</td>
+	        <td>{{fleet.gameSize.name}}</td>
+	        <td>{{fleet.totalPoints}}/{{fleet.maxPoints}}</td>
+	        <td>
+	        	<button type="button" class="btn btn-icon" aria-hidden="true" (click)="onEdit()" tooltipPlacement="top" tooltip="{{ 'EDITFLEET' | translate }}">
+					<i class="fa fa-pencil" aria-hidden="true"></i>
+				</button>
+				<button *ngIf="auth.authenticated()" type="button" class="btn btn-icon" (click)="onDelete()" tooltipPlacement="top" tooltip="{{ 'CLONEFLEET' | translate }}">
+					<i class="fa fa-clone" aria-hidden="true"></i>
+				</button>
+				<button type="button" class="btn btn-icon" (click)="onClone()" tooltipPlacement="top" tooltip="{{ 'DELETEFLEET' | translate }}">
+					<i class="fa fa-trash" aria-hidden="true"></i>
+				</button>
+	        </td>
+	      </tr>
+	    </tbody>
+	  </table>
+	  </div>
 	</div>
 </div>
